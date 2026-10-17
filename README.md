@@ -1,5 +1,7 @@
 # Demian OS
 
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/k94r9qrz96-ops/demian-os)
+
 Oficina virtual de agentes para dirigir **Elite Hunters HR**, **Rushy AI** y **Yazak Media** desde el celular.
 Le das una instrucción al director, él identifica empresa y cliente, reparte tareas entre 36 roles, ejecuta lo permitido,
 y te muestra entregables y las acciones que necesitan tu aprobación. Nada externo (WhatsApp, email, Calendar, publicaciones)

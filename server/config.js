@@ -18,6 +18,13 @@ function loadDotEnv() {
 }
 loadDotEnv();
 
+// Tolerar nombres cargados a mano con otra forma ("Admin_email", "admin-email", " ADMIN_EMAIL ").
+for (const k of Object.keys(process.env)) {
+  const norm = k.trim().toUpperCase().replace(/[^A-Z0-9]+/g, '_');
+  if (norm !== k && process.env[norm] === undefined) process.env[norm] = process.env[k];
+}
+for (const k of ['ADMIN_EMAIL', 'ADMIN_PASSWORD', 'ADMIN_NAME']) if (process.env[k] !== undefined) process.env[k] = process.env[k].trim();
+
 const env = (k, d = undefined) => (process.env[k] === undefined || process.env[k] === '' ? d : process.env[k]);
 const num = (k, d) => (env(k) === undefined ? d : Number(env(k)));
 

@@ -1,0 +1,22 @@
+# Render Blueprint: Dashboard → New → Blueprint → elegí este repositorio.
+# Un servicio Docker con disco persistente en /data (base de datos, archivos y videos).
+services:
+  - type: web
+    name: demian-os
+    runtime: docker
+    plan: starter            # el disco persistente requiere un plan pago
+    region: virginia
+    healthCheckPath: /healthz
+    disk:
+      name: demian-data
+      mountPath: /data
+      sizeGB: 5
+    envVars:
+      - key: ADMIN_EMAIL     # tu email para entrar
+        sync: false
+      - key: ADMIN_PASSWORD  # mínimo 10 caracteres; cambiala desde la app después
+        sync: false
+      - key: ANTHROPIC_API_KEY   # opcional acá: también se carga desde la app
+        sync: false
+      - key: TZ
+        value: America/Argentina/Buenos_Aires

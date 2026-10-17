@@ -1,0 +1,195 @@
+
+> demian-os@0.1.0 test
+> node --no-warnings=ExperimentalWarning --test --test-concurrency=1 tests/*.test.js
+
+TAP version 13
+# Subtest: 1. Una instrucción crea tareas reales y produce un resultado accesible
+ok 1 - 1. Una instrucción crea tareas reales y produce un resultado accesible
+  ---
+  duration_ms: 138.840994
+  type: 'test'
+  ...
+# Subtest: 2. Al recargar se conservan los datos (reapertura de la base)
+ok 2 - 2. Al recargar se conservan los datos (reapertura de la base)
+  ---
+  duration_ms: 9.794778
+  type: 'test'
+  ...
+# Subtest: 3. La oficina refleja el estado real del backend
+ok 3 - 3. La oficina refleja el estado real del backend
+  ---
+  duration_ms: 19.173535
+  type: 'test'
+  ...
+# Subtest: 6. Los datos de un cliente no aparecen en otro
+ok 4 - 6. Los datos de un cliente no aparecen en otro
+  ---
+  duration_ms: 89.986559
+  type: 'test'
+  ...
+# Subtest: Permisos: sin sesión no hay acceso; un usuario de solo lectura no aprueba; CSRF
+ok 5 - Permisos: sin sesión no hay acceso; un usuario de solo lectura no aprueba; CSRF
+  ---
+  duration_ms: 113.784481
+  type: 'test'
+  ...
+# Subtest: Límites de gasto bloquean la tarea y pausan si se supera el diario
+ok 6 - Límites de gasto bloquean la tarea y pausan si se supera el diario
+  ---
+  duration_ms: 1.819618
+  type: 'test'
+  ...
+# Subtest: Pausa general: los trabajos automáticos no corren hasta reanudar
+ok 7 - Pausa general: los trabajos automáticos no corren hasta reanudar
+  ---
+  duration_ms: 769.178157
+  type: 'test'
+  ...
+# Subtest: Recuperación tras reinicio: un trabajo con lease vencido vuelve a la cola y termina
+ok 8 - Recuperación tras reinicio: un trabajo con lease vencido vuelve a la cola y termina
+  ---
+  duration_ms: 54.247431
+  type: 'test'
+  ...
+# Subtest: Sin Claude, los pedidos libres quedan bloqueados con explicación (no se inventa nada)
+ok 9 - Sin Claude, los pedidos libres quedan bloqueados con explicación (no se inventa nada)
+  ---
+  duration_ms: 57.756262
+  type: 'test'
+  ...
+# Subtest: Webhook sin firma válida se rechaza
+ok 10 - Webhook sin firma válida se rechaza
+  ---
+  duration_ms: 8.037739
+  type: 'test'
+  ...
+# Subtest: Circuito completo: mensaje entrante → CRM → Claude → respuesta en Chatwoot (simulado)
+ok 11 - Circuito completo: mensaje entrante → CRM → Claude → respuesta en Chatwoot (simulado)
+  ---
+  duration_ms: 57.811369
+  type: 'test'
+  ...
+# Subtest: 4. Un webhook repetido no duplica acciones
+ok 12 - 4. Un webhook repetido no duplica acciones
+  ---
+  duration_ms: 57.799752
+  type: 'test'
+  ...
+# Subtest: Anti-bucle: los mensajes salientes propios nunca disparan respuestas
+ok 13 - Anti-bucle: los mensajes salientes propios nunca disparan respuestas
+  ---
+  duration_ms: 2.81893
+  type: 'test'
+  ...
+# Subtest: Seguimiento del estado de entrega (message_updated)
+ok 14 - Seguimiento del estado de entrega (message_updated)
+  ---
+  duration_ms: 4.719148
+  type: 'test'
+  ...
+# Subtest: 7. La intervención humana pausa las respuestas automáticas
+ok 15 - 7. La intervención humana pausa las respuestas automáticas
+  ---
+  duration_ms: 57.311243
+  type: 'test'
+  ...
+# Subtest: 5. Una persona externa no puede ejecutar órdenes administrativas
+ok 16 - 5. Una persona externa no puede ejecutar órdenes administrativas
+  ---
+  duration_ms: 62.410042
+  type: 'test'
+  ...
+# Subtest: Canal de dirección: verificación del teléfono y orden con acuse por WhatsApp
+ok 17 - Canal de dirección: verificación del teléfono y orden con acuse por WhatsApp
+  ---
+  duration_ms: 812.512896
+  type: 'test'
+  ...
+# Subtest: Pedido de persona → derivación (estado open en Chatwoot + bot pausado)
+ok 18 - Pedido de persona → derivación (estado open en Chatwoot + bot pausado)
+  ---
+  duration_ms: 57.008824
+  type: 'test'
+  ...
+# Subtest: Audio sin servicio de transcripción → se deriva a una persona
+ok 19 - Audio sin servicio de transcripción → se deriva a una persona
+  ---
+  duration_ms: 55.975093
+  type: 'test'
+  ...
+# Subtest: Modo borrador: nota privada en Chatwoot + aprobación en Demian OS, nada público
+ok 20 - Modo borrador: nota privada en Chatwoot + aprobación en Demian OS, nada público
+  ---
+  duration_ms: 111.345676
+  type: 'test'
+  ...
+# Subtest: 8. Una integración caída muestra error y permite recuperación
+ok 21 - 8. Una integración caída muestra error y permite recuperación
+  ---
+  duration_ms: 45.902674
+  type: 'test'
+  ...
+# Subtest: 10. Acción externa autorizada → confirmación verificable, sin duplicar aunque se pierda la respuesta
+ok 22 - 10. Acción externa autorizada → confirmación verificable, sin duplicar aunque se pierda la respuesta
+  ---
+  duration_ms: 2108.20153
+  type: 'test'
+  ...
+# Subtest: Una aprobación no puede decidirse dos veces ni con contenido distinto al mostrado
+ok 23 - Una aprobación no puede decidirse dos veces ni con contenido distinto al mostrado
+  ---
+  duration_ms: 7.715842
+  type: 'test'
+  ...
+# Subtest: Gmail sin autorizar: la acción aprobada falla con explicación y no se declara enviada
+ok 24 - Gmail sin autorizar: la acción aprobada falla con explicación y no se declara enviada
+  ---
+  duration_ms: 57.194305
+  type: 'test'
+  ...
+# Subtest: Semana de contenido: tareas encadenadas y reel MP4 exportado con fotos reales del cliente
+ok 25 - Semana de contenido: tareas encadenadas y reel MP4 exportado con fotos reales del cliente
+  ---
+  duration_ms: 20400.781549
+  type: 'test'
+  ...
+# \# Evidencia: /tmp/demian-os-content-HuZyfJ/files/deliverables/5/reel-9x16-1792264815080.mp4 · 9.40 s · sha256 baaa92d20176bae12d2a0b58145f3fe66bcd29f3ddc190b973c4c2c3e32d21d7
+# Subtest: 9. El archivo de video exportado se reproduce correctamente
+ok 26 - 9. El archivo de video exportado se reproduce correctamente
+  ---
+  duration_ms: 1146.64259
+  type: 'test'
+  ...
+# Subtest: Sin fotos suficientes el reel se bloquea con una indicación concreta
+ok 27 - Sin fotos suficientes el reel se bloquea con una indicación concreta
+  ---
+  duration_ms: 122.282218
+  type: 'test'
+  ...
+# Subtest: Credenciales: solo el dueño, cifradas en la base, nunca devueltas completas
+ok 28 - Credenciales: solo el dueño, cifradas en la base, nunca devueltas completas
+  ---
+  duration_ms: 97.692196
+  type: 'test'
+  ...
+# Subtest: Primer arranque: alta del dueño solo con el código de instalación y una sola vez
+ok 29 - Primer arranque: alta del dueño solo con el código de instalación y una sola vez
+  ---
+  duration_ms: 86.581585
+  type: 'test'
+  ...
+# Subtest: Cambio de contraseña exige la actual
+ok 30 - Cambio de contraseña exige la actual
+  ---
+  duration_ms: 214.355933
+  type: 'test'
+  ...
+1..30
+# tests 30
+# suites 0
+# pass 30
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 29267.111453

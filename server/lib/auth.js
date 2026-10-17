@@ -29,11 +29,12 @@ export function createUser({ email, name, password, role = 'admin', company_scop
 export function ensureBootstrapAdmin() {
   const count = q.get('SELECT COUNT(*) c FROM users').c;
   const { email, password, name } = config.bootstrapAdmin;
+  console.log(`[auth] Variables de cuenta: ADMIN_EMAIL ${email ? 'cargada' : 'FALTA'}, ADMIN_PASSWORD ${password ? 'cargada' : 'FALTA'}`);
   if (count === 0 && email && password) {
     createUser({ email, name, password, role: 'owner' });
-    console.log(`[auth] Usuario dueño creado: ${email}. Quitá ADMIN_PASSWORD del entorno después del primer arranque.`);
+    console.log(`[auth] Usuario dueño creado: ${email}.`);
   }
-  return count;
+  return q.get('SELECT COUNT(*) c FROM users').c;
 }
 
 function tooManyAttempts(key) {

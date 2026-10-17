@@ -67,7 +67,10 @@ export default async function api(app) {
     return { user: r.user };
   });
   // Primer arranque sin usuarios: alta del dueño con el código de instalación (logs del servidor o SETUP_CODE).
-  app.get('/setup/status', { config: { public: true } }, async () => ({ needs_setup: q.get('SELECT COUNT(*) c FROM users').c === 0 }));
+  app.get('/setup/status', { config: { public: true } }, async () => {
+    const needs = q.get('SELECT COUNT(*) c FROM users').c === 0;
+    return needs ? { needs_setup: true, admin_env: { email: !!config.bootstrapAdmin.email, password: !!config.bootstrapAdmin.password } } : { needs_setup: false };
+  });
   app.post('/setup', { config: { public: true } }, async (req, reply) => {
     if (q.get('SELECT COUNT(*) c FROM users').c > 0) throw Object.assign(new Error('La instalación ya tiene dueño'), { statusCode: 409 });
     const { code, email, name, password } = req.body || {};

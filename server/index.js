@@ -22,7 +22,7 @@ async function main() {
   const app = await buildApp({ logger: { level: process.env.LOG_LEVEL || 'info' } });
   await app.listen({ port: config.port, host: config.host });
   console.log(`Demian OS ${config.demo ? '[DEMO — datos de demostración]' : ''} escuchando en ${config.publicUrl} (puerto ${config.port})`);
-  if (!users && !config.bootstrapAdmin.email) console.log(`No hay usuarios. Abrí ${config.publicUrl} y usá el código de instalación: ${config.setupCode}`);
+  if (!users) console.log(`No hay usuarios. Abrí ${config.publicUrl} y usá el código de instalación: ${config.setupCode}`);
   const shutdown = async (sig) => {
     console.log(`${sig}: cerrando con orden…`);
     clearInterval(sched);

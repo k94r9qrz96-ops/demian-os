@@ -18,6 +18,13 @@ Railway también sirve: New Project → Deploy from GitHub repo (usa `railway.js
 
 Si no cargás `ADMIN_EMAIL`/`ADMIN_PASSWORD`, la primera pantalla pide un **código de instalación** que aparece en los logs del servicio.
 
+## Opción gratis para probar — Render Free (sin tarjeta)
+
+New → Web Service → elegí `demian-os` → Language **Docker** → Instance Type **Free** → variables `ADMIN_EMAIL` y `ADMIN_PASSWORD` → Deploy.
+Limitaciones: sin disco (los datos se borran cuando el servicio se duerme tras 15 minutos sin uso), 512 MB de memoria
+(los reels se renderizan en modo de poca memoria, más lento) y la primera visita después de dormir tarda alrededor de un minuto.
+La app muestra una franja de "Modo prueba" mientras no haya disco. Para operar en serio, pasá al plan con disco.
+
 ## Opción A — Docker (recomendada)
 
 ```bash

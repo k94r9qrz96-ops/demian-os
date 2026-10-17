@@ -44,6 +44,12 @@ export function agentStatus(slug) {
   return { status: 'available', task: null };
 }
 
+// En Render sin disco, los datos viven en el sistema de archivos efímero del contenedor.
+function isEphemeral() {
+  if (!process.env.RENDER) return false;
+  try { return fs.statSync(config.dataDir).dev === fs.statSync('/').dev; } catch { return true; }
+}
+
 export default async function api(app) {
   // ---------- Autenticación ----------
   app.addHook('preHandler', async (req) => {
@@ -81,6 +87,7 @@ export default async function api(app) {
     user: publicUser(req.user), demo: config.demo, llm: llmMode(),
     companies: q.all(`SELECT id, slug, name, description, color FROM companies WHERE id IN (${allowedCompanyIds(req.user).join(',') || 'NULL'}) ORDER BY id`),
     paused: !!getSetting('automations_paused'),
+    ephemeral: isEphemeral(),
   }));
 
   app.post('/me/password', async (req) => {

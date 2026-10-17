@@ -6,7 +6,23 @@ import { spawn } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
+import os from 'node:os';
 import { config } from '../config.js';
+
+// Memoria disponible (límite del contenedor si existe). Con poca memoria se renderiza sin sobremuestreo
+// y con menos hilos: tarda un poco más y el movimiento es apenas menos suave, pero entra en 512 MB.
+export function availableMemoryMb() {
+  if (process.env.REEL_LOW_MEMORY === '1') return 256;
+  try {
+    const v = fs.readFileSync('/sys/fs/cgroup/memory.max', 'utf8').trim();
+    if (v !== 'max') return Math.round(Number(v) / 1048576);
+  } catch {}
+  try {
+    const v = Number(fs.readFileSync('/sys/fs/cgroup/memory/memory.limit_in_bytes', 'utf8'));
+    if (v > 0 && v < 1e15) return Math.round(v / 1048576);
+  } catch {}
+  return Math.round(os.totalmem() / 1048576);
+}
 
 export const FORMATS = { '9:16': [1080, 1920], '4:5': [1080, 1350], '1:1': [1080, 1080] };
 const TRANSITIONS = ['smoothleft', 'circleopen', 'slideup', 'fadeblack', 'wiperight', 'smoothup', 'radial', 'slideleft'];
@@ -91,6 +107,8 @@ export async function renderReel(o, { signal } = {}) {
   const font = fontPath();
   if (!font) throw new Error('No hay tipografía disponible para los textos');
   const accent = (brand.accent || '#B8F32D').replace('#', '0x');
+  const low = availableMemoryMb() < 1500;
+  const SS = low ? 1 : 2; // sobremuestreo para el movimiento de cámara
   fs.mkdirSync(path.dirname(outFile), { recursive: true });
   const work = fs.mkdtempSync(path.join(path.dirname(outFile), '.render-'));
 
@@ -101,9 +119,9 @@ export async function renderReel(o, { signal } = {}) {
   scenes.forEach((s, i) => {
     const mv = moveExpr(MOVES[i % MOVES.length], frames);
     const base = framing === 'cover'
-      ? `[${i}:v]scale=${W * 2}:${H * 2}:force_original_aspect_ratio=increase,crop=${W * 2}:${H * 2},setsar=1[c${i}]`
-      : `[${i}:v]split=2[a${i}][b${i}];[a${i}]scale=${W}:${H}:force_original_aspect_ratio=increase,crop=${W}:${H},boxblur=28:4,eq=brightness=-0.10:saturation=0.9,scale=${W * 2}:${H * 2}[bg${i}];` +
-        `[b${i}]scale=${W * 2}:${H * 2}:force_original_aspect_ratio=decrease[fg${i}];[bg${i}][fg${i}]overlay=(W-w)/2:(H-h)/2,setsar=1[c${i}]`;
+      ? `[${i}:v]scale=${W * SS}:${H * SS}:force_original_aspect_ratio=increase,crop=${W * SS}:${H * SS},setsar=1[c${i}]`
+      : `[${i}:v]split=2[a${i}][b${i}];[a${i}]scale=${W}:${H}:force_original_aspect_ratio=increase,crop=${W}:${H},boxblur=28:4,eq=brightness=-0.10:saturation=0.9,scale=${W * SS}:${H * SS}[bg${i}];` +
+        `[b${i}]scale=${W * SS}:${H * SS}:force_original_aspect_ratio=decrease[fg${i}];[bg${i}][fg${i}]overlay=(W-w)/2:(H-h)/2,setsar=1[c${i}]`;
     let chain = `${base};[c${i}]zoompan=z='${mv.z}':x='${mv.x}':y='${mv.y}':d=${frames}:s=${W}x${H}:fps=${fps},format=yuv420p,setpts=PTS-STARTPTS`;
     // degradé inferior para legibilidad + barra de acento
     chain += `,drawbox=x=0:y=ih*0.56:w=iw:h=ih*0.06:color=black@0.10:t=fill,drawbox=x=0:y=ih*0.62:w=iw:h=ih*0.06:color=black@0.20:t=fill,drawbox=x=0:y=ih*0.68:w=iw:h=ih*0.32:color=black@0.34:t=fill`;
@@ -137,34 +155,60 @@ export async function renderReel(o, { signal } = {}) {
     inputsCount += 1;
   }
 
-  // Encadenar transiciones
-  let last = 'v0';
-  for (let k = 1; k < inputsCount; k++) {
-    const offset = (k * (D - T)).toFixed(3);
-    const out = k === inputsCount - 1 ? 'vout' : `x${k}`;
-    parts.push(`[${last}][v${k}]xfade=transition=${TRANSITIONS[(k - 1) % TRANSITIONS.length]}:duration=${T}:offset=${offset}[${out}]`);
-    last = out;
-  }
   const total = inputsCount * D - (inputsCount - 1) * T;
-
-  let audioNote;
-  if (audio?.path) {
-    args.push('-i', audio.path);
-    parts.push(`[${scenes.length}:a]atrim=0:${total.toFixed(2)},asetpts=PTS-STARTPTS,afade=t=in:d=0.5,afade=t=out:st=${(total - 1.2).toFixed(2)}:d=1.2,volume=0.9[aout]`);
-    audioNote = `Audio provisto: ${audio.license}`;
-  } else {
-    args.push('-f', 'lavfi', '-i', `aevalsrc='${musicExpr()}':s=44100:d=${total.toFixed(2)}`);
-    parts.push(`[${scenes.length}:a]lowpass=f=4200,afade=t=in:d=0.8,afade=t=out:st=${(total - 1.5).toFixed(2)}:d=1.5,volume=0.8[aout]`);
-    audioNote = 'Pista original generada por Demian OS (sintetizada, sin derechos de terceros)';
-  }
-
-  const filterFile = path.join(work, 'graph.txt');
-  fs.writeFileSync(filterFile, parts.join(';\n'));
-  args.push('-filter_complex_script', filterFile, '-map', '[vout]', '-map', '[aout]',
-    '-c:v', 'libx264', '-preset', 'medium', '-crf', '20', '-profile:v', 'high', '-pix_fmt', 'yuv420p', '-r', String(fps),
-    '-c:a', 'aac', '-b:a', '160k', '-ar', '44100', '-movflags', '+faststart', '-t', total.toFixed(2), outFile);
+  const xfades = (label) => {
+    const out = [];
+    let last = label(0);
+    for (let k = 1; k < inputsCount; k++) {
+      const offset = (k * (D - T)).toFixed(3);
+      const o2 = k === inputsCount - 1 ? 'vout' : `x${k}`;
+      out.push(`[${last}][${label(k)}]xfade=transition=${TRANSITIONS[(k - 1) % TRANSITIONS.length]}:duration=${T}:offset=${offset}[${o2}]`);
+      last = o2;
+    }
+    return out;
+  };
+  const audioPart = (idx) => (audio?.path
+    ? `[${idx}:a]atrim=0:${total.toFixed(2)},asetpts=PTS-STARTPTS,afade=t=in:d=0.5,afade=t=out:st=${(total - 1.2).toFixed(2)}:d=1.2,volume=0.9[aout]`
+    : `[${idx}:a]lowpass=f=4200,afade=t=in:d=0.8,afade=t=out:st=${(total - 1.5).toFixed(2)}:d=1.5,volume=0.8[aout]`);
+  const audioArgs = audio?.path ? ['-i', audio.path] : ['-f', 'lavfi', '-i', `aevalsrc='${musicExpr()}':s=44100:d=${total.toFixed(2)}`];
+  const audioNote = audio?.path ? `Audio provisto: ${audio.license}` : 'Pista original generada por Demian OS (sintetizada, sin derechos de terceros)';
+  const encode = ['-c:v', 'libx264', '-preset', low ? 'veryfast' : 'medium', '-crf', '20', ...(low ? ['-x264-params', 'rc-lookahead=10:threads=2'] : []), '-profile:v', 'high', '-pix_fmt', 'yuv420p', '-r', String(fps),
+    '-c:a', 'aac', '-b:a', '160k', '-ar', '44100', '-movflags', '+faststart', '-t', total.toFixed(2), outFile];
+  const head = ['-y', '-hide_banner', '-loglevel', process.env.FFLOG || 'error'];
   try {
-    await run('ffmpeg', args, { signal });
+    if (!low) {
+      // Un solo paso: todas las escenas en un grafo (más suave, ~1 GB de memoria)
+      const graph = [...parts, ...xfades((k) => `v${k}`), audioPart(scenes.length)];
+      const filterFile = path.join(work, 'graph.txt');
+      fs.writeFileSync(filterFile, graph.join(';\n'));
+      await run('ffmpeg', [...args, ...audioArgs, '-filter_complex_script', filterFile, '-map', '[vout]', '-map', '[aout]', ...encode], { signal });
+    } else {
+      // Poca memoria: cada escena se renderiza por separado y después se unen con transiciones
+      const clips = [];
+      for (let i = 0; i < inputsCount; i++) {
+        const isScene = i < scenes.length;
+        const g = isScene ? parts[i].split(`[${i}:v]`).join('[0:v]') : parts[i];
+        const gf = path.join(work, `g${i}.txt`);
+        fs.writeFileSync(gf, g);
+        const clip = path.join(work, `clip${i}.mp4`);
+        await run('ffmpeg', [...head, ...(isScene ? ['-i', scenes[i].path] : []), '-filter_complex_threads', '1', '-threads', '1',
+          '-filter_complex_script', gf, '-map', `[v${i}]`, '-t', String(D), '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '14', '-x264-params', 'rc-lookahead=10:threads=2', '-pix_fmt', 'yuv420p', '-r', String(fps), clip], { signal });
+        clips.push(clip);
+      }
+      // Transiciones de a pares: solo dos videos abiertos a la vez
+      let acc = clips[0];
+      let accDur = D;
+      for (let k = 1; k < clips.length; k++) {
+        const next = path.join(work, `acc${k}.mp4`);
+        const g = `[0:v]settb=AVTB,fps=${fps},format=yuv420p[a];[1:v]settb=AVTB,fps=${fps},format=yuv420p[b];` +
+          `[a][b]xfade=transition=${TRANSITIONS[(k - 1) % TRANSITIONS.length]}:duration=${T}:offset=${(accDur - T).toFixed(3)}[v]`;
+        await run('ffmpeg', [...head, '-threads', '1', '-i', acc, '-threads', '1', '-i', clips[k], '-filter_complex_threads', '1', '-filter_complex', g,
+          '-map', '[v]', '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '14', '-x264-params', 'rc-lookahead=10:threads=2', '-pix_fmt', 'yuv420p', '-r', String(fps), next], { signal });
+        acc = next;
+        accDur += D - T;
+      }
+      await run('ffmpeg', [...head, '-threads', '1', '-i', acc, ...audioArgs, '-filter_complex', audioPart(1), '-map', '0:v', '-map', '[aout]', ...encode], { signal });
+    }
   } finally {
     fs.rmSync(work, { recursive: true, force: true });
   }

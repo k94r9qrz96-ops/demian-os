@@ -43,7 +43,8 @@ export function scheduleIfReady(task) {
     setStatus(task.id, 'blocked', `Depende de la tarea #${bad[0].id}, que quedó ${LABEL[bad[0].status]}`);
     return false;
   }
-  enqueue('task.run', { taskId: task.id }, { idempotencyKey: `task:${task.id}:run`, timeoutMs: task.params.timeout_ms ?? undefined });
+  const renderAgent = ['editor-reels', 'formatos', 'videocv', 'qa-visual'].includes(task.agent_slug);
+  enqueue('task.run', { taskId: task.id }, { idempotencyKey: `task:${task.id}:run`, timeoutMs: task.params.timeout_ms ?? (renderAgent ? 30 * 60_000 : undefined) });
   return true;
 }
 

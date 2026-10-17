@@ -4,6 +4,7 @@ export async function api(path, { method = 'GET', body, form } = {}) {
   const res = await fetch(`/api${path}`, {
     method,
     credentials: 'same-origin',
+    cache: 'no-store',
     headers: { 'x-requested-with': 'demian-os', ...(body ? { 'content-type': 'application/json' } : {}) },
     body: form || (body ? JSON.stringify(body) : undefined),
   });

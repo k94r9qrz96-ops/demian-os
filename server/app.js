@@ -26,6 +26,10 @@ export async function buildApp({ logger = false } = {}) {
     reply.header('referrer-policy', 'same-origin');
     reply.header('x-frame-options', 'DENY');
     reply.header('permissions-policy', 'camera=(), geolocation=()');
+    if (!reply.getHeader('cache-control')) {
+      if (req.url.startsWith('/api')) reply.header('cache-control', 'no-store');
+      else if (!req.url.startsWith('/assets/')) reply.header('cache-control', 'no-cache');
+    }
     if (!req.url.startsWith('/api') && !req.url.startsWith('/webhooks'))
       reply.header('content-security-policy', "default-src 'self'; img-src 'self' data: blob:; media-src 'self' blob:; style-src 'self' 'unsafe-inline'; font-src 'self' data:; script-src 'self'; connect-src 'self'; frame-ancestors 'none'");
     return payload;

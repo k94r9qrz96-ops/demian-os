@@ -58,7 +58,10 @@ function Login({ onDone }) {
       if (setup) await api('/setup', { method: 'POST', body: { code, email, name, password } });
       else await api('/auth/login', { method: 'POST', body: { email, password } });
       onDone();
-    } catch (e2) { setErr(e2.message); } finally { setBusy(false); }
+    } catch (e2) {
+      if (setup && /ya tiene dueño/i.test(e2.message)) { setSetup(false); setErr('Ya hay una cuenta creada: entrá con tu email y contraseña.'); }
+      else setErr(e2.message);
+    } finally { setBusy(false); }
   };
   return (
     <div className="login">
@@ -71,6 +74,7 @@ function Login({ onDone }) {
         <label className="f">Contraseña{setup ? ' (mínimo 10 caracteres)' : ''}<input type="password" autoComplete={setup ? 'new-password' : 'current-password'} value={password} onChange={(e) => setPassword(e.target.value)} required minLength={setup ? 10 : undefined} /></label>
         {err && <div className="err">{err}</div>}
         <button className="btn primary" disabled={busy}>{busy ? <span className="spin" /> : setup ? 'Crear cuenta y entrar' : 'Entrar'}</button>
+        {setup && <button type="button" className="btn ghost" onClick={() => { setSetup(false); setErr(null); }}>Ya tengo cuenta: entrar</button>}
       </form>
     </div>
   );

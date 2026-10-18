@@ -27,12 +27,20 @@ export function createUser({ email, name, password, role = 'admin', company_scop
 }
 
 export function ensureBootstrapAdmin() {
-  const count = q.get('SELECT COUNT(*) c FROM users').c;
   const { email, password, name } = config.bootstrapAdmin;
-  console.log(`[auth] Variables de cuenta: ADMIN_EMAIL ${email ? 'cargada' : 'FALTA'}, ADMIN_PASSWORD ${password ? 'cargada' : 'FALTA'}`);
-  if (count === 0 && email && password) {
-    createUser({ email, name, password, role: 'owner' });
-    console.log(`[auth] Usuario dueño creado: ${email}.`);
+  console.log(`[auth] Variables de cuenta: ADMIN_EMAIL ${email ? `= ${email.toLowerCase()}` : 'FALTA'}, ADMIN_PASSWORD ${password ? `cargada (${password.length} caracteres)` : 'FALTA'}`);
+  if (email && password) {
+    // Las variables del servidor mandan: si cambian, la cuenta del dueño se actualiza al arrancar.
+    if (password.length < 10) console.log('[auth] ADMIN_PASSWORD tiene menos de 10 caracteres: no se usa.');
+    else {
+      const mail = email.toLowerCase().trim();
+      const existing = q.get('SELECT * FROM users WHERE email = ?', mail);
+      if (!existing) { createUser({ email: mail, name, password, role: 'owner' }); console.log(`[auth] Usuario dueño creado: ${mail}`); }
+      else if (!verifyPassword(password, existing.password_hash) || existing.role !== 'owner' || existing.disabled_at) {
+        q.run(`UPDATE users SET password_hash = ?, role = 'owner', disabled_at = NULL WHERE id = ?`, hashPassword(password), existing.id);
+        console.log(`[auth] Contraseña del dueño actualizada desde ADMIN_PASSWORD: ${mail}`);
+      }
+    }
   }
   return q.get('SELECT COUNT(*) c FROM users').c;
 }
@@ -49,7 +57,7 @@ export function login(email, password, meta = {}) {
     throw e;
   }
   const user = q.get('SELECT * FROM users WHERE email = ? AND disabled_at IS NULL', String(email).toLowerCase().trim());
-  const ok = !!user && verifyPassword(password, user.password_hash);
+  const ok = !!user && (verifyPassword(password, user.password_hash) || (String(password) !== String(password).trim() && verifyPassword(String(password).trim(), user.password_hash)));
   q.run('INSERT INTO login_attempts(key, ok) VALUES (?,?)', key, ok ? 1 : 0);
   if (!ok) {
     const e = new Error('Email o contraseña incorrectos');

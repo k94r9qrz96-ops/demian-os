@@ -25,8 +25,9 @@ for (const k of Object.keys(process.env)) {
 }
 // Si ADMIN_EMAIL no está con ese nombre, buscar otra variable de cuenta cuyo valor sea un email (p. ej. "ADMIN_MAIL", "EMAIL").
 if (process.env.ADMIN_EMAIL === undefined) {
-  const k = Object.keys(process.env).find((x) => /ADMIN|MAIL|CORREO|USUARIO|USER/i.test(x) && !/CHATWOOT|GOOGLE|METRICOOL|SMTP|GIT/i.test(x)
-    && /^\s*[^\s@]+@[^\s@]+\.[^\s@]+\s*$/.test(process.env[x] || ''));
+  const isMail = (x) => /^\s*[^\s@]+@[^\s@]+\.[^\s@]+\s*$/.test(process.env[x] || '');
+  const keys = Object.keys(process.env).filter((x) => !/CHATWOOT|GOOGLE|METRICOOL|SMTP|GIT|CLAUDE|ANTHROPIC/i.test(x) && isMail(x));
+  const k = keys.find((x) => /ADMIN/i.test(x)) || keys.find((x) => /^(EMAIL|MAIL|CORREO|USUARIO)$/i.test(x.trim()));
   if (k) process.env.ADMIN_EMAIL = process.env[k];
 }
 if (process.env.ADMIN_PASSWORD === undefined) {

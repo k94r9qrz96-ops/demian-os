@@ -28,6 +28,7 @@ export function createUser({ email, name, password, role = 'admin', company_scop
 
 export function ensureBootstrapAdmin() {
   const { email, password, name } = config.bootstrapAdmin;
+  console.log(`[auth] Nombres de variables con ADMIN: ${Object.keys(process.env).filter((k) => /admin/i.test(k)).join(', ') || 'ninguna'}`);
   console.log(`[auth] Variables de cuenta: ADMIN_EMAIL ${email ? `= ${email.toLowerCase()}` : 'FALTA'}, ADMIN_PASSWORD ${password ? `cargada (${password.length} caracteres)` : 'FALTA'}`);
   if (email && password) {
     // Las variables del servidor mandan: si cambian, la cuenta del dueño se actualiza al arrancar.

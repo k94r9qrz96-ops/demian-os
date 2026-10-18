@@ -23,6 +23,16 @@ for (const k of Object.keys(process.env)) {
   const norm = k.trim().toUpperCase().replace(/[^A-Z0-9]+/g, '_');
   if (norm !== k && process.env[norm] === undefined) process.env[norm] = process.env[k];
 }
+// Si ADMIN_EMAIL no está con ese nombre, buscar otra variable de cuenta cuyo valor sea un email (p. ej. "ADMIN_MAIL", "EMAIL").
+if (process.env.ADMIN_EMAIL === undefined) {
+  const k = Object.keys(process.env).find((x) => /ADMIN|MAIL|CORREO|USUARIO|USER/i.test(x) && !/CHATWOOT|GOOGLE|METRICOOL|SMTP|GIT/i.test(x)
+    && /^\s*[^\s@]+@[^\s@]+\.[^\s@]+\s*$/.test(process.env[x] || ''));
+  if (k) process.env.ADMIN_EMAIL = process.env[k];
+}
+if (process.env.ADMIN_PASSWORD === undefined) {
+  const k = Object.keys(process.env).find((x) => /ADMIN.*(PASS|CLAVE|CONTRA)|^(PASSWORD|CONTRASE.*|CLAVE)$/i.test(x));
+  if (k) process.env.ADMIN_PASSWORD = process.env[k];
+}
 for (const k of ['ADMIN_EMAIL', 'ADMIN_PASSWORD', 'ADMIN_NAME']) if (process.env[k] !== undefined) process.env[k] = process.env[k].trim().replace(/^(["'`])(.*)\1$/, '$2');
 
 const env = (k, d = undefined) => (process.env[k] === undefined || process.env[k] === '' ? d : process.env[k]);

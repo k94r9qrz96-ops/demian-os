@@ -81,6 +81,8 @@ export function SettingsView({ ctx }) {
         <div className="muted" style={{ marginTop: 6 }}>Pegala en el Agent Bot (Chatwoot → Ajustes → Bots) y en un webhook de cuenta con eventos de mensajes y conversaciones. Los tokens se cargan en Integraciones → Credenciales.</div>
       </div>
 
+      {ctx.me.user.role === 'owner' && <BackupCard ephemeral={ctx.me.ephemeral} />}
+
       <div className="sectionTitle">Tu contraseña</div>
       <PasswordForm />
     </div>
@@ -113,5 +115,41 @@ function PasswordForm() {
       <label className="f" style={{ flex: 1, minWidth: 160 }}>Nueva (mín. 10)<input type="password" value={next} onChange={(e) => setNext(e.target.value)} autoComplete="new-password" /></label>
       <button className="btn" disabled={!cur || next.length < 10} onClick={save}>Cambiar</button>
     </div>
+  );
+}
+
+function BackupCard({ ephemeral }) {
+  const toast = useToast();
+  const [busy, setBusy] = useState(false);
+  const restore = async (file) => {
+    if (!file) return;
+    if (!confirm('Esto reemplaza todos los datos actuales (tareas, clientes, memoria, archivos) por los del respaldo. ¿Seguir?')) return;
+    setBusy(true);
+    try {
+      const fd = new FormData();
+      fd.append('file', file);
+      const r = await api('/backup/restore', { method: 'POST', form: fd });
+      toast(`Restaurado: ${r.clients} clientes, ${r.tasks} tareas, ${r.files} archivos. Volvé a entrar.`, 'ok');
+      setTimeout(() => window.location.reload(), 1500);
+    } catch (e) { toast(e.message, 'error'); } finally { setBusy(false); }
+  };
+  return (
+    <>
+      <div className="sectionTitle">Respaldo</div>
+      <div className="card col" style={{ gap: 10 }}>
+        <div className="small muted">
+          {ephemeral
+            ? 'Estás en el plan gratis sin disco: cada vez que Render reinicia o despliega, se borra todo. Descargá un respaldo antes de tocar algo en Render y restauralo después.'
+            : 'Copia de tus datos (base y archivos). Las credenciales no se incluyen: se conservan las del servidor.'}
+        </div>
+        <div className="row wrap" style={{ gap: 8 }}>
+          <a className="btn primary" href="/api/backup"><Icon name="download" size={16} />Descargar respaldo</a>
+          <label className="btn" style={{ cursor: 'pointer' }}>
+            {busy ? <span className="spin" /> : <><Icon name="upload" size={16} />Restaurar respaldo</>}
+            <input type="file" accept=".gz,.tgz,application/gzip" style={{ display: 'none' }} disabled={busy} onChange={(e) => restore(e.target.files[0])} />
+          </label>
+        </div>
+      </div>
+    </>
   );
 }

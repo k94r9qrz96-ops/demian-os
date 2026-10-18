@@ -3,7 +3,7 @@ import path from 'node:path';
 import { pipeline } from 'node:stream/promises';
 import crypto from 'node:crypto';
 import { q, j, nowIso } from '../db.js';
-import { config } from '../config.js';
+import { config, storageIsEphemeral } from '../config.js';
 import { login, logout, createUser, publicUser, allowedCompanyIds, assertCompanyAccess, assertCanAct } from '../lib/auth.js';
 import { emit, eventsSince, bus } from '../lib/events.js';
 import { enqueue, queueStats } from '../lib/queue.js';
@@ -19,6 +19,8 @@ import { pauseConversation, resumeConversation } from '../channels/chatwoot-hand
 import { llmMode } from '../llm/anthropic.js';
 import { listSecrets, setSecret, webhookUrl } from '../lib/secrets.js';
 import { hashPassword, verifyPassword } from '../lib/auth.js';
+import { createBackup, restoreBackup } from '../lib/backup.js';
+import os from 'node:os';
 
 const AGENT_TOOL_INTEGRATION = { web_search: 'claude', calendar_read: 'google_calendar', drive_read: 'google_drive', render_reel: 'video', qa_video: 'video', conversations_read: 'chatwoot' };
 const num = (v) => (v === undefined || v === null || v === '' || v === 'null' ? null : Number(v));
@@ -45,10 +47,7 @@ export function agentStatus(slug) {
 }
 
 // En Render sin disco, los datos viven en el sistema de archivos efímero del contenedor.
-function isEphemeral() {
-  if (!process.env.RENDER) return false;
-  try { return fs.statSync(config.dataDir).dev === fs.statSync('/').dev; } catch { return true; }
-}
+const isEphemeral = () => storageIsEphemeral();
 
 export default async function api(app) {
   // ---------- Autenticación ----------
@@ -365,6 +364,35 @@ export default async function api(app) {
     q.run('DELETE FROM memory_items WHERE id = ?', m.id); // eliminación real
     audit(req.user.id, 'app', 'memory.delete', `memory:${m.id}`);
     return { ok: true };
+  });
+
+  // ---------- Respaldo ----------
+  app.get('/backup', async (req, reply) => {
+    ownerOnly(req.user);
+    const file = createBackup();
+    audit(req.user.id, 'app', 'backup.download', 'backup');
+    const stream = fs.createReadStream(file);
+    stream.on('close', () => fs.rm(path.dirname(file), { recursive: true, force: true }, () => {}));
+    reply.header('content-type', 'application/gzip');
+    reply.header('content-disposition', `attachment; filename="${path.basename(file)}"`);
+    return reply.send(stream);
+  });
+  app.post('/backup/restore', async (req) => {
+    ownerOnly(req.user);
+    const part = await req.file();
+    if (!part) throw Object.assign(new Error('Elegí el archivo de respaldo'), { statusCode: 400 });
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'dos-upload-'));
+    const dest = path.join(tmp, 'respaldo.tar.gz');
+    try {
+      await pipeline(part.file, fs.createWriteStream(dest));
+      if (part.file.truncated) throw Object.assign(new Error('Respaldo demasiado grande (máx. 200 MB)'), { statusCode: 413 });
+      const r = await restoreBackup(dest);
+      audit(null, 'app', 'backup.restore', 'backup', { tasks: r.tasks, clients: r.clients });
+      emit('backup.restored', `Respaldo restaurado: ${r.clients} clientes, ${r.tasks} tareas, ${r.files} archivos`, { level: 'success' });
+      return { ok: true, ...r };
+    } catch (e) {
+      throw Object.assign(new Error(e.message), { statusCode: e.statusCode || 400 });
+    } finally { fs.rmSync(tmp, { recursive: true, force: true }); }
   });
 
   // ---------- Archivos ----------

@@ -115,7 +115,7 @@ function Shell({ me, onLogout }) {
         <button className="navitem" onClick={onLogout}><Icon name="logout" size={19} />Salir</button>
       </aside>
       <div className="main">
-        {me.ephemeral && <div className="paused-ribbon">Modo prueba gratis: sin disco. Cuando el servidor se duerme (15 min sin uso) se borran tareas, clientes, memoria y videos.</div>}
+        {me.ephemeral && <div className="paused-ribbon">Modo prueba gratis, sin disco: cada reinicio o despliegue en Render borra los datos. Antes de tocar algo en Render, descargá un respaldo en Ajustes.</div>}
         {me.demo && <div className="demo-ribbon">MODO DEMO · DATOS DE DEMOSTRACIÓN, SEPARADOS DE PRODUCCIÓN</div>}
         {office?.paused && <div className="paused-ribbon"><Icon name="pause" size={16} />Automatizaciones en pausa general<button className="btn sm" onClick={() => go('ajustes')}>Ver</button></div>}
         <header className="topbar">

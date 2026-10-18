@@ -148,3 +148,9 @@ export function requireSecretsForProduction() {
   ensureRuntimeSecrets();
   return [];
 }
+
+// En Render sin disco, /data está en el mismo dispositivo que / y se pierde al reiniciar.
+export function storageIsEphemeral() {
+  if (!process.env.RENDER) return false;
+  try { return fs.statSync(config.dataDir).dev === fs.statSync('/').dev; } catch { return true; }
+}

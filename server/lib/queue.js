@@ -132,7 +132,9 @@ export function kick() {
   if (timer && !stopping) setImmediate(tick);
 }
 
+let staleTimer = null;
 export function startWorker() {
+  if (timer) clearInterval(timer);
   stopping = false;
   recoverStale();
   timer = setInterval(() => {
@@ -142,7 +144,7 @@ export function startWorker() {
       console.error('[worker]', redact(e.message));
     }
   }, config.worker.pollMs);
-  setInterval(() => { try { recoverStale(); } catch {} }, 30_000).unref();
+  if (!staleTimer) { staleTimer = setInterval(() => { try { recoverStale(); } catch {} }, 30_000); staleTimer.unref(); }
 }
 
 export async function stopWorker() {

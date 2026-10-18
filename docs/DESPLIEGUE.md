@@ -21,9 +21,12 @@ Si no cargás `ADMIN_EMAIL`/`ADMIN_PASSWORD`, la primera pantalla pide un **cód
 ## Opción gratis para probar — Render Free (sin tarjeta)
 
 New → Web Service → elegí `demian-os` → Language **Docker** → Instance Type **Free** → variables `ADMIN_EMAIL` y `ADMIN_PASSWORD` → Deploy.
-Limitaciones: sin disco (los datos se borran cuando el servicio se duerme tras 15 minutos sin uso), 512 MB de memoria
-(los reels se renderizan en modo de poca memoria, más lento) y la primera visita después de dormir tarda alrededor de un minuto.
-La app muestra una franja de "Modo prueba" mientras no haya disco. Para operar en serio, pasá al plan con disco.
+Limitaciones: sin disco, 512 MB de memoria (los reels se renderizan en modo de poca memoria, más lento).
+La app se mantiene despierta sola con un pedido liviano a `/healthz` cada 10 minutos (usa las horas gratis del mes; `KEEP_AWAKE=0` lo desactiva),
+así que los datos sobreviven a la inactividad, pero **se borran en cada despliegue o reinicio**.
+Antes de tocar algo en Render: Ajustes → Respaldo → **Descargar respaldo**; después del despliegue, **Restaurar respaldo**.
+El respaldo incluye base y archivos, no credenciales (se conservan las del servidor; en modo gratis conviene cargarlas como variables de Render).
+Para operar en serio, pasá al plan con disco.
 
 ## Opción A — Docker (recomendada)
 

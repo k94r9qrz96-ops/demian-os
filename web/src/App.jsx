@@ -12,6 +12,7 @@ import { IntegrationsView } from './views/Integrations.jsx';
 import { SettingsView } from './views/Settings.jsx';
 import { ActivityView } from './views/Activity.jsx';
 import { MoreView } from './views/More.jsx';
+import { SetupView } from './views/Setup.jsx';
 import { DirectorSheet } from './components/DirectorSheet.jsx';
 import { AgentPanel } from './components/AgentPanel.jsx';
 import { GlobalSearch } from './components/GlobalSearch.jsx';
@@ -29,6 +30,7 @@ const ROUTES = {
   integraciones: { title: 'Integraciones', icon: 'plug', el: IntegrationsView },
   ajustes: { title: 'Ajustes y control', icon: 'gear', el: SettingsView },
   mas: { title: 'Más', icon: 'more', el: MoreView },
+  puesta: { title: 'Puesta en marcha', icon: 'target', el: SetupView },
 };
 
 function useHashRoute() {
@@ -94,7 +96,7 @@ function Shell({ me, onLogout }) {
   const ctx = { me, openAgent: setAgent, openTask: setTask, openDeliverable: setDeliverable, openInstruction: setInstruction, openDirector: (o = {}) => setDirector(o), params: route.params };
   const pending = office?.pending_approvals || 0;
   const unread = office?.unread || 0;
-  const nav = ['oficina', 'tareas', 'aprobaciones', 'entregables', 'conversaciones', 'seleccion', 'memoria', 'actividad', 'integraciones', 'ajustes'];
+  const nav = ['puesta', 'oficina', 'tareas', 'aprobaciones', 'entregables', 'conversaciones', 'seleccion', 'memoria', 'actividad', 'integraciones', 'ajustes'];
   const mobile = ['oficina', 'tareas', 'aprobaciones', 'entregables', 'mas'];
   return (
     <div className="app">

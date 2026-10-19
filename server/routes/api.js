@@ -366,6 +366,60 @@ export default async function api(app) {
     return { ok: true };
   });
 
+  // ---------- Puesta en marcha: qué está listo y qué falta (calculado del estado real) ----------
+  app.get('/readiness', async (req) => {
+    const company = (slug) => q.get('SELECT id FROM companies WHERE slug = ?', slug)?.id;
+    const rushy = company('rushy'); const eh = company('elite-hunters');
+    const count = (sql, ...p) => q.get(sql, ...p).c;
+    const st = (k) => q.get('SELECT status FROM integrations WHERE key = ?', k)?.status;
+    const claude = llmMode() === 'real';
+    const steps = [
+      { key: 'claude', title: 'Conectar Claude (el cerebro de los agentes)', done: claude,
+        what: 'Los agentes pueden investigar en internet, redactar propuestas, copies y seguimientos, y entender pedidos libres como "buscame empresas que contratan vendedores".',
+        without: 'Sin esto solo funcionan las tareas fijas (estado de búsquedas, prioridades, reels con tus fotos). Lo demás queda bloqueado, sin inventar nada.',
+        how: 'console.anthropic.com → Billing (cargar saldo) → API Keys → Create Key. Copiala y cargala en Render → Environment Variables como ANTHROPIC_API_KEY. La suscripción de claude.ai no sirve para esto.',
+        route: 'integraciones' },
+      { key: 'storage', title: 'Que los datos no se borren', done: !isEphemeral(),
+        what: 'Clientes, tareas, memoria, fotos y videos quedan guardados para siempre.',
+        without: 'En el plan gratis la app ya no se duerme, pero cada despliegue o reinicio en Render borra todo. Usá Ajustes → Respaldo antes de tocar Render.',
+        how: 'Render → tu servicio → Upgrade your instance (plan pago) → Disks → Add Disk en /data. Es pago: lo decidís vos.',
+        route: 'ajustes' },
+      { key: 'rushy', title: 'Cargar clientes de Rushy con fotos reales', done: !!rushy && count('SELECT COUNT(*) c FROM clients WHERE company_id = ?', rushy) > 0 && count(`SELECT COUNT(*) c FROM files WHERE company_id = ? AND kind = 'photo'`, rushy) > 0,
+        what: 'Reels, semana de contenido, copies e historias para cada cliente, usando sus fotos tal cual (sin inventar productos ni personas).',
+        without: 'No hay clientes ni fotos con qué trabajar: no se inventan.',
+        how: 'Más → Empresas, clientes y memoria → Rushy AI → agregá el cliente → subí sus fotos → botón "Semana de contenido".',
+        route: 'memoria' },
+      { key: 'elite', title: 'Cargar búsquedas de Elite Hunters', done: !!eh && count('SELECT COUNT(*) c FROM rec_searches WHERE company_id = ?', eh) > 0,
+        what: 'Seguimiento de candidatos, entrevistas, qué falta en cada búsqueda y permanencia (garantía). Las decisiones sobre candidatos siempre son tuyas.',
+        without: 'El equipo de Selección no tiene búsquedas para coordinar.',
+        how: 'Más → Selección → Nueva búsqueda → agregá candidatos.',
+        route: 'seleccion' },
+      { key: 'google', title: 'Conectar Google (Gmail, Calendar, Drive)', done: ['google_gmail', 'google_calendar', 'google_drive'].some((k) => st(k) === 'connected'),
+        what: 'Enviar emails, agendar entrevistas en tu Calendar e importar fotos desde Drive, siempre con tu aprobación o tus reglas.',
+        without: 'Los agentes preparan borradores pero no pueden enviarlos ni agendar.',
+        how: 'console.cloud.google.com → proyecto → habilitar Gmail, Calendar y Drive → ID de cliente OAuth (web) con la URI que muestra Integraciones → Credenciales → Google → Autorizar Google.',
+        route: 'integraciones', optional: true },
+      { key: 'whatsapp', title: 'Conectar WhatsApp (vía Chatwoot)', done: st('chatwoot') === 'connected',
+        what: 'Responder consultas de clientes y candidatos, con pausa automática cuando vos tomás la conversación.',
+        without: 'No entran ni salen mensajes de WhatsApp.',
+        how: 'Primero con un número de prueba: NO conectes tu número actual sin revisar coexistencia. Chatwoot → inbox WhatsApp Cloud API → cargar datos en Integraciones → Credenciales → Chatwoot.',
+        route: 'integraciones', optional: true },
+      { key: 'director', title: 'Tu número de dirección por WhatsApp', done: !!req.user.whatsapp_verified_at,
+        what: 'Darle órdenes al director desde WhatsApp: "estado", "APROBAR…", "pausar todo".',
+        without: 'Solo podés dar órdenes desde la app.',
+        how: 'Requiere WhatsApp conectado. Ajustes → Tu canal de dirección por WhatsApp → Verificar.',
+        route: 'ajustes', optional: true },
+    ];
+    const works_now = [
+      'Oficina en vivo: cada agente muestra lo que realmente está haciendo.',
+      'Tareas, aprobaciones, entregables y actividad con historial.',
+      'Selección: búsquedas, candidatos, entrevistas y alertas de permanencia.',
+      'Reels MP4 con tus fotos reales (sin Claude).',
+      'Memoria por empresa y por cliente, y respaldo de datos.',
+    ];
+    return { steps, done: steps.filter((x) => x.done).length, total: steps.length, essential_done: steps.filter((x) => !x.optional && x.done).length, essential_total: steps.filter((x) => !x.optional).length, works_now };
+  });
+
   // ---------- Respaldo ----------
   app.get('/backup', async (req, reply) => {
     ownerOnly(req.user);

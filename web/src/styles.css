@@ -277,3 +277,12 @@ label.f { display: flex; flex-direction: column; gap: 6px; font-size: 13px; colo
 }
 
 @media (max-width: 860px) { .toasts .toast:not(:last-child) { display: none; } .toast { font-size: 13px; padding: 9px 12px; } }
+
+/* Puesta en marcha */
+.progress { height: 8px; border-radius: 99px; background: var(--line); overflow: hidden; }
+.progress > div { height: 100%; background: var(--accent); border-radius: 99px; transition: width .4s; }
+.stepdot { width: 26px; height: 26px; border-radius: 50%; border: 2px solid; display: inline-grid; place-items: center; font-size: 12px; font-weight: 700; flex: none; color: var(--bg); }
+.stepdot:not([style*="var(--st-working)"]) { color: var(--muted); }
+.setup-banner { display: flex; align-items: center; gap: 8px; width: 100%; padding: 9px 14px; border: 0; border-bottom: 1px solid var(--line);
+  background: color-mix(in srgb, var(--accent) 14%, transparent); color: var(--text); font: inherit; font-size: 13px; cursor: pointer; }
+.setup-banner .min0 { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }

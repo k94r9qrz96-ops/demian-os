@@ -143,7 +143,7 @@ function BackupCard({ ephemeral }) {
             : 'Copia de tus datos (base y archivos). Las credenciales no se incluyen: se conservan las del servidor.'}
         </div>
         <div className="row wrap" style={{ gap: 8 }}>
-          <a className="btn primary" href="/api/backup"><Icon name="download" size={16} />Descargar respaldo</a>
+          <a className="btn primary" href="/api/backup" style={{ textDecoration: 'none' }}><Icon name="download" size={16} />Descargar respaldo</a>
           <label className="btn" style={{ cursor: 'pointer' }}>
             {busy ? <span className="spin" /> : <><Icon name="upload" size={16} />Restaurar respaldo</>}
             <input type="file" accept=".gz,.tgz,application/gzip" style={{ display: 'none' }} disabled={busy} onChange={(e) => restore(e.target.files[0])} />

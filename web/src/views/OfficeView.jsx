@@ -1,3 +1,4 @@
+import { SetupBanner } from './Setup.jsx';
 import { useMemo, useState } from 'react';
 import Office from '../Office.jsx';
 import { useLive, Status, ago, usd } from '../lib.jsx';
@@ -47,6 +48,7 @@ export function OfficeView({ ctx }) {
   const recent = events.filter((e) => e.type !== 'agent.step').slice(0, 8);
   return (
     <div className="office-screen">
+      <SetupBanner />
       <div className="office-top">
         <div style={{ minWidth: 0, flex: 1 }}>
           <div className="title">Oficina viva</div>

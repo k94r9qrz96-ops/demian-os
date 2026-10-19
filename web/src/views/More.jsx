@@ -2,6 +2,7 @@ import { Icon } from '../icons.jsx';
 import { go, api } from '../lib.jsx';
 
 const ITEMS = [
+  ['puesta', 'target', 'Puesta en marcha', 'Qué funciona, qué falta y para qué sirve cada paso'],
   ['conversaciones', 'chat', 'Conversaciones', 'WhatsApp vía Chatwoot, pausas y derivaciones'],
   ['seleccion', 'briefcase', 'Selección · Elite Hunters', 'Búsquedas, candidatos, entrevistas, permanencia'],
   ['memoria', 'brain', 'Empresas, clientes y memoria', 'Instrucciones, tono, restricciones, fotos reales'],

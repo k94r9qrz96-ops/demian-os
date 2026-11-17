@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{{title}}</title>
+<meta name="description" content="{{desc}}">
+<meta property="og:type" content="website">
+<meta property="og:title" content="{{title}}">
+<meta property="og:description" content="{{desc}}">
+<meta property="og:url" content="{{url}}">
+<meta name="theme-color" content="#0a0f0c">
+<link rel="icon" href="/fichaje/assets/icon.svg">
+<link rel="stylesheet" href="/fichaje/assets/fichaje.css">
+</head>
+<body data-page="apply">
+<div class="apply">
+  <nav class="nav"><span class="logo"><i>F</i> Fichaje</span><span class="mute small">Postulación en 3 min</span></nav>
+  <div id="loading" class="mute">Cargando vacante…</div>
+
+  <div id="intro" class="hide">
+    <div class="eyebrow"><b></b> <span id="company"></span> está fichando</div>
+    <h2 id="headline"></h2>
+    <p class="mute" id="meta"></p>
+    <details class="card" style="margin:16px 0;padding:16px"><summary><b>Ver el aviso completo</b></summary><p class="aviso mute" id="aviso" style="margin-top:12px"></p></details>
+  </div>
+
+  <div id="closed" class="card hide"><h3>Esta búsqueda ya cerró</h3><p class="mute">Gracias por el interés. La empresa ya no recibe postulaciones para este puesto.</p></div>
+
+  <form id="applyForm" class="card hide" novalidate>
+    <div class="mute small" id="stepLabel"></div>
+    <div class="progress"><i id="bar"></i></div>
+    <div id="stepBody"></div>
+    <div class="hp" aria-hidden="true"><label>Web <input name="website" tabindex="-1" autocomplete="off"></label></div>
+    <div id="applyErr" class="err hide" role="alert"></div>
+    <div class="navbtns">
+      <button class="btn btn-ghost" type="button" id="backBtn">← Atrás</button>
+      <button class="btn btn-lime" type="submit" id="nextBtn">Siguiente →</button>
+    </div>
+  </form>
+
+  <div id="sent" class="card hide" style="text-align:center">
+    <div style="font-size:3rem">⚽</div>
+    <h2>¡Postulación enviada!</h2>
+    <p class="mute">La empresa recibe tus respuestas ahora mismo. Si tu perfil encaja, te van a contactar al dato que dejaste.</p>
+  </div>
+  <p class="mute small" style="margin-top:24px">Tus respuestas se comparten solo con la empresa que publicó esta vacante. Un sistema automático las ordena para ayudarla a decidir; la decisión es de la empresa.</p>
+</div>
+<script src="/fichaje/assets/fichaje.js"></script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Fichaje — Caja del dueño</title>
+<meta name="theme-color" content="#0a0f0c">
+<link rel="icon" href="/fichaje/assets/icon.svg">
+<link rel="stylesheet" href="/fichaje/assets/fichaje.css">
+</head>
+<body data-page="admin">
+<div class="wrap">
+  <nav class="nav"><a class="logo" href="/fichaje"><i>F</i> Fichaje <small>caja del dueño</small></a><a class="btn btn-ghost btn-sm" href="/">Demian OS</a></nav>
+  <div id="loading" class="mute">Cargando…</div>
+  <div id="login" class="card hide"><h3>Iniciá sesión en Demian OS</h3><p class="mute">Esta página usa tu sesión de Demian OS. <a href="/">Entrá</a> y volvé a abrir /fichaje/admin.</p></div>
+  <div id="adm" class="hide">
+    <h1 style="font-size:clamp(1.8rem,4.5vw,3rem)">Vacantes y cobros</h1>
+    <div id="cfgWarn" class="upsell hide"></div>
+    <div class="stats">
+      <div class="stat"><b id="tVac">0</b><span>Vacantes creadas</span></div>
+      <div class="stat"><b id="tUp">0</b><span>Listas para cobrar</span></div>
+      <div class="stat"><b id="tPaid">0</b><span>Pagadas</span></div>
+      <div class="stat"><b id="tCand">0</b><span>Candidatos</span></div>
+    </div>
+    <div class="card table-wrap">
+      <table>
+        <thead><tr><th>Vacante</th><th>Contacto</th><th>Candidatos</th><th>Plan</th><th></th></tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<script src="/fichaje/assets/fichaje.js"></script>
+</body>
+</html>

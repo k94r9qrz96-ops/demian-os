@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Fichaje — tu vacante con entrevistador propio</title>
+<meta name="description" content="Pegá tu vacante y en 60 segundos tenés el aviso, el guion del reel y un link de postulación con un entrevistador IA que filtra y ordena a cada candidato.">
+<meta property="og:title" content="Fichaje — publicá una vacante, recibí a los mejores ya ordenados">
+<meta property="og:description" content="Un entrevistador IA filtra a cada postulante y te los entrega rankeados. Sin leer 300 CVs.">
+<meta name="theme-color" content="#0a0f0c">
+<link rel="icon" href="/fichaje/assets/icon.svg">
+<link rel="stylesheet" href="/fichaje/assets/fichaje.css">
+</head>
+<body data-page="landing">
+<div class="wrap">
+  <nav class="nav">
+    <a class="logo" href="/fichaje"><i>F</i> Fichaje <small>por {{brand}}</small></a>
+    <a class="btn btn-lime btn-sm" href="#crear">Crear vacante gratis</a>
+  </nav>
+
+  <header class="hero">
+    <div>
+      <div class="eyebrow"><b></b> Reclutamiento con entrevistador IA</div>
+      <h1>Publicá una vacante.<br><span class="lime">Recibí a los mejores, ya ordenados.</span></h1>
+      <p class="lead">Pegás la descripción del puesto y en 60 segundos tenés el aviso listo, el guion del reel y un link de postulación con su propio entrevistador. Cada candidato responde en 3 minutos, sin CV, y Fichaje te lo devuelve con puntaje, razones y alertas.</p>
+      <ul class="ticks">
+        <li>Filtra los requisitos excluyentes antes de que pierdas un minuto.</li>
+        <li>Ranking del 0 al 100 con veredicto: <b>Fichar ya · Entrevistar · En reserva · Descartado</b>.</li>
+        <li>Aviso, reel de 15 s y posts para LinkedIn, Instagram y WhatsApp escritos para que la gente se postule.</li>
+        <li>Gratis para tus primeros 5 candidatos, sin tarjeta. Si te sirve, desbloqueás la vacante por {{price}}.</li>
+      </ul>
+    </div>
+
+    <div class="card form-card" id="crear">
+      <form id="vacForm" autocomplete="on" novalidate>
+        <h3>Creá tu vacante · gratis</h3>
+        <p class="mute small">Tarda 60 segundos. Te damos el link para compartir y tu panel privado.</p>
+        <label for="f-title">Puesto</label>
+        <input id="f-title" name="title" required maxlength="120" placeholder="Ej.: Vendedor/a de salón">
+        <div class="row2">
+          <div><label for="f-company">Empresa</label><input id="f-company" name="company_name" required maxlength="120" placeholder="Ej.: Muebles Norte"></div>
+          <div><label for="f-location">Lugar / modalidad <span>(opcional)</span></label><input id="f-location" name="location" maxlength="120" placeholder="Ej.: Córdoba · presencial"></div>
+        </div>
+        <label for="f-salary">Sueldo <span>(opcional, sube mucho la respuesta)</span></label>
+        <input id="f-salary" name="salary" maxlength="120" placeholder="Ej.: $900.000 + comisiones">
+        <label for="f-desc">¿Qué va a hacer y qué ofrecen?</label>
+        <textarea id="f-desc" name="description" required maxlength="6000" placeholder="Pegá el aviso que ya tenés o contalo con tus palabras."></textarea>
+        <label for="f-must">Requisitos excluyentes <span>(uno por línea, máx. 3)</span></label>
+        <textarea id="f-must" name="must_haves" maxlength="1500" style="min-height:84px" placeholder="Experiencia en ventas&#10;Disponibilidad sábados"></textarea>
+        <div class="row2">
+          <div><label for="f-wa">Tu WhatsApp</label><input id="f-wa" name="contact_whatsapp" inputmode="tel" maxlength="40" placeholder="+54 9 ..."></div>
+          <div><label for="f-mail">o tu email</label><input id="f-mail" name="contact_email" type="email" maxlength="200" placeholder="vos@empresa.com"></div>
+        </div>
+        <div class="hp" aria-hidden="true"><label>Web <input name="website" tabindex="-1" autocomplete="off"></label></div>
+        <div id="vacErr" class="err hide" role="alert"></div>
+        <button class="btn btn-lime" style="width:100%;margin-top:18px" type="submit" id="vacBtn">Crear mi vacante con entrevistador →</button>
+        <p class="mute small" style="margin:10px 0 0">Sin tarjeta. Tus datos se usan solo para avisarte de tus candidatos.</p>
+      </form>
+
+      <div id="vacDone" class="hide">
+        <div class="eyebrow"><b></b> Vacante publicada</div>
+        <h3 id="doneTitle">¡Listo!</h3>
+        <div class="okbox">
+          <b>1 · Compartí este link</b> <span class="mute small">(es donde se postulan)</span>
+          <div class="linkrow"><input id="doneApply" readonly><button class="btn btn-ghost btn-sm" data-copy="doneApply" type="button">Copiar</button></div>
+          <b>2 · Tu panel privado</b> <span class="mute small">(guardalo: es tu llave)</span>
+          <div class="linkrow"><input id="donePanel" readonly><button class="btn btn-ghost btn-sm" data-copy="donePanel" type="button">Copiar</button></div>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px">
+          <a class="btn btn-lime" id="doneOpen" href="#">Abrir mi panel y el kit →</a>
+          <a class="btn btn-ghost" id="doneShare" href="#" target="_blank" rel="noopener">Compartir por WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </header>
+</div>
+
+<section class="block">
+  <div class="wrap">
+    <h2>Así trabaja tu entrevistador</h2>
+    <p class="mute">Lo que hoy te lleva una semana de leer CVs y hacer llamadas, pasa solo mientras hacés otra cosa.</p>
+    <div class="steps">
+      <div class="card step"><b>1</b><h3>Pegás la vacante</h3><p class="mute">Fichaje escribe un aviso que convierte, el guion de un reel de 15 s y las preguntas de filtro: excluyentes, de oficio y de disponibilidad.</p></div>
+      <div class="card step"><b>2</b><h3>Compartís un link</h3><p class="mute">Por WhatsApp, Instagram o LinkedIn. El candidato responde desde el celular en 3 minutos. Sin CV, sin registrarse.</p></div>
+      <div class="card step"><b>3</b><h3>Recibís el ranking</h3><p class="mute">Cada postulante llega con puntaje, veredicto, razones y alertas. Llamás solo a los que valen la pena.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap layout" style="padding-bottom:0">
+    <div>
+      <h2>Tu panel, en vivo</h2>
+      <p class="mute">Ejemplo ilustrativo de cómo se ve el ranking de una vacante de ventas.</p>
+      <div class="cand"><div class="ring" style="--p:91"><span>91</span></div><div><b>Lucía M.</b><span class="chip v-fichar">Fichar ya</span><ul><li>Cerró 38 ventas en un mes en un salón similar.</li><li>Disponible inmediato, expectativa dentro del rango.</li></ul></div></div>
+      <div class="cand"><div class="ring" style="--p:68;--c:var(--ok)"><span>68</span></div><div><b>Tomás R.</b><span class="chip v-entrevistar">Entrevistar</span><ul><li>Buena motivación, pero sin números concretos.</li></ul></div></div>
+      <div class="cand"><div class="ring" style="--p:24;--c:var(--bad)"><span>24</span></div><div><b>Diego S.</b><span class="chip v-descartado">Descartado</span><ul class="flags"><li>No cumple: disponibilidad sábados.</li></ul></div></div>
+    </div>
+    <div class="card">
+      <h3>Por qué funciona</h3>
+      <p class="mute">Un aviso común junta cientos de CVs iguales. Fichaje cambia la pregunta: en vez de “mandame tu CV”, cada postulante tiene que demostrar con un ejemplo concreto que puede hacer el trabajo. Los requisitos excluyentes se filtran solos y las respuestas vagas bajan en el ranking.</p>
+      <p class="mute">Detrás está el equipo de {{brand}}: si querés, un headhunter humano entrevista a tus mejores candidatos por vos.</p>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="precios">
+  <div class="wrap">
+    <h2>Pagás por vacante. Sin suscripción.</h2>
+    <div class="grid3">
+      <div class="card plan"><span class="badge">Gratis</span><div class="price">US$ 0</div><p class="mute">Para probarlo hoy.</p><ul><li>Aviso, reel y posts</li><li>Entrevistador IA y ranking</li><li>Ves tus primeros 5 candidatos completos</li></ul><a class="btn btn-ghost" href="#crear" style="width:100%">Empezar gratis</a></div>
+      <div class="card plan featured"><span class="badge lime">Más elegido</span><div class="price">{{price}}</div><p class="mute">Por vacante, pago único.</p><ul><li>Candidatos ilimitados</li><li>Contacto, respuestas y razones de todos</li><li>Exportación a Excel/CSV</li><li>Vacante activa hasta que la cierres</li></ul><a class="btn btn-lime" href="#crear" style="width:100%">Crear y desbloquear</a></div>
+      <div class="card plan"><span class="badge">Pro</span><div class="price">{{pro_price}}</div><p class="mute">Por vacante. Con humano.</p><ul><li>Todo lo anterior</li><li>Un headhunter de {{brand}} entrevista a tus 5 mejores</li><li>Te entrega una terna con informe en 72 h hábiles</li></ul><a class="btn btn-ghost" href="#crear" style="width:100%">Quiero Pro</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="block faq">
+  <div class="wrap" style="max-width:780px">
+    <h2>Preguntas frecuentes</h2>
+    <details><summary>¿El candidato tiene que registrarse o mandar CV?</summary><p class="mute">No. Abre el link, pone su nombre y un contacto, y responde las preguntas. Lleva unos 3 minutos desde el celular.</p></details>
+    <details><summary>¿Quién decide a quién contrato?</summary><p class="mute">Vos. Fichaje ordena y explica; la decisión y el contacto con los candidatos son tuyos.</p></details>
+    <details><summary>¿Qué pasa con los candidatos que llegan después de los 5 gratis?</summary><p class="mute">Se guardan igual y ves su puntaje y veredicto. Para ver nombre, contacto y respuestas desbloqueás la vacante.</p></details>
+    <details><summary>¿Cómo pago?</summary><p class="mute">Desde tu panel, con el botón de desbloquear. Al confirmarse el pago se habilita la vacante completa.</p></details>
+  </div>
+</section>
+
+<footer><div class="wrap">Fichaje · un producto de {{brand}} · Las respuestas de los candidatos se comparten solo con la empresa que publicó la vacante.</div></footer>
+<script src="/fichaje/assets/fichaje.js"></script>
+</body>
+</html>

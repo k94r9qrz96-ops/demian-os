@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Panel de vacante — Fichaje</title>
+<meta name="theme-color" content="#0a0f0c">
+<link rel="icon" href="/fichaje/assets/icon.svg">
+<link rel="stylesheet" href="/fichaje/assets/fichaje.css">
+</head>
+<body data-page="panel">
+<div class="wrap">
+  <nav class="nav"><a class="logo" href="/fichaje"><i>F</i> Fichaje</a><span class="badge" id="planBadge"></span></nav>
+  <div id="loading" class="mute">Cargando tu panel…</div>
+  <div id="denied" class="card hide"><h3>Este link de panel no es válido</h3><p class="mute">Usá el link completo que recibiste al crear la vacante (incluye la parte después del #).</p></div>
+
+  <div id="panel" class="hide">
+    <h1 style="font-size:clamp(1.8rem,4.5vw,3rem)" id="pTitle"></h1>
+    <p class="mute" id="pMeta"></p>
+    <div class="stats">
+      <div class="stat"><b id="sTotal">0</b><span>Postulantes</span></div>
+      <div class="stat"><b id="sHot">0</b><span>Para fichar ya</span></div>
+      <div class="stat"><b id="sViews">0</b><span>Visitas al link</span></div>
+      <div class="stat"><b id="sConv">–</b><span>Visitas → postulación</span></div>
+    </div>
+
+    <div class="card" style="margin-bottom:18px">
+      <b>Link de postulación</b> <span class="mute small">— compartilo en todos lados</span>
+      <div class="linkrow"><input id="applyUrl" readonly><button class="btn btn-ghost btn-sm" data-copy="applyUrl" type="button">Copiar</button></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <a class="btn btn-lime btn-sm" id="waShare" target="_blank" rel="noopener" href="#">Compartir por WhatsApp</a>
+        <a class="btn btn-ghost btn-sm" id="liShare" target="_blank" rel="noopener" href="#">Compartir en LinkedIn</a>
+        <a class="btn btn-ghost btn-sm hide" id="csvBtn" href="#">Exportar CSV</a>
+        <button class="btn btn-ghost btn-sm" id="closeBtn" type="button">Cerrar búsqueda</button>
+      </div>
+    </div>
+
+    <div class="layout">
+      <div>
+        <h2>Ranking</h2>
+        <div id="upsell" class="upsell hide">
+          <h3 id="upTitle"></h3>
+          <p class="mute" id="upText"></p>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <a class="btn btn-lime" id="payBtn" target="_blank" rel="noopener" href="#"></a>
+            <a class="btn btn-ghost" id="proBtn" target="_blank" rel="noopener" href="#"></a>
+          </div>
+          <p class="mute small" id="payNote" style="margin:10px 0 0">Después de pagar, la vacante se desbloquea en este mismo link.</p>
+        </div>
+        <div id="cands"></div>
+        <div id="empty" class="card hide"><h3>Todavía no hay postulantes</h3><p class="mute">Compartí el link en tus redes, grupos de WhatsApp y estados. Usá el aviso y el guion del reel del kit para que se postule más gente. Esta página se actualiza sola.</p></div>
+      </div>
+      <div>
+        <h2>Tu kit</h2>
+        <div class="card">
+          <div class="tabs" id="kitTabs"></div>
+          <div id="kitBody"></div>
+        </div>
+        <div class="card" style="margin-top:16px">
+          <h3>¿Querés que lo hagamos por vos?</h3>
+          <p class="mute">Con <b>Fichaje Pro</b> un headhunter entrevista a tus 5 mejores candidatos y te entrega una terna con informe.</p>
+          <a class="btn btn-ghost" id="proBtn2" target="_blank" rel="noopener" href="#">Quiero Pro</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="/fichaje/assets/fichaje.js"></script>
+</body>
+</html>

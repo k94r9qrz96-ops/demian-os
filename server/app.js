@@ -11,9 +11,10 @@ import { redact } from './lib/util.js';
 import api, { oauthRoutes } from './routes/api.js';
 import { authenticateWebhook, receiveWebhook } from './channels/chatwoot-handler.js';
 import { queueStats } from './lib/queue.js';
+import fichajeRoutes, { fichajeRewrite } from './fichaje/routes.js';
 
 export async function buildApp({ logger = false } = {}) {
-  const app = Fastify({ logger, trustProxy: true, bodyLimit: 2 * 1024 * 1024 });
+  const app = Fastify({ logger, trustProxy: true, bodyLimit: 2 * 1024 * 1024, rewriteUrl: fichajeRewrite });
   await app.register(cookie);
   await app.register(multipart, { limits: { fileSize: 200 * 1024 * 1024, files: 20 } });
 
@@ -59,6 +60,7 @@ export async function buildApp({ logger = false } = {}) {
   });
 
   await app.register(api, { prefix: '/api' });
+  await app.register(fichajeRoutes);
   await app.register(oauthRoutes);
 
   app.setNotFoundHandler((req, reply) => {

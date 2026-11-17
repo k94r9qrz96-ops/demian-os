@@ -37,12 +37,18 @@ WhatsApp ─► API oficial de Meta ─► Chatwoot ─► /webhooks/chatwoot (H
 ```bash
 npm install && (cd web && npm install && npm run build)
 npm run demo            # base de demostración separada: demo@demian-os.local / demo-demian-os
-npm test                # 30 pruebas
+npm test                # 38 pruebas
 ```
 
 Producción en Render en ~10 minutos desde el celular: ver `docs/DESPLIEGUE.md` (`render.yaml` incluido). Operación desde el teléfono: `docs/TELEFONO.md`.
 
+## Fichaje (producto nuevo)
+
+`/fichaje`: vacantes con entrevistador IA propio y ranking automático de candidatos. Se cobra por vacante. Ver `docs/FICHAJE.md`.
+
 ## Documentos
+
+- `docs/FICHAJE.md` — Fichaje: producto, precios, cómo cobrar y plan de las primeras 24 h
 
 - `docs/TELEFONO.md` — guía breve para operar desde el celular
 - `docs/DESPLIEGUE.md` — despliegue reproducible (Docker o Node)

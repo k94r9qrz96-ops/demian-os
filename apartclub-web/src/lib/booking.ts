@@ -25,8 +25,10 @@ export const nightsBetween = (a?: string, b?: string) => {
 
 /** Abre en pestaña nueva; si el navegador la bloquea, navega en la misma pestaña. */
 function openExternal(url: string) {
-  const w = window.open(url, '_blank', 'noopener')
-  if (!w) window.location.href = url
+  // equivalente a tocar un enlace real: funciona también en visores con ventanas emergentes restringidas
+  const a = document.createElement('a')
+  a.href = url; a.target = '_blank'; a.rel = 'noopener'
+  document.body.appendChild(a); a.click(); a.remove()
 }
 
 export function whatsappUrl(message: string) {

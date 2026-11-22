@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=540, initial-scale=1" />
+<title>Showreel Apart Club</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+<script src="../node_modules/gsap/dist/gsap.min.js"></script>
+<style>
+  :root { --night:#071d28; --ivory:#f6f3eb; --pool:#7fd3e2; --sand:#d8c5a8; }
+  html, body { margin:0; width:540px; height:960px; overflow:hidden; background:var(--night); color:var(--ivory); font-family:'Instrument Sans', system-ui, sans-serif; }
+  .bg { position:absolute; inset:-20%; background: radial-gradient(40% 30% at 25% 30%, rgba(35,167,192,.35), transparent 70%), radial-gradient(45% 30% at 80% 75%, rgba(73,105,92,.4), transparent 70%); }
+  .grain { position:absolute; inset:0; background: linear-gradient(180deg, rgba(7,29,40,0), rgba(7,29,40,.6)); }
+  .top { position:absolute; top:22px; left:0; right:0; display:flex; justify-content:space-between; align-items:center; padding:0 26px; }
+  .top img { height:34px; }
+  .top span { font-size:10px; letter-spacing:.24em; text-transform:uppercase; opacity:.7; }
+  .phone { position:absolute; left:50%; top:76px; width:393px; height:852px; margin-left:-196.5px; transform-origin:50% 0; border-radius:52px; padding:0; box-shadow: 0 0 0 9px #0d1418, 0 0 0 10px #2a3a42, 0 60px 120px -30px rgba(0,0,0,.8); overflow:hidden; background:#000; }
+  .phone iframe { width:393px; height:852px; border:0; display:block; }
+  .island { position:absolute; top:11px; left:50%; width:120px; height:34px; margin-left:-60px; background:#000; border-radius:20px; z-index:3; }
+  .cap { position:absolute; left:26px; right:26px; bottom:26px; height:96px; }
+  .cap div { position:absolute; inset:0; opacity:0; }
+  .cap small { display:block; font-size:10.5px; letter-spacing:.24em; text-transform:uppercase; color:var(--pool); margin-bottom:6px; }
+  .cap b { font-family:'Instrument Serif', serif; font-weight:400; font-size:34px; line-height:1.02; display:block; }
+  .card { position:absolute; inset:0; display:grid; place-content:center; text-align:center; padding:0 40px; }
+  .card img { width:300px; margin:0 auto 34px; }
+  .card h1 { font-family:'Instrument Serif', serif; font-weight:400; font-size:54px; line-height:.95; margin:0; }
+  .card h1 em { color:var(--pool); display:block; font-size:66px; }
+  .card p { margin-top:26px; font-size:11px; letter-spacing:.24em; text-transform:uppercase; opacity:.7; }
+  .mask { overflow:hidden; display:block; padding-bottom:4px; }
+  .mask > * { display:block; }
+  .end h1 em { color:#ffd9a8; }
+  .ripple { position:absolute; left:50%; top:46%; width:10px; height:10px; margin:-5px; border-radius:50%; border:1px solid rgba(127,211,226,.6); }
+</style>
+</head>
+<body>
+  <div class="bg"></div><div class="grain"></div>
+  <div class="ripple r1"></div><div class="ripple r2"></div><div class="ripple r3"></div>
+  <div class="card open">
+    <img src="../public/img/logo-light.webp" alt="" />
+    <h1><span class="mask"><span>Hay lugares que no se visitan.</span></span><span class="mask"><em>Se viven.</em></span></h1>
+    <p>Propuesta de nueva web · demo funcional</p>
+  </div>
+  <div class="top"><img src="../public/img/logo-light.webp" alt="" /><span>Nueva experiencia web</span></div>
+  <div class="phone"><div class="island"></div><iframe id="site" title="sitio"></iframe></div>
+  <div class="cap" id="cap"></div>
+  <div class="card end">
+    <img src="../public/img/logo-light.webp" alt="" />
+    <h1><span class="mask"><span>Tu próxima escapada</span></span><span class="mask"><em>empieza acá.</em></span></h1>
+    <p>Responsive · WebGL · GSAP · Reservas directas</p>
+  </div>
+<script>
+  const CAPS = window.CAPS || [];
+  const cap = document.getElementById('cap');
+  CAPS.forEach(c => { const d = document.createElement('div'); d.innerHTML = `<small>${c.k}</small><b>${c.t}</b>`; cap.appendChild(d); });
+  const tl = gsap.timeline({ paused: true });
+  tl.set('.top, .phone, .cap', { opacity: 0 })
+    .set('.end', { opacity: 0 })
+    .fromTo('.r1', { scale: 0, opacity: 1 }, { scale: 90, opacity: 0, duration: 3, ease: 'power2.out' }, 0)
+    .fromTo('.r2', { scale: 0, opacity: 1 }, { scale: 90, opacity: 0, duration: 3, ease: 'power2.out' }, 0.5)
+    .fromTo('.r3', { scale: 0, opacity: 1 }, { scale: 90, opacity: 0, duration: 3, ease: 'power2.out' }, 1.0)
+    .from('.open img', { opacity: 0, y: 20, filter: 'blur(10px)', duration: 1, ease: 'power3.out' }, 0.1)
+    .from('.open .mask > *', { yPercent: 110, duration: 1.1, stagger: 0.25, ease: 'expo.out' }, 0.4)
+    .from('.open p', { opacity: 0, duration: 0.8 }, 1.2)
+    .to('.open', { opacity: 0, y: -60, duration: 0.7, ease: 'power3.in' }, 2.3)
+    .to('.top', { opacity: 1, duration: 0.6 }, 2.6)
+    .fromTo('.phone', { opacity: 0, y: 500, scale: 0.86, rotate: 4 }, { opacity: 1, y: 0, scale: 0.86, rotate: 0, duration: 1.3, ease: 'expo.out' }, 2.4)
+    .to('.cap', { opacity: 1, duration: 0.01 }, 3.0);
+  CAPS.forEach((c, i) => {
+    const el = cap.children[i];
+    tl.fromTo(el, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, ease: 'expo.out' }, c.at)
+      .to(el, { opacity: 0, y: -18, duration: 0.4, ease: 'power2.in' }, (CAPS[i + 1]?.at ?? window.END) - 0.35);
+  });
+  tl.to('.phone', { scale: 0.6, y: 120, opacity: 0, duration: 1, ease: 'power3.in' }, window.END)
+    .to('.top', { opacity: 0, duration: 0.5 }, window.END)
+    .to('.end', { opacity: 1, duration: 0.01 }, window.END + 0.6)
+    .from('.end img', { opacity: 0, y: 20, duration: 1, ease: 'power3.out' }, window.END + 0.6)
+    .from('.end .mask > *', { yPercent: 110, duration: 1.1, stagger: 0.2, ease: 'expo.out' }, window.END + 0.8)
+    .from('.end p', { opacity: 0, duration: 0.8 }, window.END + 1.6)
+    .to({}, { duration: 1 }, window.END + 3.6);
+  window.reel = { seek: (t) => tl.seek(t, false), duration: () => tl.duration() };
+</script>
+</body>
+</html>

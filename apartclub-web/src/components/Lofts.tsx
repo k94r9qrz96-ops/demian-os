@@ -112,7 +112,7 @@ export function Lofts() {
       <div className="lofts__tabs" role="tablist" aria-label="Elegí un espacio">
         {LOFT_SPACES.map((sp, k) => (
           <button key={sp.id} role="tab" aria-selected={k === i} className={k === i ? 'is-on' : ''} onClick={() => go(k)}>
-            <img src={sp.src.replace('.webp', '-720.webp')} alt="" loading="lazy" />
+            <img src={sp.thumb} alt="" loading="lazy" />
             <span>{sp.title}</span>
           </button>
         ))}

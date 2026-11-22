@@ -1,5 +1,6 @@
 import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react'
 import { WaterScene, canUseWater } from '../lib/water'
+import { A, srcset } from '../lib/asset'
 
 type Props = {
   name: 'piscina-hero' | 'piscina-mirador'
@@ -29,7 +30,7 @@ export const WaterImage = forwardRef<WaterScene | null, Props>(function WaterIma
     const boot = () => {
       if (cancelled || !canvas.current) return
       try {
-        s = new WaterScene(canvas.current, { image: `./img/${name}.jpg`, mask: `./img/${name}-mask.png`, interactive, intensity })
+        s = new WaterScene(canvas.current, { image: A(`./img/${name}.jpg`), mask: A(`./img/${name}-mask.png`), interactive, intensity })
         scene.current = s
         s.ready.then(() => !cancelled && setLive(true)).catch(() => {})
       } catch { /* sin WebGL: queda la foto estática */ }
@@ -46,8 +47,8 @@ export const WaterImage = forwardRef<WaterScene | null, Props>(function WaterIma
     <div className={`water ${live ? 'is-live' : ''} ${className}`}>
       <img
         className="water__img"
-        src={`./img/${name}.webp`}
-        srcSet={`./img/${name}-720.webp 720w, ./img/${name}.webp 1290w`}
+        src={A(`./img/${name}.webp`)}
+        srcSet={srcset(`./img/${name}-720.webp 720w, ./img/${name}.webp 1290w`)}
         sizes="100vw"
         alt={alt}
         fetchPriority={priority ? 'high' : 'auto'}

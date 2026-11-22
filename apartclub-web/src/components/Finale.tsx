@@ -4,6 +4,7 @@ import { Icon } from './Icon'
 import { gsap, splitReveal } from '../lib/motion'
 import { goToBooking, openWhatsApp } from '../lib/booking'
 import { CONTACT, LEGAL } from '../data/content'
+import { A } from '../lib/asset'
 
 /** Escena 12: cierre al atardecer + footer. */
 export function Finale() {
@@ -34,7 +35,7 @@ export function Finale() {
       </section>
       <footer className="ftr">
         <div className="ftr__top">
-          <img className="ftr__logo" src="./img/logo-light.webp" alt="Apart Club San Pedro" width="1048" height="353" loading="lazy" />
+          <img className="ftr__logo" src={A("./img/logo-light.webp")} alt="Apart Club San Pedro" width="1048" height="353" loading="lazy" />
           <nav aria-label="Pie de página">
             <a href="#experiencia">El complejo</a><a href="#lofts">Lofts</a><a href="#experiencias">Experiencias</a>
             <a href="#gastronomia">Gastronomía</a><a href="#san-pedro">San Pedro</a><a href="#reservar">Reservar</a>

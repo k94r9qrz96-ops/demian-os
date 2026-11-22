@@ -4,6 +4,7 @@ import { gsap, splitReveal } from '../lib/motion'
 import { nightsBetween, openOfficialBooking, openWhatsApp, stayMessage } from '../lib/booking'
 import { CONTACT } from '../data/content'
 import { track } from '../lib/track'
+import { A } from '../lib/asset'
 
 const iso = (d: Date) => new Date(d.getTime() - d.getTimezoneOffset() * 60000).toISOString().slice(0, 10)
 const addDays = (s: string, n: number) => { const d = new Date(s + 'T12:00:00'); d.setDate(d.getDate() + n); return iso(d) }
@@ -76,7 +77,7 @@ export function Booking() {
 
   return (
     <section ref={root} id="reservar" className="bk" aria-labelledby="bk-title">
-      <div className="bk__bg" aria-hidden="true"><img src="./img/piscina-hero-720.webp" alt="" loading="lazy" /></div>
+      <div className="bk__bg" aria-hidden="true"><img src={A("./img/piscina-hero-720.webp")} alt="" loading="lazy" /></div>
       <div className="bk__head">
         <p className="kicker">Reservas directas</p>
         <h2 id="bk-title" className="display" data-split>Elegí tus fechas. <em>Del resto nos ocupamos.</em></h2>

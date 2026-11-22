@@ -3,6 +3,7 @@ import { CONTACT, POLICIES } from '../data/content'
 import { Icon } from './Icon'
 import { gsap, splitReveal } from '../lib/motion'
 import { track } from '../lib/track'
+import { A } from '../lib/asset'
 
 /**
  * Escena 11: confianza. No se publican reseñas inventadas: las opiniones reales viven en Google y en el
@@ -45,11 +46,11 @@ export function Trust() {
           <a href={CONTACT.mapsUrl} target="_blank" rel="noopener" onClick={() => track('maps_click')}><Icon name="pin" />{CONTACT.address}</a>
         </div>
         <div className="trust__map">
-          {map ? (
+          {map && false ? (
             <iframe title="Ubicación de Apart Club San Pedro en Google Maps" loading="lazy" referrerPolicy="no-referrer-when-downgrade"
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3321.093446898848!2d-59.7399845!3d-33.654740499999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95ba22ef60d03267%3A0x32b1544c02dd1326!2sApart%20Club%20San%20Pedro!5e0!3m2!1ses!2sar!4v1690378602957!5m2!1ses!2sar" />
           ) : (
-            <button className="trust__mapbtn" style={{ background: "url(./img/parque-laguna-720.webp) center / cover" }} onClick={() => setMap(true)}><Icon name="pin" size={28} /><span>Cargar mapa interactivo</span></button>
+            <a className="trust__mapbtn" style={{ background: `url(${A('./img/parque-laguna-720.webp')}) center / cover` }} href={CONTACT.mapsUrl} target="_blank" rel="noopener" onClick={() => { setMap(false); track('maps_click', { source: 'map_card' }) }}><Icon name="pin" size={28} /><span>Abrir ubicación en Google Maps</span></a>
           )}
         </div>
       </div>

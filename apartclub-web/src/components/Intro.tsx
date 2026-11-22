@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { gsap, reducedMotion } from '../lib/motion'
+import { A } from '../lib/asset'
 
 const KEY = 'ac-intro-seen'
 
@@ -56,12 +57,12 @@ export function Intro({ onDone }: { onDone: () => void }) {
               <feDisplacementMap in="SourceGraphic" scale="14" />
             </filter>
           </defs>
-          <image href="./img/logo-light.png" width="1048" height="353" opacity=".1" />
-          <image href="./img/logo-light.png" width="1048" height="353" clipPath="url(#liquid)" />
+          <image href={A("./img/logo-light.png")} width="1048" height="353" opacity=".1" />
+          <image href={A("./img/logo-light.png")} width="1048" height="353" clipPath="url(#liquid)" />
         </svg>
         <svg className="intro__mirror" viewBox="0 0 1048 353" aria-hidden="true">
           <g mask="url(#mirrorMask)" filter="url(#ripple)">
-            <image href="./img/logo-light.png" width="1048" height="353" transform="translate(0 353) scale(1 -1)" />
+            <image href={A("./img/logo-light.png")} width="1048" height="353" transform="translate(0 353) scale(1 -1)" />
           </g>
         </svg>
         <p className="intro__tag">The art of escaping</p>

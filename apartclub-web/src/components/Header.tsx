@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { goToBooking } from '../lib/booking'
 import { track } from '../lib/track'
+import { A } from '../lib/asset'
 
 const NAV = [
   ['#experiencia', 'El complejo'],
@@ -38,7 +39,7 @@ export function Header() {
     <>
       <header className={`hdr ${scrolled ? 'is-scrolled' : ''}`}>
         <a href="#inicio" className="hdr__logo" aria-label="Apart Club San Pedro, inicio" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }) }}>
-          <img src="./img/logo-light.webp" alt="Apart Club San Pedro" width="1048" height="353" />
+          <img src={A("./img/logo-light.webp")} alt="Apart Club San Pedro" width="1048" height="353" />
         </a>
         <nav className="hdr__nav" aria-label="Principal">
           {NAV.map(([h, l]) => <a key={h} href={h} onClick={(e) => { e.preventDefault(); go(h) }}>{l}</a>)}

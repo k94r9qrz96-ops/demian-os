@@ -29,7 +29,7 @@ export function Discover() {
   }, [])
 
   return (
-    <section ref={root} id="experiencia" className="disc" aria-labelledby="disc-title">
+    <section ref={root} id="experiencia" className="disc" data-chapter="El complejo" aria-labelledby="disc-title">
       <div className="disc__head">
         <p className="kicker">El complejo</p>
         <h2 id="disc-title" className="display" data-split>Un lugar para <em>bajar el ritmo.</em></h2>

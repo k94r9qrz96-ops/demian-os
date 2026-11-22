@@ -78,7 +78,7 @@ export function Experiences() {
   const pick = (k: number) => { setA(k); track('experience_open', { id: EXPERIENCES[k].id }) }
 
   return (
-    <section ref={root} id="experiencias" className="xp" style={{ '--tint': EXPERIENCES[a].tint } as React.CSSProperties} aria-labelledby="xp-title">
+    <section ref={root} id="experiencias" className="xp" data-chapter="Experiencias" style={{ '--tint': EXPERIENCES[a].tint } as React.CSSProperties} aria-labelledby="xp-title">
       <div className="xp__head">
         <p className="kicker">Experiencias</p>
         <h2 id="xp-title" className="display" data-split>Elegí cómo querés <em>vivir San Pedro.</em></h2>

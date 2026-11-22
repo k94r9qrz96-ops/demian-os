@@ -44,7 +44,7 @@ export function Mirror() {
   }, [])
 
   return (
-    <section ref={root} className="mirror" aria-labelledby="mirror-title">
+    <section ref={root} className="mirror" data-chapter="El Mirador" aria-labelledby="mirror-title">
       <div className="mirror__pin">
         <div className="mirror__flip">
           <WaterImage ref={water} name="piscina-mirador" alt="El restaurante El Mirador reflejado en la piscina al atardecer" />

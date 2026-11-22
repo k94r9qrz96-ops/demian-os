@@ -15,6 +15,10 @@ import { Trust } from './components/Trust'
 import { Finale } from './components/Finale'
 import { FloatingCTA } from './components/FloatingCTA'
 import { DemoLayer } from './components/DemoLayer'
+import { Postales } from './components/Postales'
+import { Marquee } from './components/Marquee'
+import { Wave } from './components/Wave'
+import { Chrome } from './components/Chrome'
 
 export default function App() {
   const [intro] = useState(shouldShowIntro)
@@ -46,10 +50,14 @@ export default function App() {
       <main>
         <Hero start={ready} />
         <Discover />
+        <Postales />
         <Lofts />
         <Experiences />
+        <Marquee />
         <Mirror />
+        <Wave color="var(--ivory)" />
         <Gastro />
+        <Wave color="#0c201b" flip />
         <MapExplorer />
         <Booking />
         <Trust />
@@ -57,6 +65,7 @@ export default function App() {
       </main>
       <FloatingCTA />
       <DemoLayer />
+      <Chrome />
     </>
   )
 }

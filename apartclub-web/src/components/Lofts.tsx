@@ -79,7 +79,7 @@ export function Lofts() {
 
   const s = LOFT_SPACES[i]
   return (
-    <section ref={root} id="lofts" className="lofts" aria-labelledby="lofts-title">
+    <section ref={root} id="lofts" className="lofts" data-chapter="Lofts" aria-labelledby="lofts-title">
       <div className="lofts__head">
         <p className="kicker">Lofts</p>
         <h2 id="lofts-title" className="display" data-split>Entrá. <em>Ya estás de vacaciones.</em></h2>

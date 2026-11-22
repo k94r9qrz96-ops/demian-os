@@ -10,14 +10,15 @@ const CAPS = [
   { at: 5.2, k: 'Escena 02 · Tocá el agua', t: 'La piscina real, en movimiento' },
   { at: 9.0, k: 'Escena 03 · Scroll', t: 'Una película continua' },
   { at: 15.6, k: 'Escena 04 · El complejo', t: 'Un lugar para bajar el ritmo' },
-  { at: 19.4, k: 'Escena 05 · Lofts', t: 'Entrar al loft en primera persona' },
-  { at: 25.5, k: 'Escena 06 · Experiencias', t: 'Elegí cómo vivir San Pedro' },
-  { at: 31.2, k: 'Escena 07 · Reflejo', t: 'Atravesar el agua hasta El Mirador' },
-  { at: 37.2, k: 'Escena 08 · Gastronomía', t: 'La mesa también es el viaje' },
-  { at: 40.6, k: 'Escena 10 · Reservas', t: 'Reserva directa, sin fricción' },
-  { at: 44.2, k: 'Escena 12 · Cierre', t: 'Tu escapada, a un toque' },
+  { at: 19.4, k: 'Postales', t: 'Una galería que se desliza sola' },
+  { at: 24.4, k: 'Escena 05 · Lofts', t: 'Entrar al loft en primera persona' },
+  { at: 30.5, k: 'Escena 06 · Experiencias', t: 'Elegí cómo vivir San Pedro' },
+  { at: 36.2, k: 'Escena 07 · Reflejo', t: 'Atravesar el agua hasta El Mirador' },
+  { at: 42.2, k: 'Escena 08 · Gastronomía', t: 'La mesa también es el viaje' },
+  { at: 45.6, k: 'Escena 10 · Reservas', t: 'Reserva directa, sin fricción' },
+  { at: 49.2, k: 'Escena 12 · Cierre', t: 'Tu escapada, a un toque' },
 ]
-const END = 46.3
+const END = 51.3
 const ease = (x) => 0.5 - Math.cos(Math.PI * Math.min(1, Math.max(0, x))) / 2
 
 ;(async () => {
@@ -66,7 +67,7 @@ const ease = (x) => 0.5 - Math.cos(Math.PI * Math.min(1, Math.max(0, x))) / 2
       P = await inSite(() => {
         const pos = (s) => { const e = document.querySelector(s); return e ? e.getBoundingClientRect().top + scrollY : 0 }
         const vh = innerHeight
-        return { vh, pin1: pos('#experiencia') - vh, disc: pos('#experiencia'), lofts: pos('.lofts__stage'), xp: pos('.xp__grid'),
+        return { vh, pin1: pos('#experiencia') - vh, disc: pos('#experiencia'), post: pos('.post'), postLen: pos('#lofts') - pos('.post') - vh, lofts: pos('.lofts__stage'), xp: pos('.xp__grid'),
           mirror: pos('.mirror'), pin2: pos('#gastronomia') - pos('.mirror') - vh, carta: pos('.carta'), bk: pos('.bk__card'), fin: pos('.fin') }
       })
     })
@@ -74,13 +75,15 @@ const ease = (x) => 0.5 - Math.cos(Math.PI * Math.min(1, Math.max(0, x))) / 2
       const segs = [
         [9.0, 15.0, 0, P.pin1],
         [15.6, 19.0, P.pin1, P.disc + 480],
-        [19.0, 20.2, P.disc + 480, P.lofts - 150],
-        [25.0, 26.2, P.lofts - 150, P.xp - 70],
-        [30.9, 31.6, P.xp - 70, P.mirror],
-        [31.6, 37.0, P.mirror, P.mirror + P.pin2],
-        [37.0, 38.2, P.mirror + P.pin2, P.carta - 90],
-        [40.2, 41.3, P.carta - 90, P.bk - 90],
-        [44.0, 45.6, P.bk - 90, P.fin + 120],
+        [19.0, 19.8, P.disc + 480, P.post],
+        [19.8, 24.0, P.post, P.post + P.postLen],
+        [24.0, 25.2, P.post + P.postLen, P.lofts - 150],
+        [30.0, 31.2, P.lofts - 150, P.xp - 70],
+        [35.9, 36.6, P.xp - 70, P.mirror],
+        [36.6, 42.0, P.mirror, P.mirror + P.pin2],
+        [42.0, 43.2, P.mirror + P.pin2, P.carta - 90],
+        [45.2, 46.3, P.carta - 90, P.bk - 90],
+        [49.0, 50.6, P.bk - 90, P.fin + 120],
       ]
       let y = null
       for (const [a, bb, y0, y1] of segs) if (t >= a && t <= bb + 0.05) y = y0 + (y1 - y0) * ease((t - a) / (bb - a))
@@ -89,21 +92,21 @@ const ease = (x) => 0.5 - Math.cos(Math.PI * Math.min(1, Math.max(0, x))) / 2
     await once('s1', t, 6.0, () => splash(0.5, 0.66))
     await once('s2', t, 7.1, () => splash(0.25, 0.72))
     await once('s3', t, 8.1, () => splash(0.75, 0.62))
-    await once('l1', t, 20.9, () => click('[aria-label="Espacio siguiente"]'))
-    await once('l2', t, 22.5, () => click('[aria-label="Espacio siguiente"]'))
-    await once('l3', t, 24.0, () => click('.lofts__tabs button', 5))
-    await once('x1', t, 26.9, () => click('.xp__item button', 2))
-    await once('x2', t, 28.3, () => click('.xp__item button', 3))
-    await once('x3', t, 29.7, () => click('.xp__item button', 5))
-    await once('d1', t, 38.6, () => click('.carta__list button', 1))
-    await once('d2', t, 39.5, () => click('.carta__list button', 2))
-    await once('b1', t, 41.7, () => inSite(() => {
+    await once('l1', t, 25.9, () => click('[aria-label="Espacio siguiente"]'))
+    await once('l2', t, 27.5, () => click('[aria-label="Espacio siguiente"]'))
+    await once('l3', t, 29.0, () => click('.lofts__tabs button', 5))
+    await once('x1', t, 31.9, () => click('.xp__item button', 2))
+    await once('x2', t, 33.3, () => click('.xp__item button', 3))
+    await once('x3', t, 34.7, () => click('.xp__item button', 5))
+    await once('d1', t, 43.6, () => click('.carta__list button', 1))
+    await once('d2', t, 44.5, () => click('.carta__list button', 2))
+    await once('b1', t, 46.7, () => inSite(() => {
       const el = document.querySelector('#reservar input[type=date]')
       Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value').set.call(el, '2026-12-18')
       el.dispatchEvent(new Event('input', { bubbles: true }))
     }))
-    await once('b2', t, 42.5, () => click('[aria-label="Agregar menor"]'))
-    await once('b3', t, 43.1, () => click('.chip input', 1))
+    await once('b2', t, 47.5, () => click('[aria-label="Agregar menor"]'))
+    await once('b3', t, 48.1, () => click('.chip input', 1))
     D('shot'); await page.screenshot({ path: `${out}/f${String(f).padStart(5, '0')}.jpg`, type: 'jpeg', quality: 90 })
     if (f % 150 === 0) console.error('frame', f, '/', total)
   }

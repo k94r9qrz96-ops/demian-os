@@ -38,7 +38,7 @@ export function MapExplorer() {
   const my = (base.y + p.y) / 2 - (p.x - base.x) * 0.25
 
   return (
-    <section ref={root} id="san-pedro" className="map" aria-labelledby="map-title">
+    <section ref={root} id="san-pedro" className="map" data-chapter="San Pedro" aria-labelledby="map-title">
       <div className="map__head">
         <p className="kicker">San Pedro y alrededores</p>
         <h2 id="map-title" className="display" data-split>Historia, río y <em>pueblo tranquilo.</em></h2>

@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { MENU } from '../data/content'
 import { Img } from './Img'
 import { Icon } from './Icon'
+import { DishArt } from './DishArt'
 import { gsap, splitReveal, reducedMotion } from '../lib/motion'
 import { openWhatsApp } from '../lib/booking'
 import { track } from '../lib/track'
@@ -26,12 +27,16 @@ export function Gastro() {
   useEffect(() => {
     if (reducedMotion()) return
     const card = root.current!.querySelector('.carta__card')!
-    gsap.fromTo(card.querySelectorAll('.carta__anim'), { yPercent: 60, opacity: 0 }, { yPercent: 0, opacity: 1, stagger: 0.07, duration: 0.9, ease: 'expo.out' })
+    const tl = gsap.timeline()
+    tl.fromTo(card.querySelectorAll('.dish path, .dish circle'), { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 1.6, stagger: 0.05, ease: 'power2.inOut' }, 0)
+      .fromTo(card.querySelector('.carta__num'), { yPercent: 40, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 1.2, ease: 'expo.out' }, 0)
+      .fromTo(card.querySelectorAll('.carta__anim'), { yPercent: 60, opacity: 0 }, { yPercent: 0, opacity: 1, stagger: 0.07, duration: 0.9, ease: 'expo.out' }, 0.15)
+    return () => { tl.kill() }
   }, [d])
 
   const dish = MENU[d]
   return (
-    <section ref={root} id="gastronomia" className="gastro" aria-labelledby="gastro-title">
+    <section ref={root} id="gastronomia" className="gastro" data-chapter="Gastronomía" aria-labelledby="gastro-title">
       <div className="gastro__head">
         <p className="kicker">Gastronomía</p>
         <h2 id="gastro-title" className="display" data-split>La mesa también es <em>parte del viaje.</em></h2>
@@ -56,7 +61,8 @@ export function Gastro() {
           ))}
         </div>
         <div className="carta__card" role="tabpanel" aria-live="polite">
-          <div className="carta__bg"><Img name="piscina-mirador" alt="" sizes="50vw" /></div>
+          <div className="carta__art"><DishArt id={dish.id} /></div>
+          <p className="carta__num" aria-hidden="true">{String(d + 1).padStart(2, '0')}</p>
           <div className="carta__inner">
             <p className="carta__anim carta__cat">{dish.cat}</p>
             <h3 className="carta__anim">{dish.name}</h3>

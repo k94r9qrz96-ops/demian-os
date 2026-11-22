@@ -21,10 +21,13 @@ export function splitReveal(el: Element, opts: gsap.TweenVars & { trigger?: Elem
 
 function doSplit(el: Element, opts: gsap.TweenVars & { trigger?: Element | string; start?: string }) {
   const { trigger, start = 'top 82%', ...vars } = opts
-  const split = SplitText.create(el, { type: 'lines', mask: 'lines', linesClass: 'line' })
-  return gsap.from(split.lines, {
-    yPercent: 115, rotate: 2, duration: 1.3, ease: EASE.out, stagger: 0.09,
-    scrollTrigger: { trigger: trigger ?? el, start, once: true },
+  // revelado por letra dentro de máscaras de línea: cada carácter sube, gira y se enfoca (estilo AE)
+  const split = SplitText.create(el, { type: 'lines,words,chars', mask: 'lines', linesClass: 'line' })
+  const tl = gsap.timeline({ scrollTrigger: { trigger: trigger ?? el, start, once: true } })
+  tl.from(split.chars, {
+    yPercent: 120, rotateZ: 8, opacity: 0, duration: 1.15, ease: 'expo.out',
+    stagger: { each: 0.018, from: 'start' }, transformOrigin: '0% 100%',
     ...vars,
   })
+  return tl
 }

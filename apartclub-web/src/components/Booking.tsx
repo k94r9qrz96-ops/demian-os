@@ -76,7 +76,7 @@ export function Booking() {
   const toggle = (id: string) => setExtras((x) => (x.includes(id) ? x.filter((y) => y !== id) : [...x, id]))
 
   return (
-    <section ref={root} id="reservar" className="bk" aria-labelledby="bk-title">
+    <section ref={root} id="reservar" className="bk" data-chapter="Reservas" aria-labelledby="bk-title">
       <div className="bk__bg" aria-hidden="true"><img src={A("./img/piscina-hero-720.webp")} alt="" loading="lazy" /></div>
       <div className="bk__head">
         <p className="kicker">Reservas directas</p>

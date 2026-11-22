@@ -25,7 +25,7 @@ export function Trust() {
   }, [])
 
   return (
-    <section ref={root} id="info" className="trust" aria-labelledby="trust-title">
+    <section ref={root} id="info" className="trust" data-chapter="Información" aria-labelledby="trust-title">
       <div className="trust__head">
         <p className="kicker">Antes de venir</p>
         <h2 id="trust-title" className="display" data-split>Información clara, <em>sin letra chica.</em></h2>

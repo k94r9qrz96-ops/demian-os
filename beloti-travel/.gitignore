@@ -8,3 +8,4 @@ next-env.d.ts
 # originais de alta resolução (regeráveis; ver docs/MEDIA.md)
 media-src/
 public/media/tmp/
+preview/

@@ -3,6 +3,7 @@ import { CONTACT, POLICIES } from '../data/content'
 import { Icon } from './Icon'
 import { gsap, splitReveal } from '../lib/motion'
 import { track } from '../lib/track'
+import { DEMO, toast } from '../lib/booking'
 import { A } from '../lib/asset'
 
 /**
@@ -41,7 +42,7 @@ export function Trust() {
         <div className="trust__contact">
           <p className="kicker">Contacto</p>
           <a href={CONTACT.phoneHref} onClick={() => track('phone_click')}><Icon name="phone" />{CONTACT.phoneDisplay}</a>
-          <a href={`https://wa.me/${CONTACT.whatsapp}`} target="_blank" rel="noopener" onClick={() => track('whatsapp_click', { source: 'trust' })}><Icon name="whatsapp" />WhatsApp</a>
+          <a href={`https://wa.me/${CONTACT.whatsapp}`} target="_blank" rel="noopener" onClick={(e) => { track('whatsapp_click', { source: 'trust' }); if (DEMO) { e.preventDefault(); toast('En la web real se abre WhatsApp') } }}><Icon name="whatsapp" />WhatsApp</a>
           <a href={`mailto:${CONTACT.email}`} onClick={() => track('email_click')}><Icon name="mail" />{CONTACT.email}</a>
           <a href={CONTACT.mapsUrl} target="_blank" rel="noopener" onClick={() => track('maps_click')}><Icon name="pin" />{CONTACT.address}</a>
         </div>

@@ -24,7 +24,20 @@ export const nightsBetween = (a?: string, b?: string) => {
 }
 
 /** Abre en pestaña nueva; si el navegador la bloquea, navega en la misma pestaña. */
+export const DEMO = import.meta.env.VITE_DEMO === '1'
+
+/** Aviso flotante (lo muestra <DemoLayer/>). */
+export function toast(title: string, body = '') {
+  window.dispatchEvent(new CustomEvent('ac:toast', { detail: { title, body } }))
+}
+
 function openExternal(url: string) {
+  if (DEMO) {
+    const wa = url.includes('wa.me')
+    const text = wa ? decodeURIComponent(url.split('text=')[1] ?? '') : ''
+    toast(wa ? 'En la web real se abre WhatsApp con este mensaje' : 'En la web real se abre el sistema oficial de reservas', text)
+    return
+  }
   // equivalente a tocar un enlace real: funciona también en visores con ventanas emergentes restringidas
   const a = document.createElement('a')
   a.href = url; a.target = '_blank'; a.rel = 'noopener'

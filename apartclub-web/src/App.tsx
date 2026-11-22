@@ -14,6 +14,7 @@ import { Booking } from './components/Booking'
 import { Trust } from './components/Trust'
 import { Finale } from './components/Finale'
 import { FloatingCTA } from './components/FloatingCTA'
+import { DemoLayer } from './components/DemoLayer'
 
 export default function App() {
   const [intro] = useState(shouldShowIntro)
@@ -55,6 +56,7 @@ export default function App() {
         <Finale />
       </main>
       <FloatingCTA />
+      <DemoLayer />
     </>
   )
 }

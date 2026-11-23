@@ -1,4 +1,4 @@
-# Demo premium Rushy AI — 25 s (BORRADOR, pendiente de aprobación final)
+# Demo premium Rushy AI — 25 s (FINAL aprobado por el fundador 2026-11-23)
 
 Plantilla: ReelPro · Identidad: logo oficial, negro + verde lima · Voz: Piper es_AR-daniela-high (local, gratis, licencia CC BY-SA 4.0 del dataset) · Música y SFX: originales generados por código.
 Material: fotos de stock Unsplash rotuladas EJEMPLO (cafe.ejemplo, hotel.ejemplo, resto.ejemplo). Sin clientes, cifras ni testimonios.

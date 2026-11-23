@@ -1,7 +1,8 @@
-import {Composition, Folder} from 'remotion';
+import {Composition, Folder, Still} from 'remotion';
 import {SmokeTest} from './SmokeTest';
 import {Reel, calculateReelMetadata} from './reel/Reel';
 import {ReelPro, calculateReelProMetadata} from './pro/ReelPro';
+import {Portada} from './pro/Portada';
 
 // "Reel" es la plantilla única de la fábrica: render.mjs le pasa la marca y el guion de cada cliente.
 // Los valores de abajo son solo una vista previa genérica para Remotion Studio.
@@ -44,6 +45,19 @@ export const RemotionRoot = () => (
           timeline: {duracion: 3, escenas: [], eventos: {}, subtitulos: []},
           audio: null,
           marcaDeAgua: 'VISTA PREVIA',
+        }}
+      />
+    </Folder>
+    <Folder name="Portadas">
+      <Still
+        id="Portada"
+        component={Portada}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          brand: {slug: 'ejemplo', nombre: 'Ejemplo', handle: '@ejemplo', colores: {fondo: '#050505', primario: '#7BC800', acento: '#B4F000', texto: '#FFFFFF'}, tipografia: {titulos: 'fonts/Poppins-Bold.ttf'}, logo: null},
+          linea1: '¿Tu Instagram', resalte: 'VENDE', linea2: 'o solo', tachado: 'publica?',
+          antes: 'fonts/none.jpg', despues: 'fonts/none.jpg', tituloPieza: 'Ejemplo', negocioEjemplo: 'cuenta.ejemplo', cta: 'Mirá el cambio ▶',
         }}
       />
     </Folder>

@@ -1,0 +1,16 @@
+{
+  "cliente": "rushy-ai",
+  "nota": "Reel demo de Rushy AI. Solo motion graphics por código, sin fotos ni IA generativa. Sin datos ni testimonios.",
+  "transicion": 12,
+  "portada": 1.6,
+  "escenas": [
+    {"tipo": "hook", "duracion": 2.8, "kicker": "Dueños de negocios", "lineas": ["Tus redes", "no necesitan", "más horas."], "resaltar": "horas"},
+    {"tipo": "frase", "duracion": 2.4, "texto": "Necesitan\nun sistema.", "resaltar": "sistema"},
+    {"tipo": "contraste", "duracion": 3.4, "antes": "Publicar cuando hay tiempo", "despues": "Contenido listo cada semana", "etiquetaAntes": "Hoy", "etiquetaDespues": "Con Rushy AI"},
+    {"tipo": "proceso", "duracion": 4.4, "titulo": "Así trabajamos", "pasos": ["Leemos tus métricas", "Escribimos 7 guiones", "Producimos los reels", "Vos aprobás"]},
+    {"tipo": "lista", "duracion": 3.8, "titulo": "Qué recibís", "items": ["Reels con motion", "Historias y portadas", "Copys y hashtags", "Informe semanal"]},
+    {"tipo": "frase", "duracion": 2.8, "texto": "Nada se publica\nsin tu OK.", "resaltar": "OK"},
+    {"tipo": "cta", "duracion": 3.6, "titulo": "Tu contenido,\ncon sistema.", "boton": "Escribí SISTEMA", "sub": "por DM · Rushy AI"}
+  ],
+  "subtitulos": []
+}

@@ -1,0 +1,29 @@
+{
+  "name": "rushy-studio",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Rushy Content Studio — reels con motion graphics (Remotion) por cliente",
+  "scripts": {
+    "studio": "remotion studio src/index.ts",
+    "render": "node render.mjs"
+  },
+  "dependencies": {
+    "@remotion/bundler": "^4.0.546",
+    "@remotion/captions": "^4.0.546",
+    "@remotion/cli": "^4.0.546",
+    "@remotion/fonts": "^4.0.546",
+    "@remotion/google-fonts": "^4.0.546",
+    "@remotion/install-whisper-cpp": "^4.0.546",
+    "@remotion/media-utils": "^4.0.546",
+    "@remotion/renderer": "^4.0.546",
+    "@remotion/transitions": "^4.0.546",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "remotion": "^4.0.546"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.0",
+    "typescript": "^5.8.3"
+  }
+}

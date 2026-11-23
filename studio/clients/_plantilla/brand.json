@@ -1,0 +1,20 @@
+{
+  "slug": "nuevo-cliente",
+  "nombre": "Nombre comercial",
+  "estado": "onboarding",
+  "metricool": {"brandId": null, "redes": [], "nota": "brandId sale de getBrandSettings. Sin brandId no se crean borradores."},
+  "colores": {"fondo": "#0A0A12", "primario": "#6D4AFF", "acento": "#19E6B4", "texto": "#FFFFFF"},
+  "tipografia": {"titulos": "marca/fuentes/Poppins-Bold.ttf"},
+  "logo": null,
+  "handle": null,
+  "negocio": {"rubro": "", "ubicacion": "", "propuesta_valor": "", "productos": [], "precios_publicables": false},
+  "publico": {"principal": "", "dolores": [], "deseos": [], "objeciones": []},
+  "competencia": [],
+  "tono": {"voz": "", "usar": [], "evitar": []},
+  "prohibido": ["Inventar estadísticas, testimonios o resultados"],
+  "ia": {"permitida": false, "usos_aprobados": [], "nota": "Solo con aprobación explícita del cliente y de Rushy AI. Higgsfield/Canva IA consumen créditos."},
+  "cta": {"principal": "", "link": ""},
+  "hashtags_base": [],
+  "aprobador": "Fundador de Rushy AI",
+  "fuentes_de_datos": []
+}

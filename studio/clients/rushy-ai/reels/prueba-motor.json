@@ -1,0 +1,15 @@
+{
+  "cliente": "rushy-ai",
+  "nota": "Reel técnico para probar todas las escenas del motor. No es contenido para publicar.",
+  "transicion": 12,
+  "escenas": [
+    {"tipo": "hook", "duracion": 2.6, "kicker": "Prueba de motor", "lineas": ["Todas las", "escenas en", "un reel"], "resaltar": "escenas"},
+    {"tipo": "contraste", "duracion": 3.2, "antes": "Editar a mano", "despues": "Plantilla + datos"},
+    {"tipo": "media", "duracion": 2.6, "src": "assets/prueba-gradiente.png", "titulo": "Escena con media", "texto": "Foto o video autorizado del cliente", "movimiento": "zoomin"},
+    {"tipo": "lista", "duracion": 3.2, "titulo": "Lista", "items": ["Uno", "Dos", "Tres"]},
+    {"tipo": "proceso", "duracion": 3.2, "titulo": "Proceso", "pasos": ["Analizar", "Crear", "Aprobar"]},
+    {"tipo": "frase", "duracion": 2.4, "texto": "Frase de\ngiro", "resaltar": "giro"},
+    {"tipo": "cta", "duracion": 2.8, "titulo": "Llamada\na la acción", "boton": "Escribinos", "sub": "Prueba técnica"}
+  ],
+  "subtitulos": [{"texto": "Subtítulo de prueba", "desde": 0.5, "hasta": 2.2}]
+}

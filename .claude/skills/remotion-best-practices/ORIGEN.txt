@@ -1,0 +1,1 @@
+Fuente: github.com/remotion-dev/skills @ 89c8afa (v4.0.546), licencia del repo oficial de Remotion

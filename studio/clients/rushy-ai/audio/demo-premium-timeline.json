@@ -1,0 +1,743 @@
+{
+ "duracion": 25.0,
+ "lineas": {
+  "l1": {
+   "desde": 0.15,
+   "hasta": 4.121,
+   "archivo": "audio/vo/demo-premium-l1.wav"
+  },
+  "l2": {
+   "desde": 4.301,
+   "hasta": 6.137,
+   "archivo": "audio/vo/demo-premium-l2.wav"
+  },
+  "l3": {
+   "desde": 6.317,
+   "hasta": 12.084,
+   "archivo": "audio/vo/demo-premium-l3.wav"
+  },
+  "l4": {
+   "desde": 12.264,
+   "hasta": 16.884,
+   "archivo": "audio/vo/demo-premium-l4.wav"
+  },
+  "l5": {
+   "desde": 17.064,
+   "hasta": 21.105,
+   "archivo": "audio/vo/demo-premium-l5.wav"
+  },
+  "l6": {
+   "desde": 21.285,
+   "hasta": 24.877,
+   "archivo": "audio/vo/demo-premium-l6.wav"
+  }
+ },
+ "escenas": [
+  {
+   "tipo": "pregunta",
+   "linea": "l1",
+   "feed": [
+    "assets/ejemplos-stock/restaurante-plato.jpg",
+    "assets/ejemplos-stock/cafe-brindis.jpg",
+    "assets/ejemplos-stock/hotel-pileta-atardecer.jpg",
+    "assets/ejemplos-stock/cafeteria-salon.jpg",
+    "assets/ejemplos-stock/deco-patio-plantas.jpg",
+    "assets/ejemplos-stock/cafe-latte-arte.jpg"
+   ],
+   "golpes": [
+    {
+     "en": "l1:Tu",
+     "kicker": "¿Tu negocio",
+     "titulo": "consigue",
+     "resalte": "CLIENTES"
+    },
+    {
+     "en": "l1:solamente",
+     "kicker": "…o solamente",
+     "titulo": "",
+     "resalte": "PUBLICA?",
+     "tachar": true
+    }
+   ],
+   "desde": 0.0,
+   "hasta": 4.181
+  },
+  {
+   "tipo": "problema",
+   "linea": "l2",
+   "kicker": "Publicar por publicar",
+   "titulo": "ya no alcanza.",
+   "en_titulo": "l2:ya",
+   "imagenes": [
+    "assets/ejemplos-stock/cafeteria-vereda.jpg",
+    "assets/ejemplos-stock/restaurante-salon.jpg",
+    "assets/ejemplos-stock/cafe-letrero.jpg",
+    "assets/ejemplos-stock/hotel-pileta-noche.jpg",
+    "assets/ejemplos-stock/cafe-mesa-ventana.jpg",
+    "assets/ejemplos-stock/cafeteria-barista.jpg"
+   ],
+   "desde": 4.181,
+   "hasta": 6.197
+  },
+  {
+   "tipo": "transformacion",
+   "linea": "l3",
+   "en_marca": "l3:Rushy",
+   "en_transforma": "l3:fotos",
+   "en_reel": "l3:reels",
+   "en_historias": "l3:historias",
+   "foto": "assets/ejemplos-stock/cafe-latte-arte.jpg",
+   "etiquetaAntes": "Foto del negocio",
+   "etiquetaDespues": "Reel profesional",
+   "tituloPieza": "Latte de autor",
+   "subPieza": "Todos los días · 8 a 20 h",
+   "negocioEjemplo": "cafe.ejemplo",
+   "historias": [
+    {
+     "img": "assets/ejemplos-stock/hotel-pileta-atardecer.jpg",
+     "texto": "Atardecer en la pileta",
+     "rubro": "hotel.ejemplo"
+    },
+    {
+     "img": "assets/ejemplos-stock/restaurante-plato.jpg",
+     "texto": "Menú de temporada",
+     "rubro": "resto.ejemplo"
+    }
+   ],
+   "desde": 6.197,
+   "hasta": 12.144
+  },
+  {
+   "tipo": "pilares",
+   "linea": "l4",
+   "items": [
+    {
+     "texto": "Estrategia",
+     "icono": "estrategia",
+     "en": "l4:Estrategia"
+    },
+    {
+     "texto": "Creatividad",
+     "icono": "creatividad",
+     "en": "l4:creatividad"
+    },
+    {
+     "texto": "Edición profesional",
+     "icono": "edicion",
+     "en": "l4:edición"
+    },
+    {
+     "texto": "Programación de contenido",
+     "icono": "calendario",
+     "en": "l4:programación"
+    }
+   ],
+   "cierre": {
+    "en": "l4:Todo",
+    "kicker": "Todo en",
+    "texto": "un mismo servicio."
+   },
+   "desde": 12.144,
+   "hasta": 16.944
+  },
+  {
+   "tipo": "beneficio",
+   "linea": "l5",
+   "foto": "assets/ejemplos-stock/cafeteria-barista.jpg",
+   "vos": [
+    "Vos,",
+    "tu negocio."
+   ],
+   "nosotros": [
+    "Nosotros,",
+    "tu presencia digital."
+   ],
+   "en_nosotros": "l5:Nosotros",
+   "grilla": [
+    "assets/ejemplos-stock/cafe-latte-arte.jpg",
+    "assets/ejemplos-stock/hotel-pileta-atardecer.jpg",
+    "assets/ejemplos-stock/restaurante-plato.jpg",
+    "assets/ejemplos-stock/deco-patio-plantas.jpg",
+    "assets/ejemplos-stock/cafe-brindis.jpg",
+    "assets/ejemplos-stock/hotel-pileta-noche.jpg",
+    "assets/ejemplos-stock/cafeteria-salon.jpg",
+    "assets/ejemplos-stock/restaurante-salon.jpg",
+    "assets/ejemplos-stock/cafe-mesa-ventana.jpg"
+   ],
+   "desde": 16.944,
+   "hasta": 21.165
+  },
+  {
+   "tipo": "cta",
+   "linea": "l6",
+   "kicker": "Probá Rushy AI",
+   "grande": "7 días",
+   "en_grande": "l6:durante",
+   "palabraClave": "RUSHY",
+   "en_dm": "l6:Escribinos",
+   "handle": "@rushy.ai",
+   "desde": 21.165,
+   "hasta": 25.0
+  }
+ ],
+ "eventos": {
+  "s0.inicio": 0.0,
+  "s0.golpe0": 0.17,
+  "s0.golpe1": 2.71,
+  "s1.inicio": 4.181,
+  "s1.titulo": 5.201,
+  "s2.inicio": 6.197,
+  "s2.marca": 6.367,
+  "s2.transforma": 7.417,
+  "s2.reel": 9.517,
+  "s2.historias": 10.157,
+  "s3.inicio": 12.144,
+  "s3.item0": 12.244,
+  "s3.item1": 12.934,
+  "s3.item2": 13.614,
+  "s3.item3": 14.504,
+  "s3.cierre": 15.714,
+  "s4.inicio": 16.944,
+  "s4.nosotros": 18.564,
+  "s4.tile0": 18.764,
+  "s4.tile1": 18.874,
+  "s4.tile2": 18.984,
+  "s4.tile3": 19.094,
+  "s4.tile4": 19.204,
+  "s4.tile5": 19.314,
+  "s4.tile6": 19.424,
+  "s4.tile7": 19.534,
+  "s4.tile8": 19.644,
+  "s5.inicio": 21.165,
+  "s5.grande": 22.035,
+  "s5.dm": 23.065,
+  "s5.tecla0": 23.365,
+  "s5.tecla1": 23.465,
+  "s5.tecla2": 23.565,
+  "s5.tecla3": 23.665,
+  "s5.tecla4": 23.765,
+  "s5.enviar": 24.045
+ },
+ "subtitulos": [
+  {
+   "palabras": [
+    {
+     "palabra": "¿Tu",
+     "desde": 0.21,
+     "hasta": 0.24
+    },
+    {
+     "palabra": "negocio",
+     "desde": 0.24,
+     "hasta": 0.57
+    },
+    {
+     "palabra": "está",
+     "desde": 0.57,
+     "hasta": 0.82
+    },
+    {
+     "palabra": "consiguiendo",
+     "desde": 0.82,
+     "hasta": 1.38
+    }
+   ],
+   "desde": 0.21,
+   "hasta": 1.38
+  },
+  {
+   "palabras": [
+    {
+     "palabra": "clientes",
+     "desde": 1.38,
+     "hasta": 1.76
+    },
+    {
+     "palabra": "gracias",
+     "desde": 1.76,
+     "hasta": 2.13
+    },
+    {
+     "palabra": "a",
+     "desde": 2.13,
+     "hasta": 2.15
+    },
+    {
+     "palabra": "Instagram…",
+     "desde": 2.15,
+     "hasta": 2.74
+    }
+   ],
+   "desde": 1.38,
+   "hasta": 2.74
+  },
+  {
+   "palabras": [
+    {
+     "palabra": "o",
+     "desde": 2.74,
+     "hasta": 2.75
+    },
+    {
+     "palabra": "solamente",
+     "desde": 2.75,
+     "hasta": 3.22
+    },
+    {
+     "palabra": "está",
+     "desde": 3.22,
+     "hasta": 3.53
+    },
+    {
+     "palabra": "publicando?",
+     "desde": 3.53,
+     "hasta": 4.05
+    }
+   ],
+   "desde": 2.74,
+   "hasta": 4.341
+  },
+  {
+   "palabras": [
+    {
+     "palabra": "Publicar",
+     "desde": 4.341,
+     "hasta": 4.681
+    },
+    {
+     "palabra": "por",
+     "desde": 4.681,
+     "hasta": 4.821
+    },
+    {
+     "palabra": "publicar",
+     "desde": 4.821,
+     "hasta": 5.201
+    }
+   ],
+   "desde": 4.341,
+   "hasta": 5.201
+  },
+  {
+   "palabras": [
+    {
+     "palabra": "ya",
+     "desde": 5.201,
+     "hasta": 5.431
+    },
+    {
+     "palabra": "no",
+     "desde": 5.431,
+     "hasta": 5.521
+    },
+    {
+     "palabra": "alcanza.",
+     "desde": 5.521,
+     "hasta": 5.981
+    }
+   ],
+   "desde": 5.201,
+   "hasta": 6.367
+  },
+  {
+   "palabras": [
+    {
+     "palabra": "Rushy",
+     "desde": 6.367,
+     "hasta": 6.624
+    },
+    {
+     "palabra": "AI",
+     "desde": 6.624,
+     "hasta": 6.727
+    },
+    {
+     "palabra": "transforma",
+     "desde": 6.727,
+     "hasta": 7.257
+    },
+    {
+     "palabra": "tus",
+     "desde": 7.257,
+     "hasta": 7.417
+    }
+   ],
+   "desde": 6.367,
+   "hasta": 7.417
+  },
+  {
+   "palabras": [
+    {
+     "palabra": "fotos",
+     "desde": 7.417,
+     "hasta": 7.687
+    },
+    {
+     "palabra": "y",
+     "desde": 7.687,
+     "hasta": 7.737
+    },
+    {
+     "palabra": "videos",
+     "desde": 7.737,
+     "hasta": 8.157
+    },
+    {
+     "palabra": "en",
+     "desde": 8.157,
+     "hasta": 8.277
+    }
+   ],
+   "desde": 7.417,
+   "hasta": 8.277
+  },
+  {
+   "palabras": [
+    {
+     "palabra": "contenido",
+     "desde": 8.277,
+     "hasta": 8.807
+    },
+    {
+     "palabra": "profesional,",
+     "desde": 8.807,
+     "hasta": 9.517
+    }
+   ],
+   "desde": 8.277,
+   "hasta": 9.517
+  },
+  {
+   "palabras": [
+    {
+     "palabra": "reels",
+     "desde": 9.517,
+     "hasta": 9.647
+    },
+    {
+     "palabra": "atractivos",
+     "desde": 9.647,
+     "hasta": 10.117
+    },
+    {
+     "palabra": "e",
+     "desde": 10.117,
+     "hasta": 10.157
+    }
+   ],
+   "desde": 9.517,
+   "hasta": 10.157
+  },
+  {
+   "palabras": [
+    {
+     "palabra": "historias",
+     "desde": 10.157,
+     "hasta": 10.587
+    },
+    {
+     "palabra": "que",
+     "desde": 10.587,
+     "hasta": 10.767
+    },
+    {
+     "palabra": "hacen",
+     "desde": 10.767,
+     "hasta": 10.967
+    }
+   ],
+   "desde": 10.157,
+   "hasta": 10.967
+  },
+  {
+   "palabras": [
+    {
+     "palabra": "destacar",
+     "desde": 10.967,
+     "hasta": 11.347
+    },
+    {
+     "palabra": "tu",
+     "desde": 11.347,
+     "hasta": 11.517
+    },
+    {
+     "palabra": "negocio.",
+     "desde": 11.517,
+     "hasta": 12.037
+    }
+   ],
+   "desde": 10.967,
+   "hasta": 12.294
+  },
+  {
+   "palabras": [
+    {
+     "palabra": "Estrategia,",
+     "desde": 12.294,
+     "hasta": 12.984
+    }
+   ],
+   "desde": 12.294,
+   "hasta": 12.984
+  },
+  {
+   "palabras": [
+    {
+     "palabra": "creatividad,",
+     "desde": 12.984,
+     "hasta": 13.664
+    }
+   ],
+   "desde": 12.984,
+   "hasta": 13.664
+  },
+  {
+   "palabras": [
+    {
+     "palabra": "edición",
+     "desde": 13.664,
+     "hasta": 13.994
+    },
+    {
+     "palabra": "profesional",
+     "desde": 13.994,
+     "hasta": 14.464
+    },
+    {
+     "palabra": "y",
+     "desde": 14.464,
+     "hasta": 14.554
+    }
+   ],
+   "desde": 13.664,
+   "hasta": 14.554
+  },
+  {
+   "palabras": [
+    {
+     "palabra": "programación",
+     "desde": 14.554,
+     "hasta": 15.064
+    },
+    {
+     "palabra": "de",
+     "desde": 15.064,
+     "hasta": 15.184
+    },
+    {
+     "palabra": "contenido.",
+     "desde": 15.184,
+     "hasta": 15.764
+    }
+   ],
+   "desde": 14.554,
+   "hasta": 15.764
+  },
+  {
+   "palabras": [
+    {
+     "palabra": "Todo",
+     "desde": 15.764,
+     "hasta": 15.884
+    },
+    {
+     "palabra": "en",
+     "desde": 15.884,
+     "hasta": 15.944
+    },
+    {
+     "palabra": "un",
+     "desde": 15.944,
+     "hasta": 16.024
+    }
+   ],
+   "desde": 15.764,
+   "hasta": 16.024
+  },
+  {
+   "palabras": [
+    {
+     "palabra": "mismo",
+     "desde": 16.024,
+     "hasta": 16.344
+    },
+    {
+     "palabra": "servicio.",
+     "desde": 16.344,
+     "hasta": 16.694
+    }
+   ],
+   "desde": 16.024,
+   "hasta": 17.064
+  },
+  {
+   "palabras": [
+    {
+     "palabra": "Vos",
+     "desde": 17.064,
+     "hasta": 17.184
+    },
+    {
+     "palabra": "concentrate",
+     "desde": 17.104,
+     "hasta": 17.804
+    },
+    {
+     "palabra": "en",
+     "desde": 17.804,
+     "hasta": 17.874
+    }
+   ],
+   "desde": 17.064,
+   "hasta": 17.874
+  },
+  {
+   "palabras": [
+    {
+     "palabra": "tu",
+     "desde": 17.874,
+     "hasta": 17.994
+    },
+    {
+     "palabra": "negocio.",
+     "desde": 17.994,
+     "hasta": 18.564
+    }
+   ],
+   "desde": 17.874,
+   "hasta": 18.564
+  },
+  {
+   "palabras": [
+    {
+     "palabra": "Nosotros",
+     "desde": 18.564,
+     "hasta": 18.974
+    },
+    {
+     "palabra": "nos",
+     "desde": 18.974,
+     "hasta": 19.124
+    },
+    {
+     "palabra": "ocupamos",
+     "desde": 19.124,
+     "hasta": 19.544
+    },
+    {
+     "palabra": "de",
+     "desde": 19.544,
+     "hasta": 19.674
+    }
+   ],
+   "desde": 18.564,
+   "hasta": 19.674
+  },
+  {
+   "palabras": [
+    {
+     "palabra": "potenciar",
+     "desde": 19.674,
+     "hasta": 20.074
+    },
+    {
+     "palabra": "su",
+     "desde": 20.074,
+     "hasta": 20.144
+    },
+    {
+     "palabra": "presencia",
+     "desde": 20.144,
+     "hasta": 20.654
+    },
+    {
+     "palabra": "digital.",
+     "desde": 20.654,
+     "hasta": 21.064
+    }
+   ],
+   "desde": 19.674,
+   "hasta": 21.335
+  },
+  {
+   "palabras": [
+    {
+     "palabra": "Probá",
+     "desde": 21.335,
+     "hasta": 21.647
+    },
+    {
+     "palabra": "Rushy",
+     "desde": 21.647,
+     "hasta": 21.96
+    },
+    {
+     "palabra": "AI",
+     "desde": 21.96,
+     "hasta": 22.085
+    }
+   ],
+   "desde": 21.335,
+   "hasta": 22.085
+  },
+  {
+   "palabras": [
+    {
+     "palabra": "durante",
+     "desde": 22.085,
+     "hasta": 22.525
+    },
+    {
+     "palabra": "7",
+     "desde": 22.525,
+     "hasta": 22.715
+    },
+    {
+     "palabra": "días.",
+     "desde": 22.715,
+     "hasta": 23.165
+    }
+   ],
+   "desde": 22.085,
+   "hasta": 23.165
+  },
+  {
+   "palabras": [
+    {
+     "palabra": "Escribinos",
+     "desde": 23.165,
+     "hasta": 23.665
+    },
+    {
+     "palabra": "RUSHY",
+     "desde": 23.665,
+     "hasta": 23.915
+    },
+    {
+     "palabra": "por",
+     "desde": 23.915,
+     "hasta": 24.065
+    }
+   ],
+   "desde": 23.165,
+   "hasta": 24.065
+  },
+  {
+   "palabras": [
+    {
+     "palabra": "mensaje",
+     "desde": 24.065,
+     "hasta": 24.425
+    },
+    {
+     "palabra": "privado.",
+     "desde": 24.425,
+     "hasta": 24.805
+    }
+   ],
+   "desde": 24.065,
+   "hasta": 25.0
+  }
+ ]
+}

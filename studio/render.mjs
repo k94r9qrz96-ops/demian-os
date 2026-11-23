@@ -19,24 +19,38 @@ if (brand.slug !== slug || (reel.cliente && reel.cliente !== slug)) throw new Er
 
 // Solo se aceptan rutas dentro de la carpeta del cliente
 const assertLocal = (p) => { if (!p) return; const abs = path.resolve(dir, p); if (!abs.startsWith(dir + path.sep) || !fs.existsSync(abs)) throw new Error(`Archivo inválido o inexistente para ${slug}: ${p}`); };
-[brand.tipografia.titulos, brand.tipografia.cuerpo, brand.logo, reel.musica?.src, ...reel.escenas.map((s) => s.src)].forEach(assertLocal);
+[brand.tipografia.titulos, brand.tipografia.cuerpo, brand.tipografia.acento, brand.logo, reel.musica?.src, ...(reel.plantilla === 'ReelPro' ? [] : reel.escenas.map((s) => s.src))].forEach(assertLocal);
 if (reel.musica && !reel.musica.licencia) throw new Error('La música necesita nota de licencia');
 
 const browserExecutable = process.env.REMOTION_CHROME || ['/opt/pw-browsers/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell'].find((f) => fs.existsSync(f)) || null;
 const out = path.join(dir, 'exports'); fs.mkdirSync(out, {recursive: true});
-const inputProps = {brand: {...brand, handle: brand.handle ?? null, logo: brand.logo ?? null}, escenas: reel.escenas, transicion: reel.transicion ?? 12, subtitulos: reel.subtitulos ?? [], musica: reel.musica ?? null, marcaDeAgua: args.borrador ? 'BORRADOR — NO PUBLICAR' : null};
+const PRO = reel.plantilla === 'ReelPro';
+let inputProps, timeline;
+if (PRO) {
+  // ReelPro: requiere tools/voz.py y tools/montaje.py (línea de tiempo + mezcla sincronizadas)
+  const tlFile = path.join(dir, 'audio', `${id}-timeline.json`), mixFile = path.join(dir, 'audio', `${id}-mezcla.wav`);
+  if (!fs.existsSync(tlFile)) throw new Error(`Falta ${tlFile}: corré python3 -I tools/voz.py y tools/montaje.py`);
+  timeline = JSON.parse(fs.readFileSync(tlFile, 'utf8'));
+  const imgs = JSON.stringify(timeline.escenas).match(/assets\/[^"]+\.(jpe?g|png|webp|mp4|mov)/gi) || [];
+  [...new Set(imgs)].forEach(assertLocal);
+  inputProps = {brand: {...brand, handle: brand.handle ?? null, logo: brand.logo ?? null}, timeline, audio: fs.existsSync(mixFile) ? `audio/${id}-mezcla.wav` : null, marcaDeAgua: args.borrador ? 'BORRADOR · NO PUBLICAR' : null};
+} else {
+  inputProps = {brand: {...brand, handle: brand.handle ?? null, logo: brand.logo ?? null}, escenas: reel.escenas, transicion: reel.transicion ?? 12, subtitulos: reel.subtitulos ?? [], musica: reel.musica ?? null, marcaDeAgua: args.borrador ? 'BORRADOR — NO PUBLICAR' : null};
+}
 
 console.log(`▶ ${brand.nombre} / ${id}: empaquetando…`);
 const serveUrl = await bundle({entryPoint: path.join(root, 'src', 'index.ts'), publicDir: dir});
-const composition = await selectComposition({serveUrl, id: 'Reel', inputProps, browserExecutable});
+const composition = await selectComposition({serveUrl, id: PRO ? 'ReelPro' : 'Reel', inputProps, browserExecutable});
 // Modo storyboard: un cuadro por escena (sin video), para aprobar antes de renderizar
 if (args.storyboard) {
-  const T = inputProps.transicion; let start = 0; const frames = [];
-  reel.escenas.forEach((s, i) => { const f = Math.round(s.duracion * 30); frames.push(start + Math.round(f * 0.7)); start += f - T; });
-  const sb = path.join(out, `${id}-storyboard`); fs.mkdirSync(sb, {recursive: true});
-  for (const [i, frame] of frames.entries()) await renderStill({composition, serveUrl, output: path.join(sb, `${String(i + 1).padStart(2, '0')}.png`), frame, inputProps: {...inputProps, subtitulos: []}, browserExecutable});
-  const sheet = path.join(out, `${id}-storyboard.jpg`);
-  execFileSync('ffmpeg', ['-y', '-loglevel', 'error', '-pattern_type', 'glob', '-i', path.join(sb, '*.png'), '-vf', `scale=360:-1,tile=${frames.length}x1:padding=12:color=0x222222`, '-frames:v', '1', sheet]);
+  let frames = [];
+  if (args.cuadros) frames = String(args.cuadros).split(',').map((x) => Math.round(Number(x) * 30));
+  else if (PRO) frames = timeline.escenas.flatMap((s) => [0.35, 0.8].map((q) => Math.round((s.desde + (s.hasta - s.desde) * q) * 30)));
+  else { const T = inputProps.transicion; let start = 0; reel.escenas.forEach((s) => { const f = Math.round(s.duracion * 30); frames.push(start + Math.round(f * 0.7)); start += f - T; }); }
+  const sb = path.join(out, `${id}-storyboard${args.cuadros ? '-cuadros' : ''}`); fs.rmSync(sb, {recursive: true, force: true}); fs.mkdirSync(sb, {recursive: true});
+  for (const [i, frame] of frames.entries()) await renderStill({composition, serveUrl, output: path.join(sb, `${String(i + 1).padStart(2, '0')}.png`), frame, inputProps: PRO ? inputProps : {...inputProps, subtitulos: []}, browserExecutable});
+  const sheet = path.join(out, `${id}-storyboard${args.cuadros ? '-cuadros' : ''}.jpg`);
+  execFileSync('ffmpeg', ['-y', '-loglevel', 'error', '-pattern_type', 'glob', '-i', path.join(sb, '*.png'), '-vf', `scale=360:-1,tile=${Math.min(frames.length, 6)}x${Math.ceil(frames.length / 6)}:padding=12:color=0x222222`, '-frames:v', '1', sheet]);
   console.log('✔ storyboard', sheet, `(${(composition.durationInFrames / 30).toFixed(1)} s)`);
   process.exit(0);
 }
@@ -48,7 +62,7 @@ console.log('\n✔ video', file);
 
 const sec = Number(args.portada ?? reel.portada ?? 1.2);
 const cover = path.join(out, `${id}-portada.png`);
-await renderStill({composition, serveUrl, output: cover, frame: Math.round(sec * 30), inputProps: {...inputProps, subtitulos: []}, browserExecutable});
+await renderStill({composition, serveUrl, output: cover, frame: Math.round(sec * 30), inputProps: PRO ? {...inputProps, timeline: {...timeline, subtitulos: []}} : {...inputProps, subtitulos: []}, browserExecutable});
 console.log('✔ portada', cover);
 
 // Control de calidad: formato exacto exigido por IG/FB/TikTok

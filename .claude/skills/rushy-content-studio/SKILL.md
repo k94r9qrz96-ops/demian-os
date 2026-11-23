@@ -37,7 +37,7 @@ studio/clients/<slug>/
 | 0 | Onboarding | `references/flujo.md#onboarding` |
 | 1–3 | Negocio, métricas reales, ideas | `references/flujo.md` + `references/metricool.md` |
 | 4 | 7 guiones semanales | `references/guiones.md` |
-| 5–6, 9 | Reels con motion graphics, export MP4 | `references/motion.md` |
+| 5–6, 9 | Reels con motion graphics, voz, música, export MP4 | `references/motion.md` (Reel simple o ReelPro) |
 | 7 | Material real vs IA | regla 4 |
 | 8 | Portada, copy, hashtags | `references/guiones.md#copy` |
 | 10–11 | Borradores en Metricool → esperar aprobación | `references/metricool.md` |
@@ -55,6 +55,8 @@ node render.mjs --cliente <slug> --reel <id> --borrador   # con marca de agua "B
 node render.mjs --cliente <slug> --reel <id>              # final (solo tras aprobación B)
 npx remotion studio src/index.ts --public-dir clients/<slug>   # vista previa interactiva (en tu compu)
 ```
+**Reels premium con voz en off, música y sound design:** plantilla `ReelPro`, ver `references/motion.md#reelpro` (voz.py → montaje.py → render.mjs).
+
 El render imprime un QA (1080×1920, h264 yuv420p, 30 fps, 15–30 s, < 100 MB) y genera portada y hoja de contacto. Mirá la hoja de contacto antes de mostrar el video.
 
 Para trabajo avanzado en Remotion (subtítulos, audio, efectos) cargá la skill `remotion-best-practices`.

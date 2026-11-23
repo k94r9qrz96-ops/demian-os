@@ -1,0 +1,414 @@
+{
+ "l1": {
+  "archivo": "audio/vo/demo-premium-l1.wav",
+  "duracion": 3.971,
+  "palabras": [
+   {
+    "palabra": "¿Tu",
+    "desde": 0.06,
+    "hasta": 0.09
+   },
+   {
+    "palabra": "negocio",
+    "desde": 0.09,
+    "hasta": 0.42
+   },
+   {
+    "palabra": "está",
+    "desde": 0.42,
+    "hasta": 0.67
+   },
+   {
+    "palabra": "consiguiendo",
+    "desde": 0.67,
+    "hasta": 1.23
+   },
+   {
+    "palabra": "clientes",
+    "desde": 1.23,
+    "hasta": 1.61
+   },
+   {
+    "palabra": "gracias",
+    "desde": 1.61,
+    "hasta": 1.98
+   },
+   {
+    "palabra": "a",
+    "desde": 1.98,
+    "hasta": 2.0
+   },
+   {
+    "palabra": "Instagram…",
+    "desde": 2.0,
+    "hasta": 2.59
+   },
+   {
+    "palabra": "o",
+    "desde": 2.59,
+    "hasta": 2.6
+   },
+   {
+    "palabra": "solamente",
+    "desde": 2.6,
+    "hasta": 3.07
+   },
+   {
+    "palabra": "está",
+    "desde": 3.07,
+    "hasta": 3.38
+   },
+   {
+    "palabra": "publicando?",
+    "desde": 3.38,
+    "hasta": 3.9
+   }
+  ],
+  "transcripcion_control": "tu negocio esta consiguiendo clientes gracias a instagram o solamente esta publicando"
+ },
+ "l2": {
+  "archivo": "audio/vo/demo-premium-l2.wav",
+  "duracion": 1.836,
+  "palabras": [
+   {
+    "palabra": "Publicar",
+    "desde": 0.04,
+    "hasta": 0.38
+   },
+   {
+    "palabra": "por",
+    "desde": 0.38,
+    "hasta": 0.52
+   },
+   {
+    "palabra": "publicar",
+    "desde": 0.52,
+    "hasta": 0.9
+   },
+   {
+    "palabra": "ya",
+    "desde": 0.9,
+    "hasta": 1.13
+   },
+   {
+    "palabra": "no",
+    "desde": 1.13,
+    "hasta": 1.22
+   },
+   {
+    "palabra": "alcanza.",
+    "desde": 1.22,
+    "hasta": 1.68
+   }
+  ],
+  "transcripcion_control": "publicar por publicar ceana de cansa"
+ },
+ "l3": {
+  "archivo": "audio/vo/demo-premium-l3.wav",
+  "duracion": 5.767,
+  "palabras": [
+   {
+    "palabra": "Rushy",
+    "desde": 0.05,
+    "hasta": 0.307
+   },
+   {
+    "palabra": "AI",
+    "desde": 0.307,
+    "hasta": 0.41
+   },
+   {
+    "palabra": "transforma",
+    "desde": 0.41,
+    "hasta": 0.94
+   },
+   {
+    "palabra": "tus",
+    "desde": 0.94,
+    "hasta": 1.1
+   },
+   {
+    "palabra": "fotos",
+    "desde": 1.1,
+    "hasta": 1.37
+   },
+   {
+    "palabra": "y",
+    "desde": 1.37,
+    "hasta": 1.42
+   },
+   {
+    "palabra": "videos",
+    "desde": 1.42,
+    "hasta": 1.84
+   },
+   {
+    "palabra": "en",
+    "desde": 1.84,
+    "hasta": 1.96
+   },
+   {
+    "palabra": "contenido",
+    "desde": 1.96,
+    "hasta": 2.49
+   },
+   {
+    "palabra": "profesional,",
+    "desde": 2.49,
+    "hasta": 3.2
+   },
+   {
+    "palabra": "reels",
+    "desde": 3.2,
+    "hasta": 3.33
+   },
+   {
+    "palabra": "atractivos",
+    "desde": 3.33,
+    "hasta": 3.8
+   },
+   {
+    "palabra": "e",
+    "desde": 3.8,
+    "hasta": 3.84
+   },
+   {
+    "palabra": "historias",
+    "desde": 3.84,
+    "hasta": 4.27
+   },
+   {
+    "palabra": "que",
+    "desde": 4.27,
+    "hasta": 4.45
+   },
+   {
+    "palabra": "hacen",
+    "desde": 4.45,
+    "hasta": 4.65
+   },
+   {
+    "palabra": "destacar",
+    "desde": 4.65,
+    "hasta": 5.03
+   },
+   {
+    "palabra": "tu",
+    "desde": 5.03,
+    "hasta": 5.2
+   },
+   {
+    "palabra": "negocio.",
+    "desde": 5.2,
+    "hasta": 5.72
+   }
+  ],
+  "transcripcion_control": "pashaiai transforma tus fotos y videos en contenido profesional viz atractivos y historias que hacen destacar tu negocio"
+ },
+ "l4": {
+  "archivo": "audio/vo/demo-premium-l4.wav",
+  "duracion": 4.62,
+  "palabras": [
+   {
+    "palabra": "Estrategia,",
+    "desde": 0.03,
+    "hasta": 0.72
+   },
+   {
+    "palabra": "creatividad,",
+    "desde": 0.72,
+    "hasta": 1.4
+   },
+   {
+    "palabra": "edición",
+    "desde": 1.4,
+    "hasta": 1.73
+   },
+   {
+    "palabra": "profesional",
+    "desde": 1.73,
+    "hasta": 2.2
+   },
+   {
+    "palabra": "y",
+    "desde": 2.2,
+    "hasta": 2.29
+   },
+   {
+    "palabra": "programación",
+    "desde": 2.29,
+    "hasta": 2.8
+   },
+   {
+    "palabra": "de",
+    "desde": 2.8,
+    "hasta": 2.92
+   },
+   {
+    "palabra": "contenido.",
+    "desde": 2.92,
+    "hasta": 3.5
+   },
+   {
+    "palabra": "Todo",
+    "desde": 3.5,
+    "hasta": 3.62
+   },
+   {
+    "palabra": "en",
+    "desde": 3.62,
+    "hasta": 3.68
+   },
+   {
+    "palabra": "un",
+    "desde": 3.68,
+    "hasta": 3.76
+   },
+   {
+    "palabra": "mismo",
+    "desde": 3.76,
+    "hasta": 4.08
+   },
+   {
+    "palabra": "servicio.",
+    "desde": 4.08,
+    "hasta": 4.43
+   }
+  ],
+  "transcripcion_control": "estrategia creatividad edicion profesional y programacion de contenido todo en un mismo"
+ },
+ "l5": {
+  "archivo": "audio/vo/demo-premium-l5.wav",
+  "duracion": 4.041,
+  "palabras": [
+   {
+    "palabra": "Vos",
+    "desde": 0.0,
+    "hasta": 0.12
+   },
+   {
+    "palabra": "concentrate",
+    "desde": 0.04,
+    "hasta": 0.74
+   },
+   {
+    "palabra": "en",
+    "desde": 0.74,
+    "hasta": 0.81
+   },
+   {
+    "palabra": "tu",
+    "desde": 0.81,
+    "hasta": 0.93
+   },
+   {
+    "palabra": "negocio.",
+    "desde": 0.93,
+    "hasta": 1.5
+   },
+   {
+    "palabra": "Nosotros",
+    "desde": 1.5,
+    "hasta": 1.91
+   },
+   {
+    "palabra": "nos",
+    "desde": 1.91,
+    "hasta": 2.06
+   },
+   {
+    "palabra": "ocupamos",
+    "desde": 2.06,
+    "hasta": 2.48
+   },
+   {
+    "palabra": "de",
+    "desde": 2.48,
+    "hasta": 2.61
+   },
+   {
+    "palabra": "potenciar",
+    "desde": 2.61,
+    "hasta": 3.01
+   },
+   {
+    "palabra": "su",
+    "desde": 3.01,
+    "hasta": 3.08
+   },
+   {
+    "palabra": "presencia",
+    "desde": 3.08,
+    "hasta": 3.59
+   },
+   {
+    "palabra": "digital.",
+    "desde": 3.59,
+    "hasta": 4.0
+   }
+  ],
+  "transcripcion_control": "concentrate en tu negocio nosotros nos ocupamos de potenciar su presencia digital"
+ },
+ "l6": {
+  "archivo": "audio/vo/demo-premium-l6.wav",
+  "duracion": 3.592,
+  "palabras": [
+   {
+    "palabra": "Probá",
+    "desde": 0.05,
+    "hasta": 0.362
+   },
+   {
+    "palabra": "Rushy",
+    "desde": 0.362,
+    "hasta": 0.675
+   },
+   {
+    "palabra": "AI",
+    "desde": 0.675,
+    "hasta": 0.8
+   },
+   {
+    "palabra": "durante",
+    "desde": 0.8,
+    "hasta": 1.24
+   },
+   {
+    "palabra": "7",
+    "desde": 1.24,
+    "hasta": 1.43
+   },
+   {
+    "palabra": "días.",
+    "desde": 1.43,
+    "hasta": 1.88
+   },
+   {
+    "palabra": "Escribinos",
+    "desde": 1.88,
+    "hasta": 2.38
+   },
+   {
+    "palabra": "RUSHY",
+    "desde": 2.38,
+    "hasta": 2.63
+   },
+   {
+    "palabra": "por",
+    "desde": 2.63,
+    "hasta": 2.78
+   },
+   {
+    "palabra": "mensaje",
+    "desde": 2.78,
+    "hasta": 3.14
+   },
+   {
+    "palabra": "privado.",
+    "desde": 3.14,
+    "hasta": 3.52
+   }
+  ],
+  "transcripcion_control": "prove rashi ya y durante 7 dias equivine os rashi por mensaje privado"
+ }
+}

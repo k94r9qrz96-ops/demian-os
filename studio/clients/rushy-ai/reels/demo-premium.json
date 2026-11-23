@@ -1,0 +1,199 @@
+{
+  "cliente": "rushy-ai",
+  "plantilla": "ReelPro",
+  "nota": "Demo comercial premium. Fotos de ejemplo: Unsplash (licencia libre), rotuladas como EJEMPLO. Sin resultados, cifras ni testimonios.",
+  "voz": {
+    "modelo": "es_AR-daniela-high",
+    "velocidad": 0.86,
+    "fonetica": {
+      "¿Tu negocio": "[[ tˈu ]] [[ neɣˈosjo ]]",
+      "Publicar por publicar ya": "[[ publikˈaɾ ]] por [[ publikˈaɾ ]], ya",
+      "Probá Rushy AI": "[[ pɾoβˈa ]] [[ rˈaʃi ˈeɪ ˈaɪ ]]",
+      "Rushy AI": "[[ rˈaʃi ˈeɪ ˈaɪ ]]",
+      "RUSHY": "[[ rˈaʃi ]]",
+      "reels": "rils",
+      "7 días.": "siete días,",
+      "contenido. Todo": "contenido, todo",
+      "negocio. Nosotros": "negocio, nosotros",
+      "Vos concentrate": "Vos, concentrate",
+      "Escribinos": "escribinos",
+      "Estrategia,": "[[ estɾatˈexja ]],",
+      "edición": "[[ eðisjˈon ]]"
+    },
+    "lineas": [
+      {
+        "id": "l1",
+        "texto": "¿Tu negocio está consiguiendo clientes gracias a Instagram… o solamente está publicando?"
+      },
+      {
+        "id": "l2",
+        "texto": "Publicar por publicar ya no alcanza."
+      },
+      {
+        "id": "l3",
+        "texto": "Rushy AI transforma tus fotos y videos en contenido profesional, reels atractivos e historias que hacen destacar tu negocio."
+      },
+      {
+        "id": "l4",
+        "texto": "Estrategia, creatividad, edición profesional y programación de contenido. Todo en un mismo servicio."
+      },
+      {
+        "id": "l5",
+        "texto": "Vos concentrate en tu negocio. Nosotros nos ocupamos de potenciar su presencia digital."
+      },
+      {
+        "id": "l6",
+        "texto": "Probá Rushy AI durante 7 días. Escribinos RUSHY por mensaje privado."
+      }
+    ],
+    "inicio": 0.15,
+    "pausa": 0.18
+  },
+  "duracion": 25.0,
+  "escenas": [
+    {
+      "tipo": "pregunta",
+      "linea": "l1",
+      "feed": [
+        "assets/ejemplos-stock/restaurante-plato.jpg",
+        "assets/ejemplos-stock/cafe-brindis.jpg",
+        "assets/ejemplos-stock/hotel-pileta-atardecer.jpg",
+        "assets/ejemplos-stock/cafeteria-salon.jpg",
+        "assets/ejemplos-stock/deco-patio-plantas.jpg",
+        "assets/ejemplos-stock/cafe-latte-arte.jpg"
+      ],
+      "golpes": [
+        {
+          "en": "l1:Tu",
+          "kicker": "¿Tu negocio",
+          "titulo": "consigue",
+          "resalte": "CLIENTES"
+        },
+        {
+          "en": "l1:solamente",
+          "kicker": "…o solamente",
+          "titulo": "",
+          "resalte": "PUBLICA?",
+          "tachar": true
+        }
+      ]
+    },
+    {
+      "tipo": "problema",
+      "linea": "l2",
+      "kicker": "Publicar por publicar",
+      "titulo": "ya no alcanza.",
+      "en_titulo": "l2:ya",
+      "imagenes": [
+        "assets/ejemplos-stock/cafeteria-vereda.jpg",
+        "assets/ejemplos-stock/restaurante-salon.jpg",
+        "assets/ejemplos-stock/cafe-letrero.jpg",
+        "assets/ejemplos-stock/hotel-pileta-noche.jpg",
+        "assets/ejemplos-stock/cafe-mesa-ventana.jpg",
+        "assets/ejemplos-stock/cafeteria-barista.jpg"
+      ]
+    },
+    {
+      "tipo": "transformacion",
+      "linea": "l3",
+      "en_marca": "l3:Rushy",
+      "en_transforma": "l3:fotos",
+      "en_reel": "l3:reels",
+      "en_historias": "l3:historias",
+      "foto": "assets/ejemplos-stock/cafe-latte-arte.jpg",
+      "etiquetaAntes": "Foto del negocio",
+      "etiquetaDespues": "Reel profesional",
+      "tituloPieza": "Latte de autor",
+      "subPieza": "Todos los días · 8 a 20 h",
+      "negocioEjemplo": "cafe.ejemplo",
+      "historias": [
+        {
+          "img": "assets/ejemplos-stock/hotel-pileta-atardecer.jpg",
+          "texto": "Atardecer en la pileta",
+          "rubro": "hotel.ejemplo"
+        },
+        {
+          "img": "assets/ejemplos-stock/restaurante-plato.jpg",
+          "texto": "Menú de temporada",
+          "rubro": "resto.ejemplo"
+        }
+      ]
+    },
+    {
+      "tipo": "pilares",
+      "linea": "l4",
+      "items": [
+        {
+          "texto": "Estrategia",
+          "icono": "estrategia",
+          "en": "l4:Estrategia"
+        },
+        {
+          "texto": "Creatividad",
+          "icono": "creatividad",
+          "en": "l4:creatividad"
+        },
+        {
+          "texto": "Edición profesional",
+          "icono": "edicion",
+          "en": "l4:edición"
+        },
+        {
+          "texto": "Programación de contenido",
+          "icono": "calendario",
+          "en": "l4:programación"
+        }
+      ],
+      "cierre": {
+        "en": "l4:Todo",
+        "kicker": "Todo en",
+        "texto": "un mismo servicio."
+      }
+    },
+    {
+      "tipo": "beneficio",
+      "linea": "l5",
+      "foto": "assets/ejemplos-stock/cafeteria-barista.jpg",
+      "vos": [
+        "Vos,",
+        "tu negocio."
+      ],
+      "nosotros": [
+        "Nosotros,",
+        "tu presencia digital."
+      ],
+      "en_nosotros": "l5:Nosotros",
+      "grilla": [
+        "assets/ejemplos-stock/cafe-latte-arte.jpg",
+        "assets/ejemplos-stock/hotel-pileta-atardecer.jpg",
+        "assets/ejemplos-stock/restaurante-plato.jpg",
+        "assets/ejemplos-stock/deco-patio-plantas.jpg",
+        "assets/ejemplos-stock/cafe-brindis.jpg",
+        "assets/ejemplos-stock/hotel-pileta-noche.jpg",
+        "assets/ejemplos-stock/cafeteria-salon.jpg",
+        "assets/ejemplos-stock/restaurante-salon.jpg",
+        "assets/ejemplos-stock/cafe-mesa-ventana.jpg"
+      ]
+    },
+    {
+      "tipo": "cta",
+      "linea": "l6",
+      "kicker": "Probá Rushy AI",
+      "grande": "7 días",
+      "en_grande": "l6:durante",
+      "palabraClave": "RUSHY",
+      "en_dm": "l6:Escribinos",
+      "handle": "@rushy.ai"
+    }
+  ],
+  "subtitulos": {
+    "maxPalabras": 4
+  },
+  "musica": {
+    "generada": true,
+    "bpm": 120,
+    "tonalidad": "La menor",
+    "licencia": "Original generada por código (tools/montaje.py). Sin derechos de terceros."
+  },
+  "portada": 2.0
+}

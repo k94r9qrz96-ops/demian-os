@@ -1,6 +1,7 @@
 import {Composition, Folder} from 'remotion';
 import {SmokeTest} from './SmokeTest';
 import {Reel, calculateReelMetadata} from './reel/Reel';
+import {ReelPro, calculateReelProMetadata} from './pro/ReelPro';
 
 // "Reel" es la plantilla única de la fábrica: render.mjs le pasa la marca y el guion de cada cliente.
 // Los valores de abajo son solo una vista previa genérica para Remotion Studio.
@@ -26,6 +27,23 @@ export const RemotionRoot = () => (
             {tipo: 'lista', duracion: 3.5, titulo: 'Beneficios', items: ['Uno', 'Dos', 'Tres']},
             {tipo: 'cta', duracion: 3, titulo: 'Llamada\na la acción', boton: 'Escribinos', sub: 'Link en bio'},
           ],
+        }}
+      />
+    </Folder>
+    <Folder name="Premium">
+      <Composition
+        id="ReelPro"
+        component={ReelPro}
+        durationInFrames={750}
+        fps={30}
+        width={1080}
+        height={1920}
+        calculateMetadata={calculateReelProMetadata}
+        defaultProps={{
+          brand: {slug: 'ejemplo', nombre: 'Ejemplo', handle: '@ejemplo', colores: {fondo: '#07070D', primario: '#6D4AFF', acento: '#19E6B4', texto: '#FFFFFF'}, tipografia: {titulos: 'fonts/Poppins-Bold.ttf'}, logo: null},
+          timeline: {duracion: 3, escenas: [], eventos: {}, subtitulos: []},
+          audio: null,
+          marcaDeAgua: 'VISTA PREVIA',
         }}
       />
     </Folder>

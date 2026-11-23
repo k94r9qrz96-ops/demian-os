@@ -4,3 +4,4 @@ out/
 .whisper/
 clients/*/exports/
 clients/*/assets/privado/
+.voces/

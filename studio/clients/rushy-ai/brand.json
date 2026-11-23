@@ -2,25 +2,90 @@
   "slug": "rushy-ai",
   "nombre": "Rushy AI",
   "estado": "demo",
-  "metricool": {"brandId": null, "redes": [], "nota": "Rushy AI no tiene marca en Metricool (auditoría 2026-11-23). Borradores solo locales."},
-  "colores": {"fondo": "#07070D", "primario": "#6D4AFF", "acento": "#19E6B4", "texto": "#FFFFFF", "nota": "PROPUESTA — confirmar paleta real de la marca"},
-  "tipografia": {"titulos": "marca/fuentes/Poppins-Bold.ttf"},
+  "metricool": {
+    "brandId": null,
+    "redes": [],
+    "nota": "Rushy AI no tiene marca en Metricool (auditoría 2026-11-23). Borradores solo locales."
+  },
+  "colores": {
+    "fondo": "#07070D",
+    "primario": "#6D4AFF",
+    "acento": "#19E6B4",
+    "texto": "#FFFFFF",
+    "nota": "PROPUESTA — confirmar paleta real de la marca",
+    "calido": "#FF8A4C"
+  },
+  "tipografia": {
+    "titulos": "marca/fuentes/InterTight-Var.ttf",
+    "acento": "marca/fuentes/InstrumentSerif-Italic.ttf",
+    "nota": "Inter Tight + Instrument Serif (Google Fonts, OFL). Propuesta: confirmar."
+  },
   "logo": null,
-  "handle": null,
+  "handle": "@rushy.ai",
   "negocio": {
     "rubro": "Agencia de contenido y redes sociales con IA",
     "ubicacion": "Argentina",
     "propuesta_valor": "Creación de contenido, reels, historias, análisis y programación de redes para negocios",
-    "productos": ["Reels con motion graphics", "Historias", "Guiones", "Análisis de métricas", "Programación de publicaciones"],
+    "productos": [
+      "Reels con motion graphics",
+      "Historias",
+      "Guiones",
+      "Análisis de métricas",
+      "Programación de publicaciones"
+    ],
     "precios_publicables": false
   },
-  "publico": {"principal": "Dueños de negocios y marcas que no tienen tiempo ni equipo para sostener sus redes", "dolores": ["Publicar sin constancia", "Contenido que no se ve profesional", "No saber qué funciona"], "deseos": ["Redes activas y prolijas sin dedicarles horas", "Contenido que genere consultas"], "objeciones": ["¿La IA hace contenido genérico?", "¿Pierdo control de lo que se publica?"]},
+  "publico": {
+    "principal": "Dueños de negocios y marcas que no tienen tiempo ni equipo para sostener sus redes",
+    "dolores": [
+      "Publicar sin constancia",
+      "Contenido que no se ve profesional",
+      "No saber qué funciona"
+    ],
+    "deseos": [
+      "Redes activas y prolijas sin dedicarles horas",
+      "Contenido que genere consultas"
+    ],
+    "objeciones": [
+      "¿La IA hace contenido genérico?",
+      "¿Pierdo control de lo que se publica?"
+    ]
+  },
   "competencia": [],
-  "tono": {"voz": "Directo, rioplatense, seguro, premium sin ser frío", "usar": ["vos", "frases cortas"], "evitar": ["promesas de resultados", "números inventados", "jerga técnica"]},
-  "prohibido": ["Inventar estadísticas, testimonios, clientes o resultados", "Prometer seguidores o ventas"],
-  "ia": {"permitida": true, "usos_aprobados": ["gráficos y animaciones generados por código (Remotion)"], "nota": "Generación de imagen/video con IA paga (Higgsfield, Canva IA) no aprobada."},
-  "cta": {"principal": "Escribinos por DM", "link": ""},
-  "hashtags_base": ["#RushyAI", "#MarketingDigital", "#ReelsParaNegocios", "#ContenidoConIA"],
+  "tono": {
+    "voz": "Directo, rioplatense, seguro, premium sin ser frío",
+    "usar": [
+      "vos",
+      "frases cortas"
+    ],
+    "evitar": [
+      "promesas de resultados",
+      "números inventados",
+      "jerga técnica"
+    ]
+  },
+  "prohibido": [
+    "Inventar estadísticas, testimonios, clientes o resultados",
+    "Prometer seguidores o ventas"
+  ],
+  "ia": {
+    "permitida": true,
+    "usos_aprobados": [
+      "gráficos y animaciones generados por código (Remotion)"
+    ],
+    "nota": "Generación de imagen/video con IA paga (Higgsfield, Canva IA) no aprobada."
+  },
+  "cta": {
+    "principal": "Escribinos por DM",
+    "link": ""
+  },
+  "hashtags_base": [
+    "#RushyAI",
+    "#MarketingDigital",
+    "#ReelsParaNegocios",
+    "#ContenidoConIA"
+  ],
   "aprobador": "Fundador de Rushy AI",
-  "fuentes_de_datos": []
+  "fuentes_de_datos": [],
+  "nota_logo": "Logo oficial pendiente: Instagram no es accesible desde el entorno de Claude. Se usa wordmark tipográfico provisorio."
 }

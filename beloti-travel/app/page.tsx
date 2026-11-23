@@ -11,6 +11,7 @@ import { Globe } from "@/components/Globe";
 import { Closing, Footer } from "@/components/Closing";
 import { FloatingContact } from "@/components/FloatingContact";
 import { Consent } from "@/components/Consent";
+import { DemoBadge } from "@/components/DemoBadge";
 
 export default function Home() {
   return (
@@ -31,6 +32,7 @@ export default function Home() {
       <Footer />
       <FloatingContact />
       <Consent />
+      <DemoBadge />
     </>
   );
 }

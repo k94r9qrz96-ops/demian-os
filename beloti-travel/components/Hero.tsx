@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap, useGSAP, MOTION_OK, DESKTOP } from "@/lib/gsap";
 import { track } from "@/lib/analytics";
-import { asset, imgSet } from "@/lib/asset";
+import { setVideoSrc, imgSet } from "@/lib/asset";
 
 const SCENES = [
   { t: 0, label: "Mar turquesa" },
@@ -26,7 +26,7 @@ export function Hero() {
     const portrait = window.matchMedia("(max-aspect-ratio: 1/1)").matches;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData;
-    v.src = asset(portrait ? "/media/hero-m.mp4" : "/media/hero-d.mp4");
+    setVideoSrc(v, portrait ? "/media/hero-m.mp4" : "/media/hero-d.mp4");
     if (!reduce && !saveData) {
       v.play().catch(() => setPlaying(false));
     }

@@ -4,7 +4,7 @@ import { gsap, SplitText, useGSAP, MOTION_OK } from "@/lib/gsap";
 import { FAQ } from "@/data/faq";
 import { SITE, waLink, WA, mailLink } from "@/lib/site";
 import { track } from "@/lib/analytics";
-import { asset, imgSet } from "@/lib/asset";
+import { setVideoSrc, imgSet } from "@/lib/asset";
 import { Logo } from "./Logo";
 
 function FaqItem({ q, a, i }: { q: string; a: string; i: number }) {
@@ -52,7 +52,7 @@ export function Closing() {
     const portrait = window.matchMedia("(max-aspect-ratio: 1/1)").matches;
     const io = new IntersectionObserver(([e]) => {
       if (e.isIntersecting) {
-        if (!v.src) v.src = asset(portrait ? "/media/sunset-m.mp4" : "/media/sunset-d.mp4");
+        if (!v.src) setVideoSrc(v, portrait ? "/media/sunset-m.mp4" : "/media/sunset-d.mp4");
         if (!reduce) v.play().catch(() => {});
       } else v.pause();
     }, { rootMargin: "300px 0px" });

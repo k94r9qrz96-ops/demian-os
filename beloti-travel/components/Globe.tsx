@@ -97,7 +97,7 @@ export function Globe() {
     const io = new IntersectionObserver(async ([e]) => {
       if (!e.isIntersecting || land.current) return;
       io.disconnect();
-      const [{ feature }, t] = await Promise.all([import("topojson-client"), fetch(asset("/data/land-110m.json")).then((r) => r.json())]);
+      const [{ feature }, t] = await Promise.all([import("topojson-client"), (window as Window & { __LAND?: unknown }).__LAND ?? fetch(asset("/data/land-110m.json")).then((r) => r.json())]);
       if (cancelled) return;
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       land.current = feature(t as any, (t as any).objects.land) as unknown as GeoPermissibleObjects;

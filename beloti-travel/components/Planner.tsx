@@ -110,10 +110,9 @@ export function Planner() {
   };
   const back = () => { dir.current = -1; setError(null); setStep((s) => Math.max(1, s - 1)); };
 
-  const send = () => {
-    track("whatsapp_click", { location: "planejador" });
-    window.open(waLink(buildMessage(d)), "_blank", "noopener,noreferrer");
-  };
+  // link <a> real (e não window.open): funciona também em visualizadores que bloqueiam pop-ups
+  const sendLink = useRef<HTMLAnchorElement>(null);
+  const send = () => sendLink.current?.click();
   const reset = () => { setD(EMPTY); dir.current = -1; setStep(1); try { sessionStorage.removeItem(KEY); } catch { /* ignore */ } };
 
   const [year, month] = d.month ? d.month.split("-") : ["", ""];
@@ -334,11 +333,18 @@ export function Planner() {
               {step > STEP_COUNT ? (
                 <>
                   <button type="button" onClick={reset} className="ulink self-center text-sm font-semibold text-ocean/60 sm:self-auto">Recomeçar</button>
-                  <button type="submit" className="btn btn-dark w-full sm:w-auto">
+                  <a
+                    ref={sendLink}
+                    href={waLink(buildMessage(d))}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => track("whatsapp_click", { location: "planejador" })}
+                    className="btn btn-dark w-full sm:w-auto"
+                  >
                     <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.3-.8-2.8-1.1-4.5-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.3 0 .5l-.3.5-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l2 1c.3.1.5.2.5.3.1.1.1.7-.1 1.3z" /></svg>
                     Enviar meu roteiro para a Beloti Travel
                     <span className="sr-only"> (abre o WhatsApp em nova aba)</span>
-                  </button>
+                  </a>
                 </>
               ) : (
                 <>

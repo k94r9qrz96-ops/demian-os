@@ -12,7 +12,8 @@
     "test": "node --test tests/*.test.mjs",
     "images": "node scripts/build-images.mjs",
     "media": "bash scripts/build-media.sh",
-    "preview:file": "next build --webpack && node scripts/build-preview.mjs"
+    "preview:file": "next build --webpack && node scripts/build-preview.mjs",
+    "preview:artifact": "next build --webpack && node scripts/build-preview.mjs --artifact"
   },
   "engines": {
     "node": ">=20.9"

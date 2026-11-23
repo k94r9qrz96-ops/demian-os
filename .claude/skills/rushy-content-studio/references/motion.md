@@ -98,3 +98,4 @@ Rotular "EJEMPLO" todo material que no sea del cliente. No usar oferta (p. ej. "
 ## Portadas (Still "Portada")
 `clients/<slug>/portadas/<id>.json` → `node portada.mjs --cliente <slug> --portada <id>` → PNG 1080×1920 + recorte de grilla 4:5.
 Fórmula: pregunta-gancho en serif + palabra gigante en color de marca + palabra tachada (el dolor) + antes/después con flecha + botón "Mirá…". Todo lo esencial dentro de la franja central 1080×1350 (lo que muestra la grilla). Ejemplo: `clients/rushy-ai/portadas/demo-premium.json`.
+Variante `"plantilla": "PortadaComparador"`: misma foto partida por un deslizador antes/después, texto centrado ("Misma foto. / OTRO NIVEL." + "¿Cuál elegiría tu cliente?"). Ejemplo: `clients/rushy-ai/portadas/comparador.json`. Ideal para cualquier rubro con una sola foto del cliente.

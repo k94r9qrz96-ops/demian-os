@@ -1,0 +1,11 @@
+{
+  "cliente": "rushy-ai",
+  "plantilla": "PortadaComparador",
+  "foto": "assets/ejemplos-stock/cafe-latte-arte.jpg",
+  "kicker": "Misma foto.",
+  "titulo": "OTRO NIVEL.",
+  "pregunta1": "¿Cuál elegiría",
+  "pregunta2": "tu cliente?",
+  "boton": "Mirá cómo lo hacemos ▶",
+  "rotuloEjemplo": "IMAGEN DE EJEMPLO"
+}

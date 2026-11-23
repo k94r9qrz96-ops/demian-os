@@ -1,0 +1,21 @@
+{
+  "cliente": "rushy-ai",
+  "plantilla": "PortadaPoster",
+  "estilo": "logo",
+  "lineas": [
+    {
+      "t": "Tus redes,",
+      "s": "serif"
+    },
+    {
+      "t": "NIVEL",
+      "s": "bold"
+    },
+    {
+      "t": "AGENCIA.",
+      "s": "resalte"
+    }
+  ],
+  "sub": "REELS · HISTORIAS · ESTRATEGIA",
+  "boton": "Mirá el reel ▶"
+}

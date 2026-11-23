@@ -1,0 +1,46 @@
+{
+  "cliente": "rushy-ai",
+  "plantilla": "PortadaPoster",
+  "estilo": "muro",
+  "lineas": [
+    {
+      "t": "¿Tu feed",
+      "s": "serif"
+    },
+    {
+      "t": "SE VE",
+      "s": "bold"
+    },
+    {
+      "t": "ASÍ?",
+      "s": "resalte"
+    }
+  ],
+  "sub": "CAFÉS · RESTOS · HOTELES · DECO",
+  "boton": "Mirá cómo lo logramos ▶",
+  "rotuloEjemplo": "IMÁGENES DE EJEMPLO",
+  "fotos": [
+    "assets/ejemplos-stock/restaurante-plato.jpg",
+    "assets/ejemplos-stock/hotel-pileta-atardecer.jpg",
+    "assets/ejemplos-stock/cafe-latte-arte.jpg",
+    "assets/ejemplos-stock/deco-patio-plantas.jpg",
+    "assets/ejemplos-stock/cafe-brindis.jpg",
+    "assets/ejemplos-stock/hotel-pileta-noche.jpg",
+    "assets/ejemplos-stock/cafeteria-salon.jpg",
+    "assets/ejemplos-stock/restaurante-salon.jpg",
+    "assets/ejemplos-stock/cafe-mesa-ventana.jpg",
+    "assets/ejemplos-stock/cafeteria-barista.jpg"
+  ],
+  "etiquetas": [
+    "Menú",
+    "Atardecer",
+    "Latte",
+    "Patio",
+    "Brindis",
+    "Noche",
+    "Salón",
+    "Cena",
+    "Mañana",
+    "Barista"
+  ]
+}

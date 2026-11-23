@@ -4,6 +4,7 @@ import {Reel, calculateReelMetadata} from './reel/Reel';
 import {ReelPro, calculateReelProMetadata} from './pro/ReelPro';
 import {Portada} from './pro/Portada';
 import {PortadaComparador} from './pro/PortadaComparador';
+import {PortadaPoster} from './pro/PortadaPoster';
 
 // "Reel" es la plantilla única de la fábrica: render.mjs le pasa la marca y el guion de cada cliente.
 // Los valores de abajo son solo una vista previa genérica para Remotion Studio.
@@ -69,6 +70,16 @@ export const RemotionRoot = () => (
         defaultProps={{
           brand: {slug: 'ejemplo', nombre: 'Ejemplo', handle: '@ejemplo', colores: {fondo: '#050505', primario: '#7BC800', acento: '#B4F000', texto: '#FFFFFF'}, tipografia: {titulos: 'fonts/Poppins-Bold.ttf'}, logo: null},
           foto: 'fonts/none.jpg', kicker: 'Misma foto.', titulo: 'OTRO NIVEL.', pregunta1: '¿Cuál elegiría', pregunta2: 'tu cliente?', boton: 'Mirá cómo lo hacemos ▶',
+        }}
+      />
+      <Still
+        id="PortadaPoster"
+        component={PortadaPoster}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          brand: {slug: 'ejemplo', nombre: 'Ejemplo', handle: '@ejemplo', colores: {fondo: '#050505', primario: '#7BC800', acento: '#B4F000', texto: '#FFFFFF'}, tipografia: {titulos: 'fonts/Poppins-Bold.ttf'}, logo: null},
+          estilo: 'tipografica' as const, lineas: [{t: 'DEJÁ DE', s: 'serif' as const}, {t: 'VENDER.', s: 'resalte' as const}],
         }}
       />
     </Folder>

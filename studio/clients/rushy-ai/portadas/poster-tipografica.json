@@ -1,0 +1,24 @@
+{
+  "cliente": "rushy-ai",
+  "plantilla": "PortadaPoster",
+  "estilo": "tipografica",
+  "lineas": [
+    {
+      "t": "Dejá de",
+      "s": "serif"
+    },
+    {
+      "t": "PUBLICAR.",
+      "s": "tachado"
+    },
+    {
+      "t": "Empezá a",
+      "s": "serif"
+    },
+    {
+      "t": "VENDER.",
+      "s": "resalte"
+    }
+  ],
+  "boton": "Mirá cómo ▶"
+}

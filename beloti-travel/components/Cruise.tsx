@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { gsap, ScrollTrigger, useGSAP, MOTION_OK } from "@/lib/gsap";
 import { waLink, WA } from "@/lib/site";
 import { track } from "@/lib/analytics";
+import { asset } from "@/lib/asset";
 import { Img } from "./Img";
 
 const FRAMES = 93; // quadros 5 fps, 17s→35,5s do clipe Pexels 10167690 (ver scripts/build-media.sh)
@@ -84,7 +85,7 @@ export function Cruise() {
           setLoaded((l) => l + 1);
           if (Math.abs(i - frame.current.i) < 3 || n === 0) draw();
         };
-        img.src = `/media/cruise/${dir}/${pad(i + 1)}.webp`;
+        img.src = asset(`/media/cruise/${dir}/${pad(i + 1)}.webp`);
         images.current[i] = img;
       });
     };

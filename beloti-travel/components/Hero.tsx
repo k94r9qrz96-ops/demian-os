@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap, useGSAP, MOTION_OK, DESKTOP } from "@/lib/gsap";
 import { track } from "@/lib/analytics";
+import { asset, imgSet } from "@/lib/asset";
 
 const SCENES = [
   { t: 0, label: "Mar turquesa" },
@@ -25,7 +26,7 @@ export function Hero() {
     const portrait = window.matchMedia("(max-aspect-ratio: 1/1)").matches;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData;
-    v.src = portrait ? "/media/hero-m.mp4" : "/media/hero-d.mp4";
+    v.src = asset(portrait ? "/media/hero-m.mp4" : "/media/hero-d.mp4");
     if (!reduce && !saveData) {
       v.play().catch(() => setPlaying(false));
     }
@@ -95,11 +96,11 @@ export function Hero() {
       <div className="hero-frame absolute inset-0 overflow-hidden [clip-path:inset(0_0_0_0_round_0px)]">
         <div className="hero-media absolute inset-0 will-change-transform">
           <picture>
-            <source media="(max-aspect-ratio: 1/1)" type="image/avif" srcSet="/img/hero-poster-m-640.avif 640w, /img/hero-poster-m-1280.avif 720w" sizes="100vw" />
-            <source media="(max-aspect-ratio: 1/1)" type="image/webp" srcSet="/img/hero-poster-m-640.webp 640w, /img/hero-poster-m-1280.webp 720w" sizes="100vw" />
-            <source type="image/avif" srcSet="/img/hero-poster-d-640.avif 640w, /img/hero-poster-d-1280.avif 1280w" sizes="100vw" />
-            <source type="image/webp" srcSet="/img/hero-poster-d-640.webp 640w, /img/hero-poster-d-1280.webp 1280w" sizes="100vw" />
-            <img src="/img/hero-poster-d-1280.jpg" alt="" width={1280} height={720} fetchPriority="high" className="absolute inset-0 h-full w-full object-cover" />
+            <source media="(max-aspect-ratio: 1/1)" type="image/avif" srcSet={imgSet("/img/hero-poster-m-640.avif 640w, /img/hero-poster-m-1280.avif 720w")} sizes="100vw" />
+            <source media="(max-aspect-ratio: 1/1)" type="image/webp" srcSet={imgSet("/img/hero-poster-m-640.webp 640w, /img/hero-poster-m-1280.webp 720w")} sizes="100vw" />
+            <source type="image/avif" srcSet={imgSet("/img/hero-poster-d-640.avif 640w, /img/hero-poster-d-1280.avif 1280w")} sizes="100vw" />
+            <source type="image/webp" srcSet={imgSet("/img/hero-poster-d-640.webp 640w, /img/hero-poster-d-1280.webp 1280w")} sizes="100vw" />
+            <img src={imgSet("/img/hero-poster-d-1280.jpg")} alt="" width={1280} height={720} fetchPriority="high" className="absolute inset-0 h-full w-full object-cover" />
           </picture>
           <video
             ref={video}

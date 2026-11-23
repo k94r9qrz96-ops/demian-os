@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef } from "react";
+import { asset } from "@/lib/asset";
 
 type Props = { src: string; poster: string; className?: string };
 
@@ -13,7 +14,7 @@ export function LazyVideo({ src, poster, className }: Props) {
     const io = new IntersectionObserver(
       ([e]) => {
         if (e.isIntersecting) {
-          if (!v.src) v.src = src;
+          if (!v.src) v.src = asset(src);
           if (!reduce) v.play().catch(() => {});
         } else if (!v.paused) v.pause();
       },

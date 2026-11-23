@@ -4,6 +4,7 @@ import { gsap, SplitText, useGSAP, MOTION_OK } from "@/lib/gsap";
 import { FAQ } from "@/data/faq";
 import { SITE, waLink, WA, mailLink } from "@/lib/site";
 import { track } from "@/lib/analytics";
+import { asset, imgSet } from "@/lib/asset";
 import { Logo } from "./Logo";
 
 function FaqItem({ q, a, i }: { q: string; a: string; i: number }) {
@@ -51,7 +52,7 @@ export function Closing() {
     const portrait = window.matchMedia("(max-aspect-ratio: 1/1)").matches;
     const io = new IntersectionObserver(([e]) => {
       if (e.isIntersecting) {
-        if (!v.src) v.src = portrait ? "/media/sunset-m.mp4" : "/media/sunset-d.mp4";
+        if (!v.src) v.src = asset(portrait ? "/media/sunset-m.mp4" : "/media/sunset-d.mp4");
         if (!reduce) v.play().catch(() => {});
       } else v.pause();
     }, { rootMargin: "300px 0px" });
@@ -81,9 +82,9 @@ export function Closing() {
       <div className="cl-stage relative flex min-h-[100svh] items-end overflow-hidden bg-abyss text-sand">
         <div className="cl-media absolute inset-0">
           <picture>
-            <source media="(max-aspect-ratio: 1/1)" type="image/avif" srcSet="/img/sunset-m-poster-1280.avif" />
-            <source type="image/avif" srcSet="/img/sunset-d-poster-1280.avif" />
-            <img src="/img/sunset-d-poster-1280.jpg" alt="" loading="lazy" width={1280} height={720} className="absolute inset-0 h-full w-full object-cover" />
+            <source media="(max-aspect-ratio: 1/1)" type="image/avif" srcSet={imgSet("/img/sunset-m-poster-1280.avif")} />
+            <source type="image/avif" srcSet={imgSet("/img/sunset-d-poster-1280.avif")} />
+            <img src={imgSet("/img/sunset-d-poster-1280.jpg")} alt="" loading="lazy" width={1280} height={720} className="absolute inset-0 h-full w-full object-cover" />
           </picture>
           <video ref={vid} className="absolute inset-0 h-full w-full object-cover" muted loop playsInline preload="none" aria-hidden="true" tabIndex={-1} />
         </div>

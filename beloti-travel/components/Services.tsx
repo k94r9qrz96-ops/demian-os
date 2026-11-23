@@ -3,6 +3,7 @@ import { useRef, useState } from "react";
 import { gsap, useGSAP, MOTION_OK, DESKTOP } from "@/lib/gsap";
 import { Img } from "./Img";
 import { LazyVideo } from "./LazyVideo";
+import { imgSet } from "@/lib/asset";
 import { waLink, WA } from "@/lib/site";
 import { track } from "@/lib/analytics";
 
@@ -104,7 +105,7 @@ export function Services() {
       <div className="sv-flight relative h-[260vh]">
         <div className="sticky top-0 h-[100svh] overflow-hidden bg-ocean text-sand">
           <div className="fl-clouds absolute inset-0">
-            <LazyVideo src="/media/clouds.mp4" poster="/img/clouds-poster-1280.jpg" className="absolute inset-0 h-full w-full object-cover" />
+            <LazyVideo src="/media/clouds.mp4" poster={imgSet("/img/clouds-poster-1280.jpg")} className="absolute inset-0 h-full w-full object-cover" />
           </div>
           <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,39,59,0.75),rgba(8,39,59,0.25)_45%,rgba(8,39,59,0.85))]" />
           <svg className="absolute inset-0 h-full w-full" viewBox="0 0 1000 600" preserveAspectRatio="none" aria-hidden="true">

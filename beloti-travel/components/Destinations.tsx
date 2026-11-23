@@ -4,6 +4,7 @@ import { gsap, ScrollTrigger, SplitText, useGSAP, MOTION_OK } from "@/lib/gsap";
 import { DESTINATIONS, MOODS, type Mood } from "@/data/destinations";
 import { Img } from "./Img";
 import { LazyVideo } from "./LazyVideo";
+import { imgSet } from "@/lib/asset";
 import { waLink, WA } from "@/lib/site";
 import { track } from "@/lib/analytics";
 
@@ -156,7 +157,7 @@ export function Destinations() {
                 <div className="dest-bg absolute inset-0 will-change-transform">
                   <Img name={d.img} alt="" sizes="100vw" className="absolute inset-0 h-full w-full object-cover" style={{ objectPosition: d.focus }} />
                   {d.video && (
-                    <LazyVideo src={d.video} poster="/img/praias-poster-1280.jpg" className="absolute inset-0 hidden h-full w-full object-cover md:block" />
+                    <LazyVideo src={d.video} poster={imgSet("/img/praias-poster-1280.jpg")} className="absolute inset-0 hidden h-full w-full object-cover md:block" />
                   )}
                 </div>
                 <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(3,19,30,0.35)_0%,rgba(3,19,30,0)_35%,rgba(3,19,30,0.25)_60%,rgba(3,19,30,0.92)_100%)]" />

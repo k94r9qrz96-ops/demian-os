@@ -87,3 +87,11 @@ Todos os CTAs chamam `track()` (`lib/analytics.ts`) com os eventos `hero_cta_cli
   - testar a performance num dispositivo real.
 - WebM/VP9 não foi gerado (MP4 H.264 cobre todos os navegadores atuais). Pode ser adicionado como `<source>` extra.
 - Veja `docs/MEDIA.md` para créditos, licenças e mídias a substituir.
+
+## Pré-visualização em arquivo único (celular, sem servidor)
+
+```bash
+npm run preview:file   # gera preview/beloti-preview.html (~12 MB, tudo embutido)
+```
+
+Usa o build do webpack, embute JS, CSS, fontes, imagens (WebP), os vídeos verticais e os quadros do cruzeiro, e resolve as mídias via `lib/asset.ts`. Serve para revisar no iPhone; para produção, use o deploy normal (`out/`).

@@ -5,6 +5,7 @@ import { gsap, useGSAP, MOTION_OK } from "@/lib/gsap";
 import { Img } from "./Img";
 import { waLink, WA } from "@/lib/site";
 import { track } from "@/lib/analytics";
+import { asset } from "@/lib/asset";
 
 type Region = {
   id: string;
@@ -96,9 +97,8 @@ export function Globe() {
     const io = new IntersectionObserver(async ([e]) => {
       if (!e.isIntersecting || land.current) return;
       io.disconnect();
-      const [{ feature }, topo] = await Promise.all([import("topojson-client"), import("world-atlas/land-110m.json")]);
+      const [{ feature }, t] = await Promise.all([import("topojson-client"), fetch(asset("/data/land-110m.json")).then((r) => r.json())]);
       if (cancelled) return;
-      const t = (topo as { default?: unknown }).default ?? topo;
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       land.current = feature(t as any, (t as any).objects.land) as unknown as GeoPermissibleObjects;
       setReady(true);

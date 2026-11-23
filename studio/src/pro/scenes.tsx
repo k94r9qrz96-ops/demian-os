@@ -1,6 +1,6 @@
 import React from 'react';
 import {AbsoluteFill, Easing, Img, staticFile} from 'remotion';
-import {Atmosphere, C, Chip, DISPLAY, MaskWords, SERIF, clamp01, expo, inOut, mix, prog, shake, spr, useCtx, useT} from './core';
+import {Atmosphere, C, Chip, DISPLAY, MaskWords, SERIF, TECH, clamp01, expo, inOut, mix, prog, shake, spr, useCtx, useT} from './core';
 import {Avatar, FeedPost, Icon, Phone, ReelUI, StoryCard} from './mockups';
 
 type S = Record<string, any> & {desde: number; hasta: number};
@@ -18,7 +18,7 @@ export const Pregunta: React.FC<P> = ({s, i}) => {
   const g0 = ev('golpe0'), g1 = ev('golpe1');
   const scroll = (t * 520 + Math.max(0, t - g1) * 1400) % (s.feed.length * 690);
   const phoneIn = prog(t, 0, 0.9, expo);
-  const leave0 = prog(t, g1 - 0.12, 0.3, Easing.in(Easing.cubic));
+  const leave0 = prog(t, g1 - 0.28, 0.24, Easing.in(Easing.cubic));
   const strike = prog(t, g1 + 0.55, 0.28, inOut);
   const glitch = t > g1 + 0.5 && t < g1 + 0.85 ? Math.sin(t * 180) * 12 : 0;
   return (
@@ -41,8 +41,8 @@ export const Pregunta: React.FC<P> = ({s, i}) => {
       <AbsoluteFill style={{paddingTop: 270, alignItems: 'center', opacity: 1 - leave0, transform: `translateY(${-leave0 * 200}px) scale(${1 - leave0 * 0.1})`, filter: `blur(${leave0 * 14}px)`}}>
         <MaskWords text={s.golpes[0].kicker} t={t} at={g0} size={104} font={SERIF} weight={400} />
         <MaskWords text={s.golpes[0].titulo} t={t} at={g0 + 0.35} size={96} weight={600} color="rgba(255,255,255,0.85)" />
-        <div style={{transform: `scale(${mix(1.6, 1, spr(t, g0 + 0.7, {damping: 12}))})`, marginTop: -6}}>
-          <MaskWords text={s.golpes[0].resalte} t={t} at={g0 + 0.7} size={196} weight={900} letter={-0.05} gradient={`linear-gradient(100deg, ${c.acento}, #b8ffe9 45%, ${c.primario})`} />
+        <div style={{transform: `scale(${mix(1.35, 1, spr(t, g0 + 0.7, {damping: 12}))})`, marginTop: -6}}>
+          <MaskWords text={s.golpes[0].resalte} t={t} at={g0 + 0.7} size={176} weight={900} letter={-0.05} gradient={`linear-gradient(100deg, ${c.acento}, #FFFFFF 50%, ${c.primario})`} />
         </div>
       </AbsoluteFill>
       {/* golpe 1: …o solamente PUBLICA? */}
@@ -124,24 +124,30 @@ export const Transformacion: React.FC<P> = ({s, i}) => {
         const d = p * 2200;
         return <div key={k} style={{position: 'absolute', left: 540 - d / 2, top: 880 - d / 2, width: d, height: d, borderRadius: '50%', border: `${mix(10, 2, p)}px solid ${k % 2 ? c.acento : c.primario}`, opacity: (1 - p) * 0.7, boxShadow: `0 0 40px ${k % 2 ? c.acento : c.primario}66`}} />;
       })}
-      {/* wordmark provisorio (tipográfico) */}
-      <div style={{position: 'absolute', left: mix(540, 230, logoToCorner), top: mix(880, 250, logoToCorner), transform: `translate(-50%,-50%) scale(${mix(0.6, 1, logoIn) * mix(1, 0.36, logoToCorner)})`, opacity: logoIn, textAlign: 'center'}}>
-        <div style={{position: 'relative', fontFamily: DISPLAY, fontWeight: 900, fontSize: 210, letterSpacing: -10, color: c.texto, whiteSpace: 'nowrap', lineHeight: 1}}>
-          Rushy<span style={{fontFamily: SERIF, fontWeight: 400, fontStyle: 'italic', letterSpacing: -2, color: c.acento, marginLeft: 18}}>AI</span>
-          <div style={{position: 'absolute', inset: 0, color: 'transparent', backgroundImage: `linear-gradient(100deg, transparent ${sweep * 140 - 40}%, rgba(255,255,255,0.95) ${sweep * 140 - 25}%, transparent ${sweep * 140 - 10}%)`, WebkitBackgroundClip: 'text', backgroundClip: 'text', pointerEvents: 'none'}}>Rushy<span style={{fontFamily: SERIF, fontWeight: 400, fontStyle: 'italic', letterSpacing: -2, marginLeft: 18}}>AI</span></div>
+      {/* marca: R oficial con impacto + texto con barrido → insignia en la esquina */}
+      {brand.logoPartes?.r ? (
+        <div style={{position: 'absolute', left: 540, top: 860, transform: `translate(-50%,-50%) scale(${mix(1, 0.3, logoToCorner)}) translate(${logoToCorner * -1050}px, ${logoToCorner * -1900}px)`, opacity: 1 - prog(t, tf - 0.15, 0.35)}}>
+          <div style={{position: 'relative', width: 340, height: 385, margin: '0 auto', transform: `scale(${mix(2.8, 1, logoIn)}) rotate(${(1 - logoIn) * -28}deg)`, filter: `blur(${(1 - clamp01(logoIn * 1.3)) * 14}px) drop-shadow(0 0 ${40 + 40 * (1 - sweep)}px ${c.acento}88)`, opacity: clamp01(logoIn * 2)}}>
+            <Img src={staticFile(brand.logoPartes.r)} style={{width: '100%', height: '100%'}} />
+            <div style={{position: 'absolute', inset: 0, background: `linear-gradient(110deg, transparent ${sweep * 160 - 50}%, rgba(255,255,255,0.95) ${sweep * 160 - 30}%, transparent ${sweep * 160 - 10}%)`, WebkitMaskImage: `url(${staticFile(brand.logoPartes.r)})`, WebkitMaskSize: '100% 100%', maskImage: `url(${staticFile(brand.logoPartes.r)})`, maskSize: '100% 100%'}} />
+          </div>
+          {brand.logoPartes.texto && <Img src={staticFile(brand.logoPartes.texto)} style={{display: 'block', width: 760, margin: '36px auto 0', clipPath: `inset(0 ${(1 - prog(t, tm + 0.22, 0.5, inOut)) * 100}% 0 0)`}} />}
+          <div style={{textAlign: 'center', fontFamily: TECH, fontWeight: 600, fontSize: 34, letterSpacing: 8, color: 'rgba(255,255,255,0.7)', marginTop: 26, opacity: prog(t, tm + 0.6, 0.4)}}>{brand.handle ?? ''}</div>
         </div>
-        <div style={{opacity: 1 - logoToCorner, fontFamily: DISPLAY, fontWeight: 600, fontSize: 40, color: 'rgba(255,255,255,0.7)', letterSpacing: 8, marginTop: 24}}>{brand.handle ?? ''}</div>
-      </div>
+      ) : (
+        <div style={{position: 'absolute', left: 540, top: 880, transform: `translate(-50%,-50%) scale(${mix(0.6, 1, logoIn)})`, opacity: logoIn * (1 - logoToCorner), fontFamily: DISPLAY, fontWeight: 900, fontSize: 200, color: c.texto}}>{brand.nombre}</div>
+      )}
+      {brand.logo && <Img src={staticFile(brand.logo)} style={{position: 'absolute', left: 70, top: 215, width: 120, height: 120, opacity: prog(t, tf - 0.05, 0.35), transform: `scale(${0.6 + 0.4 * spr(t, tf - 0.05)})`, filter: `drop-shadow(0 0 20px ${c.acento}55)`}} />}
       {/* pasos */}
       {t > tf - 0.2 && (
-        <div style={{position: 'absolute', top: 360, left: 0, right: 0, display: 'flex', justifyContent: 'center', gap: 18, alignItems: 'center'}}>
+        <div style={{position: 'absolute', top: 250, left: 220, right: 40, display: 'flex', justifyContent: 'center', gap: 14, alignItems: 'center'}}>
           {steps.map((st, k) => {
             const on = t >= st.at;
             const p = spr(t, steps[0].at - 0.2 + k * 0.08);
             return (
               <React.Fragment key={k}>
                 {k > 0 && <div style={{width: 40, height: 3, background: on ? c.acento : 'rgba(255,255,255,0.25)', opacity: p}} />}
-                <div style={{opacity: p, padding: '14px 26px', borderRadius: 999, fontFamily: DISPLAY, fontWeight: 700, fontSize: 32, color: on ? '#0B0B10' : 'rgba(255,255,255,0.6)', background: on ? c.acento : 'rgba(255,255,255,0.08)', border: '1.5px solid rgba(255,255,255,0.15)', transform: `scale(${on ? 1 + 0.08 * Math.max(0, 1 - (t - st.at) * 4) : 0.95})`}}>{st.l}</div>
+                <div style={{opacity: p, padding: '14px 26px', borderRadius: 999, fontFamily: TECH, fontWeight: 700, fontSize: 26, letterSpacing: 1.5, textTransform: 'uppercase' as const, color: on ? '#0B0B10' : 'rgba(255,255,255,0.6)', background: on ? c.acento : 'rgba(255,255,255,0.08)', border: '1.5px solid rgba(255,255,255,0.15)', transform: `scale(${on ? 1 + 0.08 * Math.max(0, 1 - (t - st.at) * 4) : 0.95})`}}>{st.l}</div>
               </React.Fragment>
             );
           })}
@@ -308,21 +314,24 @@ export const Cta: React.FC<P> = ({s, i}) => {
   const sent = spr(t, te, {damping: 14});
   const burst = prog(t, te + 0.1, 0.8, expo);
   const [num, ...rest] = String(s.grande).split(' ');
+  void Img;
   return (
     <AbsoluteFill style={{transform: shake(t, [tg, te + 0.12], 16)}}>
       <Atmosphere energy={1.3} />
-      <AbsoluteFill style={{alignItems: 'center', transform: `translateY(${mix(0, -330, up)}px) scale(${mix(1, 0.72, up)})`}}>
-        <div style={{marginTop: 420}}><MaskWords text={s.kicker} t={t} at={s.desde + 0.15} size={104} font={SERIF} weight={400} /></div>
+      <AbsoluteFill style={{alignItems: 'center', transform: `translateY(${mix(0, -250, up)}px) scale(${mix(1, 0.7, up)})`}}>
+        {brand.logo && <Img src={staticFile(brand.logo)} style={{marginTop: 230, width: 170, height: 170, transform: `scale(${spr(t, s.desde + 0.05, {damping: 12})}) rotate(${(1 - spr(t, s.desde + 0.05, {damping: 12})) * -120}deg)`, filter: `drop-shadow(0 0 40px ${c.acento}66)`}} />}
+        <div style={{marginTop: 30, padding: '0 60px'}}><MaskWords text={s.kicker} t={t} at={s.desde + 0.2} size={88} font={SERIF} weight={400} /></div>
         <div style={{display: 'flex', alignItems: 'flex-end', gap: 26, marginTop: 10, transform: `scale(${mix(1.4, 1, spr(t, tg, {damping: 11}))})`, opacity: prog(t, tg, 0.15)}}>
           <div style={{fontFamily: DISPLAY, fontWeight: 900, fontSize: 420, lineHeight: 0.8, letterSpacing: -20, color: 'transparent', backgroundImage: `linear-gradient(160deg, #fff 10%, ${c.acento} 55%, ${c.primario})`, WebkitBackgroundClip: 'text', backgroundClip: 'text', textShadow: 'none', filter: `drop-shadow(0 20px 50px ${c.primario}88)`}}>{num}</div>
           <div style={{fontFamily: DISPLAY, fontWeight: 900, fontSize: 150, lineHeight: 0.9, letterSpacing: -6, color: c.texto, paddingBottom: 18}}>{rest.join(' ')}</div>
         </div>
       </AbsoluteFill>
+      {s.nota && <div style={{position: 'absolute', left: 0, right: 0, top: mix(1280, 760, up), display: 'flex', justifyContent: 'center', transform: `scale(${mix(1, 0.85, up)})`}}><Chip t={t} at={tg + 0.35} tone="acento" size={30}>{s.nota}</Chip></div>}
       {/* chat privado */}
       {t > td - 0.3 && (
         <div style={{position: 'absolute', left: 90, right: 90, top: 860, transform: `translateY(${(1 - dmIn) * 700}px)`, opacity: dmIn, borderRadius: 44, background: 'rgba(18,18,26,0.85)', border: '2px solid rgba(255,255,255,0.1)', backdropFilter: 'blur(24px)', padding: 34, boxShadow: '0 50px 100px rgba(0,0,0,0.5)'}}>
           <div style={{display: 'flex', alignItems: 'center', gap: 20, paddingBottom: 26, borderBottom: '1.5px solid rgba(255,255,255,0.08)'}}>
-            <Avatar s={76} label={brand.nombre} ring />
+            <Avatar s={76} label={brand.nombre} img={brand.logo} />
             <div>
               <div style={{fontFamily: DISPLAY, fontWeight: 800, fontSize: 36, color: '#fff'}}>{(brand.handle ?? '').replace('@', '')}</div>
               <div style={{fontFamily: DISPLAY, fontWeight: 500, fontSize: 26, color: 'rgba(255,255,255,0.5)'}}>Mensaje privado</div>

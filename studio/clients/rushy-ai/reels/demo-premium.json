@@ -8,7 +8,6 @@
     "fonetica": {
       "¿Tu negocio": "[[ tˈu ]] [[ neɣˈosjo ]]",
       "Publicar por publicar ya": "[[ publikˈaɾ ]] por [[ publikˈaɾ ]], ya",
-      "Probá Rushy AI": "[[ pɾoβˈa ]] [[ rˈaʃi ˈeɪ ˈaɪ ]]",
       "Rushy AI": "[[ rˈaʃi ˈeɪ ˈaɪ ]]",
       "RUSHY": "[[ rˈaʃi ]]",
       "reels": "rils",
@@ -18,7 +17,8 @@
       "Vos concentrate": "Vos, concentrate",
       "Escribinos": "escribinos",
       "Estrategia,": "[[ estɾatˈexja ]],",
-      "edición": "[[ eðisjˈon ]]"
+      "edición": "[[ eðisjˈon ]]",
+      "7 días. Escribinos": "siete días, escribinos"
     },
     "lineas": [
       {
@@ -43,11 +43,12 @@
       },
       {
         "id": "l6",
-        "texto": "Probá Rushy AI durante 7 días. Escribinos RUSHY por mensaje privado."
+        "texto": "Empezá con una prueba de 7 días. Escribinos RUSHY por mensaje privado."
       }
     ],
     "inicio": 0.15,
-    "pausa": 0.18
+    "pausa": 0.18,
+    "tomas": 6
   },
   "duracion": 25.0,
   "escenas": [
@@ -178,12 +179,13 @@
     {
       "tipo": "cta",
       "linea": "l6",
-      "kicker": "Probá Rushy AI",
+      "kicker": "Empezá con una prueba de",
       "grande": "7 días",
-      "en_grande": "l6:durante",
+      "en_grande": "l6:7",
       "palabraClave": "RUSHY",
       "en_dm": "l6:Escribinos",
-      "handle": "@rushy.ai"
+      "handle": "@rushy.ai",
+      "nota": "Consultá el valor por mensaje privado"
     }
   ],
   "subtitulos": {

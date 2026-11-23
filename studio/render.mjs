@@ -19,7 +19,7 @@ if (brand.slug !== slug || (reel.cliente && reel.cliente !== slug)) throw new Er
 
 // Solo se aceptan rutas dentro de la carpeta del cliente
 const assertLocal = (p) => { if (!p) return; const abs = path.resolve(dir, p); if (!abs.startsWith(dir + path.sep) || !fs.existsSync(abs)) throw new Error(`Archivo inválido o inexistente para ${slug}: ${p}`); };
-[brand.tipografia.titulos, brand.tipografia.cuerpo, brand.tipografia.acento, brand.logo, reel.musica?.src, ...(reel.plantilla === 'ReelPro' ? [] : reel.escenas.map((s) => s.src))].forEach(assertLocal);
+[brand.tipografia.titulos, brand.tipografia.cuerpo, brand.tipografia.acento, brand.tipografia.marca, brand.logo, brand.logoPartes?.r, brand.logoPartes?.texto, reel.musica?.src, ...(reel.plantilla === 'ReelPro' ? [] : reel.escenas.map((s) => s.src))].forEach(assertLocal);
 if (reel.musica && !reel.musica.licencia) throw new Error('La música necesita nota de licencia');
 
 const browserExecutable = process.env.REMOTION_CHROME || ['/opt/pw-browsers/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell'].find((f) => fs.existsSync(f)) || null;

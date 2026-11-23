@@ -14,7 +14,8 @@ Sistema de producción de contenido por cliente. Código en `studio/`, un direct
 3. **Nada inventado.** Ni estadísticas, ni testimonios, ni clientes, ni resultados, ni precios. Las métricas salen de Metricool (o de datos que entregue el cliente) y se citan con período y fuente. Si un dato no existe, se dice "sin datos".
 4. **Material autorizado.** Solo se usan fotos/videos listados en `assets/AUTORIZACIONES.md`. IA generativa (imagen/video) solo si `brand.json.ia.permitida` lo habilita para ese uso. Si implica Higgsfield o Canva IA: avisá que consume créditos, mostrá el costo (`estimate_*_cost` / `balance`) y pedí OK antes.
 5. **Sin gastos sin permiso.** No compres, no actives planes, no uses créditos pagos sin autorización explícita.
-6. **No borrar ni pisar** archivos de clientes existentes. Versioná: `reels/<id>-v2.json`, no sobrescribas un guion aprobado.
+6. **Ofertas tal como las define el cliente** (`brand.json.oferta`). Nunca decir "gratis" si no lo es: la prueba de 7 días de Rushy AI es paga y el valor se informa por privado.
+7. **No borrar ni pisar** archivos de clientes existentes. Versioná: `reels/<id>-v2.json`, no sobrescribas un guion aprobado.
 
 ## Estructura de un cliente
 

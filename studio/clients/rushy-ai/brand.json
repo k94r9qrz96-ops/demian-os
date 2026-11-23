@@ -8,19 +8,20 @@
     "nota": "Rushy AI no tiene marca en Metricool (auditoría 2026-11-23). Borradores solo locales."
   },
   "colores": {
-    "fondo": "#07070D",
-    "primario": "#6D4AFF",
-    "acento": "#19E6B4",
+    "fondo": "#050505",
+    "primario": "#7BC800",
+    "acento": "#B4F000",
     "texto": "#FFFFFF",
-    "nota": "PROPUESTA — confirmar paleta real de la marca",
-    "calido": "#FF8A4C"
+    "calido": "#FF8A4C",
+    "nota": "Tomados del logo oficial (verde lima #98E004 sobre negro)."
   },
   "tipografia": {
     "titulos": "marca/fuentes/InterTight-Var.ttf",
     "acento": "marca/fuentes/InstrumentSerif-Italic.ttf",
-    "nota": "Inter Tight + Instrument Serif (Google Fonts, OFL). Propuesta: confirmar."
+    "marca": "marca/fuentes/Orbitron-Var.ttf",
+    "nota": "Inter Tight + Instrument Serif + Orbitron (afín al logo). Google Fonts, OFL."
   },
-  "logo": null,
+  "logo": "marca/logo.png",
   "handle": "@rushy.ai",
   "negocio": {
     "rubro": "Agencia de contenido y redes sociales con IA",
@@ -68,13 +69,6 @@
     "Inventar estadísticas, testimonios, clientes o resultados",
     "Prometer seguidores o ventas"
   ],
-  "ia": {
-    "permitida": true,
-    "usos_aprobados": [
-      "gráficos y animaciones generados por código (Remotion)"
-    ],
-    "nota": "Generación de imagen/video con IA paga (Higgsfield, Canva IA) no aprobada."
-  },
   "cta": {
     "principal": "Escribinos por DM",
     "link": ""
@@ -87,5 +81,21 @@
   ],
   "aprobador": "Fundador de Rushy AI",
   "fuentes_de_datos": [],
-  "nota_logo": "Logo oficial pendiente: Instagram no es accesible desde el entorno de Claude. Se usa wordmark tipográfico provisorio."
+  "nota_logo": "Logo oficial recortado de la captura enviada por el fundador (2026-11-23). Pedir el archivo original en alta (PNG/SVG) para la versión final.",
+  "logoPartes": {
+    "r": "marca/logo-r.png",
+    "texto": "marca/logo-texto.png"
+  },
+  "ia": {
+    "permitida": true,
+    "usos_aprobados": [
+      "gráficos y animaciones generados por código (Remotion)"
+    ],
+    "nota": "Generación de imagen/video con IA paga no aprobada."
+  },
+  "oferta": {
+    "prueba_7_dias": true,
+    "gratis": false,
+    "nota": "La prueba de 7 días NO es gratis; el valor se informa por mensaje privado. Nunca decir 'gratis'."
+  }
 }

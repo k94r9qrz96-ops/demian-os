@@ -6,8 +6,9 @@ export type Brand = {
   nombre: string;
   handle?: string | null;
   colores: {fondo: string; primario: string; acento: string; texto: string; calido?: string};
-  tipografia: {titulos: string; acento?: string; cuerpo?: string};
+  tipografia: {titulos: string; acento?: string; cuerpo?: string; marca?: string};
   logo?: string | null;
+  logoPartes?: {r?: string; texto?: string} | null;
 };
 export type Word = {palabra: string; desde: number; hasta: number};
 export type Timeline = {
@@ -23,6 +24,7 @@ export const C = () => useCtx().brand.colores;
 
 export const DISPLAY = 'RushyDisplay, "Inter Tight", Poppins, sans-serif';
 export const SERIF = 'RushySerif, "Instrument Serif", Georgia, serif';
+export const TECH = 'RushyTech, RushyDisplay, sans-serif';
 
 export const useT = () => {
   const f = useCurrentFrame();
@@ -111,7 +113,7 @@ export const Chip: React.FC<{children: React.ReactNode; t: number; at: number; t
   const bg = tone === 'acento' ? c.acento : tone === 'aviso' ? '#FFD166' : 'rgba(255,255,255,0.12)';
   const fg = tone === 'neutro' ? c.texto : '#0B0B10';
   return (
-    <div style={{display: 'inline-flex', alignItems: 'center', gap: 12, padding: `${size * 0.42}px ${size * 0.9}px`, borderRadius: 999, background: bg, color: fg, fontFamily: DISPLAY, fontWeight: 700, fontSize: size, letterSpacing: 1, opacity: p, transform: `translateY(${(1 - p) * 20}px) scale(${0.9 + 0.1 * p})`, backdropFilter: tone === 'neutro' ? 'blur(14px)' : undefined, border: tone === 'neutro' ? '1.5px solid rgba(255,255,255,0.18)' : undefined, whiteSpace: 'nowrap'}}>
+    <div style={{display: 'inline-flex', alignItems: 'center', gap: 12, padding: `${size * 0.42}px ${size * 0.9}px`, borderRadius: 999, background: bg, color: fg, fontFamily: TECH, fontWeight: 700, fontSize: size * 0.9, letterSpacing: 2, textTransform: 'uppercase', opacity: p, transform: `translateY(${(1 - p) * 20}px) scale(${0.9 + 0.1 * p})`, backdropFilter: tone === 'neutro' ? 'blur(14px)' : undefined, border: tone === 'neutro' ? '1.5px solid rgba(255,255,255,0.18)' : undefined, whiteSpace: 'nowrap'}}>
       {children}
     </div>
   );

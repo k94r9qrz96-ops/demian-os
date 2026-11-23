@@ -80,16 +80,29 @@ def main():
         tts = txt
         for k, v in (ln.get('fonetica') or cfg.get('fonetica') or {}).items(): tts = tts.replace(k, v)
         tts = tts.replace('…', ',').replace('...', ',')
-        a, sr = synth(voice, tts, ln.get('velocidad', cfg.get('velocidad', 0.86)))
+        # Piper es estocástico: se generan varias tomas y se queda la que mejor se entiende
+        # (la transcripción automática más parecida al guion). Nombres de marca se excluyen del puntaje.
+        marca = {norm(w) for k in (ln.get('fonetica') or cfg.get('fonetica') or {}) for w in k.split() if w[:1].isupper() and len(w) > 2}
+        ref = [norm(w) for w in txt.split() if norm(w) and norm(w) not in marca]
+        best = None
+        for take in range(int(ln.get('tomas', cfg.get('tomas', 4)))):
+            a, sr = synth(voice, tts, ln.get('velocidad', cfg.get('velocidad', 0.86)))
+            wav = outdir / f".{rid}-{ln['id']}-toma{take}.wav"
+            with wave.open(str(wav), 'wb') as w:
+                w.setnchannels(1); w.setsampwidth(2); w.setframerate(sr); w.writeframes(a.tobytes())
+            w16 = outdir / f".{rid}-{ln['id']}-16k.wav"
+            subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', str(wav), '-ar', '16000', '-ac', '1', str(w16)], check=True)
+            words, heard = align(w16, txt)
+            for f in outdir.glob(f".{rid}-{ln['id']}-16k*"): f.unlink()
+            score = difflib.SequenceMatcher(None, ref, [x for x in heard.split() if x not in marca]).ratio()
+            if best is None or score > best[0]: best = (score, wav, a, sr, words, heard)
+            if score >= 0.999: break
+        score, wav0, a, sr, words, heard = best
         wav = outdir / f"{rid}-{ln['id']}.wav"
-        with wave.open(str(wav), 'wb') as w:
-            w.setnchannels(1); w.setsampwidth(2); w.setframerate(sr); w.writeframes(a.tobytes())
-        w16 = outdir / f".{rid}-{ln['id']}-16k.wav"
-        subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', str(wav), '-ar', '16000', '-ac', '1', str(w16)], check=True)
-        words, heard = align(w16, txt)
-        for f in outdir.glob(f".{rid}-{ln['id']}-16k*"): f.unlink()
-        result[ln['id']] = {'archivo': f"audio/vo/{wav.name}", 'duracion': round(len(a) / sr, 3), 'palabras': words, 'transcripcion_control': heard}
-        print(f"{ln['id']}: {len(a) / sr:.2f}s | oído: {heard}")
+        wav0.replace(wav)
+        for f in outdir.glob(f".{rid}-{ln['id']}-toma*"): f.unlink()
+        result[ln['id']] = {'archivo': f"audio/vo/{wav.name}", 'duracion': round(len(a) / sr, 3), 'palabras': words, 'transcripcion_control': heard, 'claridad': round(score, 3)}
+        print(f"{ln['id']}: {len(a) / sr:.2f}s | claridad {score:.0%} | oído: {heard}")
     (outdir / f"{rid}-palabras.json").write_text(json.dumps(result, ensure_ascii=False, indent=1))
 
 

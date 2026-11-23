@@ -26,11 +26,11 @@ export const Icon: React.FC<{d: keyof typeof I; s?: number; fill?: string}> = ({
   <svg width={s} height={s} viewBox="0 0 24 24"><path d={I[d]} fill={fill ?? 'none'} stroke="#fff" strokeWidth={1.9} strokeLinejoin="round" strokeLinecap="round" /></svg>
 );
 
-export const Avatar: React.FC<{s?: number; label: string; ring?: boolean}> = ({s = 56, label, ring}) => {
+export const Avatar: React.FC<{s?: number; label: string; ring?: boolean; img?: string | null}> = ({s = 56, label, ring, img}) => {
   const c = C();
   return (
     <div style={{width: s, height: s, borderRadius: '50%', padding: ring ? 3 : 0, background: ring ? `linear-gradient(45deg, ${c.acento}, ${c.primario})` : 'transparent', flexShrink: 0}}>
-      <div style={{width: '100%', height: '100%', borderRadius: '50%', background: `linear-gradient(135deg, ${c.primario}, #2b1f66)`, border: ring ? '3px solid #000' : undefined, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontFamily: DISPLAY, fontWeight: 800, fontSize: s * 0.42}}>{label.slice(0, 1).toUpperCase()}</div>
+      <div style={{width: '100%', height: '100%', borderRadius: '50%', background: `linear-gradient(135deg, ${c.primario}, #2b1f66)`, border: ring ? '3px solid #000' : undefined, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontFamily: DISPLAY, fontWeight: 800, fontSize: s * 0.42, overflow: 'hidden'}}>{img ? <Img src={staticFile(img)} style={{width: '100%', height: '100%'}} /> : label.slice(0, 1).toUpperCase()}</div>
     </div>
   );
 };

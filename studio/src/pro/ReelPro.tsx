@@ -57,6 +57,7 @@ export const ReelPro: React.FC<ReelProProps> = ({brand, timeline, audio, marcaDe
   const [h] = React.useState(() => delayRender('Fuentes de la marca'));
   React.useEffect(() => {
     const fs = [loadFont({family: 'RushyDisplay', url: staticFile(brand.tipografia.titulos), weight: '100 900'})];
+    if (brand.tipografia.marca) fs.push(loadFont({family: 'RushyTech', url: staticFile(brand.tipografia.marca), weight: '400 900'}));
     if (brand.tipografia.acento) fs.push(loadFont({family: 'RushySerif', url: staticFile(brand.tipografia.acento), style: 'italic'}));
     Promise.all(fs).then(() => continueRender(h)).catch((e) => { console.error(e); continueRender(h); });
   }, [brand, h]);
